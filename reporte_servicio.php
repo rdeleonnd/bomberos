@@ -4,21 +4,21 @@
 		
 	</head>
 	<body>
-		<table >
+		<table class="table table-bordered">
 			<tr>
 				<td rowspan=3>Hola</td>
 				<td>
-					Direccion del Traslado:<input type="text" id="direccion_traslado" name="direccion_traslado">
+					Direccion del Traslado<input type="text" id="direccion_traslado" name="direccion_traslado">
 				</td>
 			</tr>
 			<tr>
 				<td>
-					Nombre del paciente:<input type="text" id="nombre_paciente" name="nombre_paciente">
+					Nombre del paciente<input type="text" id="nombre_paciente" name="nombre_paciente">
 				</td>
 			</tr>	
 			<tr>
 				<td>
-					Direccion del paciente:<input type="text" id="direccion_paciente" name="direccion_paciente">
+					Direccion del paciente<input type="text" id="direccion_paciente" name="direccion_paciente">
 				</td>
 			</tr>
 		</table>
