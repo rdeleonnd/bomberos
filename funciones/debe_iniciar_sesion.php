@@ -16,4 +16,4 @@
 		</center>
 	<br/>
 <br/>
-<META HTTP-EQUIV="Refresh" CONTENT="10;URL=inicio.php">
+<META HTTP-EQUIV="Refresh" CONTENT="5;URL=inicio.php">

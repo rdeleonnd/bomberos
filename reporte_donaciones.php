@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Reporte de Servicios</title>
+	<title>Reporte Donaciones</title>
 </head>
 <body>
 	

@@ -8,20 +8,25 @@
 		<script type="text/javascript" src="jquery/jquery-1.9.1.js"></script>
 		<script type="text/javascript" src="jquery/jquery-ui.js"></script>
 		<script type="text/javascript" src="bootstrap/dist/js/bootstrap.js"></script>
+		<script type="text/javascript" src="funciones/funciones.js"></script>
+		<script type="text/javascript" src="funciones/principal.js"></script>
 	</head>
 	<body>
+		<?php 
+			include('funciones/funciones.php');
+		?>
 		</br><p align="center"><img src="img/logotipo.png"></p>
 		<hr size="10" width="85%" style="#0000FF" />
 		<table>
 			<tr>
 				<li class="dropdown">
-		        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		        <a href="" class="dropdown-toggle" data-toggle="dropdown">
 		          Ingreso de Reportes<b class="caret"></b>
 		        </a>
 		        <ul class="dropdown-menu">
-		          <li><a href="#">Reporte de Servicios</a></li>
+		          <li><a href="#" onclick='cargar_pagina("ingreso_reporte_servicio");'>Reporte de Servicios</a></li>
 		          <li class="divider"></li>
-		          <li><a href="#">Recibo de donaciones</a></li>
+		          <li><a href="#" onclick='cargar_pagina("ingreso_reporte_donaciones");'>Recibo de donaciones</a></li>
 		        </ul>
 		      </li>
 				
@@ -31,7 +36,7 @@
 					<div class="panel-heading" id="Encabezado_Panel">
 						<h3 class="panel-title">Titulo</h3>
 					</div>
-					<div id="Principal" name="Principal" class="panel-body"></div>
+					<div id="principal" name="principal" class="panel-body"></div>
 				</div>
 				
 			</tr>
@@ -40,16 +45,15 @@
 </html>
 
 <?php 
-	$Usuario = "a";
-	$Contrasenia = "a";
 
+	$Usuario = "l";
+	$Contrasenia = "p";
 	if(($Usuario!="") && ($Contrasenia!=""))
 	{
-		echo "<script >
-				$(document).ready(function(){
-					$('#Principal').load('reporte_servicio.php');
-				});
-			</script>";
+		if(isset($_POST["ingreso_reporte_servicio"]))
+		{
+			
+		}
 	}
 	else
 	{
