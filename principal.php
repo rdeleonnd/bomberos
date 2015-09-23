@@ -5,6 +5,7 @@
 		<link rel="stylesheet" type="text/css" href="jquery/jquery-ui.css" />
 		<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap-theme.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/submenus.css" />
 		<script type="text/javascript" src="jquery/jquery-1.9.1.js"></script>
 		<script type="text/javascript" src="jquery/jquery-ui.js"></script>
 		<script type="text/javascript" src="bootstrap/dist/js/bootstrap.js"></script>
@@ -19,17 +20,58 @@
 		<hr size="10" width="85%" style="#0000FF" />
 		<table>
 			<tr>
-				<li class="dropdown">
-		        <a href="" class="dropdown-toggle" data-toggle="dropdown">
-		          Ingreso de Reportes<b class="caret"></b>
-		        </a>
-		        <ul class="dropdown-menu">
-		          <li><a href="#" onclick='cargar_pagina("ingreso_reporte_servicio");'>Reporte de Servicios</a></li>
-		          <li class="divider"></li>
-		          <li><a href="#" onclick='cargar_pagina("ingreso_reporte_donaciones");'>Recibo de donaciones</a></li>
-		        </ul>
-		      </li>
-				
+				<div class="collapse navbar-collapse js-navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li class="dropdown mega-dropdown">
+					        <a href="" class="dropdown-toggle" data-toggle="dropdown">Reportes/Papeletas<b class="caret"></b></a>
+					        <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+					        	<li class="dropdown-submenu">
+					        		<a tabindex="-1" href="#">Agregar</a>
+					        		<ul class="dropdown-menu">
+					        			<li class="dropdown mega-dropdown">
+						        			<li><a tabindex="-1" href="#" onclick='cargar_pagina("ingreso_reporte_servicio");'>Reporte de Servicios</a></li>
+							        		<li><a href="#" onclick='cargar_pagina("ingreso_reporte_donaciones");'>Recibo de donaciones</a></li>
+							        		<li class="divider"></li>
+							        		<li><a href="#" onclick='cargar_pagina("ingreso_incidentes");'>Ingreso Incidentes</a></li>
+									        <li><a href="#" onclick='cargar_pagina("ingreso_categorias_incidentes");'>Ingreso de Categorias deIncidentes</a></li>
+						        		</li>
+					        		</ul>
+					        	</li>
+					        	<li class="dropdown-submenu">
+					        		<a tabindex="-1" href="#">Modificar</a>
+					        		<ul class="dropdown-menu">
+					        			<li class="dropdown mega-dropdown">
+									        
+					        			</li>
+					        		</ul>
+					        	</li>
+					        </ul>
+				        </li>
+						<li class="dropdown mega-dropdown">
+							<a href="" class="dropdown-toggle" data-toggle="dropdown">Personal<b class="caret"></b></a>
+							<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+					        	<li class="dropdown-submenu">
+					        		<a tabindex="-1" href="#">Agregar</a>
+					        		<ul class="dropdown-menu">
+					        			<li class="dropdown mega-dropdown">
+						        			<li><a href="#" onclick='cargar_pagina("ingreso_personal");'>Ingreso de Personal</a></li>
+							        		<li><a href="#" onclick='cargar_pagina("ingreso_reporte_donaciones");'></a></li>
+						        		</li>
+					        		</ul>
+					        	</li>
+					        	<li class="dropdown-submenu">
+					        		<a tabindex="-1" href="#">Modificar</a>
+					        		<ul class="dropdown-menu">
+					        			<li class="dropdown mega-dropdown">
+									        <li><a href="#" onclick='cargar_pagina("ingreso_incidentes");'></a></li>
+									        <li><a href="#" onclick='cargar_pagina("ingreso_categorias_incidentes");'></a></li>
+					        			</li>
+					        		</ul>
+					        	</li>
+					        </ul>
+						</li>
+					</ul>
+				</div>
 			</tr>
 			<tr>
 				<div class="panel panel-success">

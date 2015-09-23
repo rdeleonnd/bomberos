@@ -19,4 +19,19 @@ function cargar_pagina(pagina)
 		Parametros = "ingreso_reporte_donaciones=1";
 		div_dinamico("POST", 'ingreso_reporte_donaciones.php', Parametros, Div, false);
 	}
+	else if(pagina=='ingreso_incidentes')
+	{
+		Parametros = "ingreso_incidentes=1";
+		div_dinamico("POST", 'ingreso_incidentes.php', Parametros, Div, false);
+	}
+	else if(pagina=='ingreso_categorias_incidentes')
+	{
+		Parametros = "ingreso_categorias_incidentes=1";
+		div_dinamico("POST", 'ingreso_categorias_incidentes.php', Parametros, Div, false);
+	}
+	else if(pagina=='ingreso_personal')
+	{
+		Parametros = "ingreso_personal=1";
+		div_dinamico("POST", 'ingreso_personal.php', Parametros, Div, false);
+	}
 }
