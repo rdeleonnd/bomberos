@@ -6,6 +6,26 @@ $('a').click(function(){
 	return false;
 });
 
+function Calendario(objeto)
+{
+    $("#"+objeto).datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            changeYear: true,
+            dateFormat:"dd-mm-yy",
+            numberOfMonths: 1,
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+            dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','S&aacute'],
+            buttonImageOnly: true, 
+            showOn: 'button', 
+            buttonImage: 'img/calendario.png',
+            buttonText: "Seleccione Fecha"
+        });
+}
+
 function cargar_pagina(pagina)
 {
 	Div=document.getElementById("principal");
@@ -34,4 +54,35 @@ function cargar_pagina(pagina)
 		Parametros = "ingreso_personal=1";
 		div_dinamico("POST", 'ingreso_personal.php', Parametros, Div, false);
 	}
+	else if(pagina=='ingreso_turnos')
+	{
+		Parametros = "ingreso_turnos=1";
+		div_dinamico("POST", 'ingreso_turnos.php', Parametros, Div, false);
+	}
+	else if(pagina=='ingreso_asignar_turnos')
+	{
+		Parametros = "ingreso_asignar_turnos=1";
+		div_dinamico("POST", 'ingreso_asignar_turnos.php', Parametros, Div, false);
+	}
+	else if(pagina=='ingreso_asistencia')
+	{
+		Parametros = "ingreso_asistencia=1";
+		div_dinamico("POST", 'ingreso_asistencia.php', Parametros, Div, false);
+	}
+	else if(pagina=='ingreso_salida_asistencia')
+	{
+		Parametros = "ingreso_salida_asistencia=1";
+		div_dinamico("POST", 'ingreso_salida_asistencia.php', Parametros, Div, false);
+	}
+	else if(pagina=='ingreso_actividades')
+	{
+		Parametros = "ingreso_actividades=1";
+		div_dinamico("POST", 'ingreso_actividades.php', Parametros, Div, false);
+	}
+	else if(pagina=='ingreso_asignar_actividades')
+	{
+		Parametros = "ingreso_asignar_actividades=1";
+		div_dinamico("POST", 'ingreso_asignar_actividades.php', Parametros, Div, false);
+	}
+	
 }

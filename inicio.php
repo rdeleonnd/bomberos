@@ -19,6 +19,10 @@
 		?>
 		<div class="container">
 			<form class="form-signin">
+				<table >
+					
+				</table>
+				</br><p align="center"><img src="img/logotipo.png"></p>
 				<h1 class="form-signin-heading">Inicio de Sesión</h1></br>
 				<label class="sr-only">Nombre de Usuario</label>
 				<input id="Usuario" class="form-control" placeholder="Nombre de Usuario" required autofocus>

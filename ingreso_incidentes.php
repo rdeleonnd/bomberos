@@ -5,12 +5,17 @@
 		<title>Ingreso de Incidentes</title>
 	</head>
 	<body>
-		<table class="table table-bordered">
-			<tr>
-				<td>
-					Ingrese Incidente <input type="text" id="incidente" name="incidente">
-				</td>
-			</tr>
-		</table>
+		<form class="form-horizontal">
+			<table align="center" class="table table-bordered" style="width: 50%">
+				<tr>
+					<div class="form-group">
+							<label class="control-label col-xs-3">Ingrese Incidente:</label>
+							<div class="col-xs-3">
+								<input type="text" class="form-control" id="incidente" name="incidente">
+							</div>
+					</div>
+				</tr>
+			</table>
+		</form>
 	</body>
 </html>

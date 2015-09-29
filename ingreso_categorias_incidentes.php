@@ -5,17 +5,25 @@
 		<title>Ingreso de Categoria de Incidentes</title>
 	</head>
 	<body>
-		<table class="table table-bordered">
-			<tr>
-				<td>
-					Ingrese Categoria <input type="text" id="categoria" name="categoria">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Asocie con el Incidente 
-				</td>
-			</tr>
-		</table>
+		<form class="form-horizontal">
+			<table align="center" class="table table-bordered" style="width: 50%" >
+				<tr>
+					<div class="form-group">
+							<label class="control-label col-xs-3">Ingrese Categoria:</label>
+							<div class="col-xs-3">
+								<input type="text" class="form-control" id="categoria" name="categoria">
+							</div>
+					</div>
+				</tr>
+				<tr>
+					<div class="form-group">
+							<label class="control-label col-xs-3">Asocie con el Incidente:</label>
+							<div class="col-xs-1">
+								<input type="text" class="form-control" id="" name="">
+							</div>
+					</div>
+				</tr>
+			</table>
+		</form>
 	</body>
 </html>

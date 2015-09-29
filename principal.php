@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="jquery/jquery-ui-1.10.1.custom.min.css" />
 		<link rel="stylesheet" type="text/css" href="jquery/jquery-ui.css" />
-		<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css" />
 		<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap-theme.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/submenus.css" />
 		<script type="text/javascript" src="jquery/jquery-1.9.1.js"></script>
@@ -30,7 +32,7 @@
 					        		<ul class="dropdown-menu">
 					        			<li class="dropdown mega-dropdown">
 						        			<li><a tabindex="-1" href="#" onclick='cargar_pagina("ingreso_reporte_servicio");'>Reporte de Servicios</a></li>
-							        		<li><a href="#" onclick='cargar_pagina("ingreso_reporte_donaciones");'>Recibo de donaciones</a></li>
+							        		<li><a href="#" onclick='cargar_pagina("ingreso_reporte_donaciones");'>Recibo de Donaciones</a></li>
 							        		<li class="divider"></li>
 							        		<li><a href="#" onclick='cargar_pagina("ingreso_incidentes");'>Ingreso Incidentes</a></li>
 									        <li><a href="#" onclick='cargar_pagina("ingreso_categorias_incidentes");'>Ingreso de Categorias deIncidentes</a></li>
@@ -55,7 +57,15 @@
 					        		<ul class="dropdown-menu">
 					        			<li class="dropdown mega-dropdown">
 						        			<li><a href="#" onclick='cargar_pagina("ingreso_personal");'>Ingreso de Personal</a></li>
-							        		<li><a href="#" onclick='cargar_pagina("ingreso_reporte_donaciones");'></a></li>
+						        			<li class="divider"></li>
+							        		<li><a href="#" onclick='cargar_pagina("ingreso_turnos");'>Ingreso de Turnos</a></li>
+							        		<li><a href="#" onclick='cargar_pagina("ingreso_asignar_turnos");'>Ingreso de Asignacion de Turnos</a></li>
+							        		<li class="divider"></li>
+							        		<li><a href="#" onclick='cargar_pagina("ingreso_asistencia");'>Inreso de Entrada del Personal</a></li>
+							        		<li><a href="#" onclick='cargar_pagina("ingreso_salida_asistencia");'>Inreso de Salida del Personal</a></li>
+							        		<li class="divider"></li>
+							        		<li><a href="#" onclick='cargar_pagina("ingreso_actividades");'>Ingreso de Actividades</a></li>
+							        		<li><a href="#" onclick='cargar_pagina("ingreso_asignar_actividades");'>Ingreso de Asignacion de Actividades</a></li>
 						        		</li>
 					        		</ul>
 					        	</li>
@@ -70,15 +80,16 @@
 					        	</li>
 					        </ul>
 						</li>
+						
 					</ul>
 				</div>
 			</tr>
 			<tr>
 				<div class="panel panel-success">
 					<div class="panel-heading" id="Encabezado_Panel">
-						<h3 class="panel-title">Titulo</h3>
+						<h3 class="panel-title" align="center">Titulo</h3>
 					</div>
-					<div id="principal" name="principal" class="panel-body"></div>
+					<div id="principal" name="principal" class="panel-body" ></div>
 				</div>
 				
 			</tr>
