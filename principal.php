@@ -3,14 +3,16 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="jquery/jquery-ui-1.10.1.custom.min.css" />
-		<link rel="stylesheet" type="text/css" href="jquery/jquery-ui.css" />
+		<link rel="stylesheet" type="text/css" href="jquery/css/ui-lightness/jquery-ui-1.10.4.custom.css" />
 		<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css" />
-		<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap-theme.min.css" />
+		<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap-theme.css"/>
+		<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap-datetimepicker.css" />
+		<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap-datetimepicker-standalone.css" />
 		<link rel="stylesheet" type="text/css" href="css/submenus.css" />
-		<script type="text/javascript" src="jquery/jquery-1.9.1.js"></script>
-		<script type="text/javascript" src="jquery/jquery-ui.js"></script>
+		<script type="text/javascript" src="jquery/js/jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="funciones/Moment.js"></script>
 		<script type="text/javascript" src="bootstrap/dist/js/bootstrap.js"></script>
+		<script type="text/javascript" src="bootstrap/dist/js/bootstrap-datetimepicker.js"></script>
 		<script type="text/javascript" src="funciones/funciones.js"></script>
 		<script type="text/javascript" src="funciones/principal.js"></script>
 	</head>
@@ -91,7 +93,7 @@
 					</div>
 					<div id="principal" name="principal" class="panel-body" ></div>
 				</div>
-				
+			</div>
 			</tr>
 		</table>
 	</body>

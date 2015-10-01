@@ -40,12 +40,15 @@
 					</div>
 				</tr>
 				<tr>
-					<div class="form-group">
-						<label class="control-label col-xs-3">Fecha de Nacimiento del empleado :</label>
-						<div class="col-xs-1" id="calendario">
-							<input type="text" class="form-control" id="nacimiento" name="nacimiento">
-						</div>
-					</div>
+		            <div class="form-group">
+		            	<label class="control-label col-xs-3">Fecha de Nacimiento del empleado :</label>
+		                <div class='input-group date col-xs-1' id='datetimepicker1'>
+		                    <input type='text' class="form-control" id="nacimiento" name="nacimiento"/>
+		                    <span class="input-group-addon">
+		                        <span class="glyphicon glyphicon-calendar"></span>
+		                    </span>
+		                </div>
+		            </div>
 				</tr>
 				<tr>
 					<div class="form-group">
@@ -83,3 +86,13 @@
 		</form>
 	</body>
 </html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#datetimepicker1').datetimepicker({
+        	format: 'DD/MM/YYYY'
+        });
+        $('#nacimiento').datetimepicker({
+        	format: 'DD/MM/YYYY'
+        });
+    });
+</script>
