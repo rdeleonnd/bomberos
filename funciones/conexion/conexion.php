@@ -7,232 +7,253 @@
         var $namedb;
 
         
-        function ConexionDatos($r_user, $r_pwd, $r_db, $r_host )
+        function DB($r_Usuario, $r_Clave, $r_DB, $r_Host )
         {
-            $this->user = $r_user;
-            $this->password = $r_pwd;
-            $this->host  = $r_host;
-    		$this->namedb = $r_db;       
+            $this->user = $r_Usuario;
+            $this->password = $r_Clave;
+            $this->host  = $r_Host;
+    		$this->namedb = $r_DB;       
         }
 
     	function get_allowed_types()
     	{
-    		$link = mysql_connect($this->host, $this->user, $this->password);
-    		if($link)
+    		$Enlace = mysql_connect($this->host, $this->user, $this->password);
+    		if($Enlace)
     		{
-    				$db_selected = mysql_select_db($this->namedb) ;
-    				if ($db_selected)
-    				{
+				$db_seleccionada = mysql_select_db($this->namedb) ;
+				if ($db_seleccionada)
+				{
 
-    						// Performing SQL query
-    						$query = "select * from movement_type where show_list = 1;";
+					// Performing SQL query
+					$Consulta = "select * from movement_type where show_list = 1;";
+					$Resultado = mysql_query($Consulta, $Enlace);
 
-    						$result = mysql_query($query, $link);
-
-    						if($result)
-    						{								
-    							while ($row = mysql_fetch_assoc($result)) {
-    								$response_header = $row['idtype_movement'];//."#".row[""];
-                                }
-    						}
-    						 else {
-    								$response_header = "";
-    								die('Could not connect:1 ' . mysql_error());
-    						}
-    				}  else {
-    						$response_header ="";
-    						die('Could not connect:2 ' . mysql_error());
-    				}
-    				// Closing connection
-    				mysql_close($link);
-    		}
-    		else {
-    				die('Could not connect:3 ' . mysql_error());
-    		}
-    	}
-        function exec_proc($proc_name, $proc_params)
-        {
-                $link = mysql_connect($this->host, $this->user, $this->password);
-                if($link)
-                {
-                        $db_selected = mysql_select_db($this->namedb) ;
-                        if ($db_selected)
+					if($Resultado)
+					{								
+						while ($Fila = mysql_fetch_assoc($Resultado)) 
                         {
-
-                                // Performing SQL query
-                                $query = "call ".$proc_name."(".$proc_params.");";
-
-                                $result = mysql_query($query, $link);
-
-                                if($result)
-                                {
-                                        $response = 0;
-                                }
-                                 else {
-                                        $response_header = 1;
-                                        die('Could not connect:1 ' . mysql_error());
-                                }
-                        }  else {
-                                $response_header = 2;
-                                die('Could not connect:2 ' . mysql_error());
+							$Respuesta_Encabezado = $Fila['idtype_movement'];//."#".row[""];
                         }
-                        // Closing connection
-                        mysql_close($link);
-                }
-                else {
-                        die('Could not connect:3 ' . mysql_error());
-                }
-        }
-
-        function exec_proc_select($proc_name, $proc_params)
-        {
-                $link = mysql_connect($this->host, $this->user, $this->password);
-                if($link)
+					}
+					else 
+                    {
+						$Respuesta_Encabezado = "";
+						die('Could not connect:1 ' . mysql_error());
+					}
+				}  
+                else 
                 {
-                        $db_selected = mysql_select_db($this->namedb) ;
-                        if ($db_selected)
-                        {
+					$Respuesta_Encabezado ="";
+					die('Could not connect:2 ' . mysql_error());
+				}
+				// Closing connection
+				mysql_close($Enlace);
+    		}
+    		else
+            {
+    			die('Could not connect:3 ' . mysql_error());
+    		}
+    	}
 
-                                // Performing SQL query
-                                $query = "call ".$proc_name."(".$proc_params.");";
+        function FncEjecutarProcedimiento($Procedimiento, $Parametros)
+        {
+            $Enlace = mysql_connect($this->host, $this->user, $this->password);
+            if($Enlace)
+            {
+                $db_seleccionada = mysql_select_db($this->namedb) ;
+                if ($db_seleccionada)
+                {
 
-                                $result = mysql_query($query, $link);
+                    // Performing SQL query
+                    $Consulta = "call ".$Procedimiento."(".$Parametros.");";
+                    $Resultado = mysql_query($Consulta, $Enlace);
 
-    						if($result)
-            						{								
-            							/*while ($row = mysql_fetch_assoc($result)) {
-            								echo "<TR><TD><INPUT TYPE='CHECKBOX'></TD>"."<TD>".$row["order_date"]."</TD>"."<TD>".$row["idcustomer"]."</TD>"."<TD>".$row["lastname"]."</TD>"."<TD>".$row["firstname"]."</TD>"."<TD>".$row["idorder"]."</TD>"."<TD>".$row["edition_date"]."</TD>"."<TD>".$row["total_items"]."</TD>"."<TD>".$row["total_price"]."</TD>"."<TD>".$row["name"]."</TD>"."<TD>".$row["username"]."</TD></TR>";
-                                        }*/
-            						}
-    						 else {
-    								$result = null;
-    								die('Could not connect:1 ' . mysql_error());
-            						}
-            				}  else {
-            						$result = null;
-            						die('Could not connect:2 ' . mysql_error());
-            				}
-            				// Closing connection
-            				mysql_close($link);
-            		}
-            		else {
-            				$result = null;
-            				die('Could not connect:3 ' . mysql_error().$this->host."ddd");
-            		}
-            		return $result;
+                    if($Resultado)
+                    {
+                        $Respuesta = 0;
+                    }
+                    else 
+                    {
+                        $Respuesta_Encabezado = 1;
+                        die('Could not connect:1 ' . mysql_error());
+                    }
+                }  
+                else 
+                {
+                    $Respuesta_Encabezado = 2;
+                    die('Could not connect:2 ' . mysql_error());
+                }
+                // Closing connection
+                mysql_close($Enlace);
+            }
+            else 
+            {
+                die('Could not connect:3 ' . mysql_error());
+            }
         }
 
-
-        function list_orders($query)
+        function FncProcedimientoAlmacenado($Procedimiento, $Parametros)
         {
-    		$link = mysql_connect($this->host, $this->user, $this->password);
-    		if($link)
+            $Enlace = mysql_connect($this->host, $this->user, $this->password);
+            if($Enlace)
+            {
+                $db_seleccionada = mysql_select_db($this->namedb) ;
+                if ($db_seleccionada)
+                {
+
+                    // Performing SQL query
+                    $Consulta = "call ".$Procedimiento."(".$Parametros.");";
+                    $Resultado = mysql_query($Consulta, $Enlace);
+
+    				if($Resultado)
+					{								
+						/*while ($row = mysql_fetch_assoc($Resultado)) {
+							echo "<TR><TD><INPUT TYPE='CHECKBOX'></TD>"."<TD>".$row["order_date"]."</TD>"."<TD>".$row["idcustomer"]."</TD>"."<TD>".$row["lastname"]."</TD>"."<TD>".$row["firstname"]."</TD>"."<TD>".$row["idorder"]."</TD>"."<TD>".$row["edition_date"]."</TD>"."<TD>".$row["total_items"]."</TD>"."<TD>".$row["total_price"]."</TD>"."<TD>".$row["name"]."</TD>"."<TD>".$row["username"]."</TD></TR>";
+                        }*/
+					}
+    				else 
+                    {
+						$Resultado = null;
+						die('Could not connect:1 ' . mysql_error());
+    				}
+    			}  
+                else 
+                {
+					$Resultado = null;
+					die('Could not connect:2 ' . mysql_error());
+				}
+    				// Closing connection
+    				mysql_close($Enlace);
+        		}
+    		else 
+            {
+				$Resultado = null;
+				die('Could not connect:3 ' . mysql_error().$this->host."ddd");
+    		}
+        	return $Resultado;
+        }
+
+        function list_orders($Consulta)
+        {
+    		$Enlace = mysql_connect($this->host, $this->user, $this->password);
+    		if($Enlace)
     		{
-    				$db_selected = mysql_select_db($this->namedb) ;
-    				if ($db_selected)
+    				$db_seleccionada = mysql_select_db($this->namedb) ;
+    				if ($db_seleccionada)
     				{
 
-    						// Performing SQL query
-    												
-    						$result = mysql_query($query, $link);
+						// Performing SQL Consulta
+												
+						$Resultado = mysql_query($Consulta, $Enlace);
 
-    						if($result)
-    						{								
-    							/*while ($row = mysql_fetch_assoc($result)) {
-    								echo "<TR><TD><INPUT TYPE='CHECKBOX'></TD>"."<TD>".$row["order_date"]."</TD>"."<TD>".$row["idcustomer"]."</TD>"."<TD>".$row["lastname"]."</TD>"."<TD>".$row["firstname"]."</TD>"."<TD>".$row["idorder"]."</TD>"."<TD>".$row["edition_date"]."</TD>"."<TD>".$row["total_items"]."</TD>"."<TD>".$row["total_price"]."</TD>"."<TD>".$row["name"]."</TD>"."<TD>".$row["username"]."</TD></TR>";
-                                }*/
-    						}
-    						 else {
-    								$result = null;
-    								die('Could not connect:1 ' . mysql_error());
-    						}
-    				}  else {
-    						$result = null;
-    						die('Could not connect:2 ' . mysql_error());
+						if($Resultado)
+						{								
+							/*while ($row = mysql_fetch_assoc($Resultado)) {
+								echo "<TR><TD><INPUT TYPE='CHECKBOX'></TD>"."<TD>".$row["order_date"]."</TD>"."<TD>".$row["idcustomer"]."</TD>"."<TD>".$row["lastname"]."</TD>"."<TD>".$row["firstname"]."</TD>"."<TD>".$row["idorder"]."</TD>"."<TD>".$row["edition_date"]."</TD>"."<TD>".$row["total_items"]."</TD>"."<TD>".$row["total_price"]."</TD>"."<TD>".$row["name"]."</TD>"."<TD>".$row["username"]."</TD></TR>";
+                            }*/
+						}
+						else 
+                        {
+							$Resultado = null;
+							die('Could not connect:1 ' . mysql_error());
+						}
+    				}  
+                    else 
+                    {
+						$Resultado = null;
+						die('Could not connect:2 ' . mysql_error());
     				}
     				// Closing connection
-    				mysql_close($link);
+    				mysql_close($Enlace);
     		}
-    		else {
-    				$result = null;
-    				die('Could not connect:3 ' . mysql_error().$this->host."ddd");
-    		}
-    		return $result;
-    	}
-        function insert_to_db($query)
-        {
-            $response = FALSE;
-            $link = mysql_connect($this->host, $this->user, $this->password);
-            if($link)
+    		else 
             {
-                //echo "link<br>";
-                $db_selected = mysql_select_db($this->namedb);
-                if ($db_selected)
-                {
-                    $result = mysql_query($query, $link);
+				$Resultado = null;
+				die('No se puede conectar:3 ' . mysql_error().$this->host."ddd");
+    		}
+    		return $Resultado;
+    	}
 
-                    if($result)
+        function FncInsertar($Consulta)
+        {
+            $Respuesta = FALSE;
+            $Enlace = mysql_connect($this->host, $this->user, $this->password);
+            if($Enlace)
+            {
+                //echo "Enlace<br>";
+                $db_seleccionada = mysql_select_db($this->namedb);
+                if ($db_seleccionada)
+                {
+                    $Resultado = mysql_query($Consulta, $Enlace);
+
+                    if($Resultado)
                     {
-                        $response = TRUE;
+                        $Respuesta = TRUE;
                          // Free resultset
                         $this->transac_id = mysql_insert_id();
-                        //mysql_free_result($result);
-                    }  else {
+                        //mysql_free_result($Resultado);
+                    }
+                    else 
+                    {
                         //$message  = 'Invalid query: ' . mysql_error() . "\n";
                         //$message .= 'Whole query: ' . $query;
-                        die('001 Could not connect: ' . mysql_error());
-
+                        die('001 No se puede conectar: ' . mysql_error());
                     }
                 }
-                else {
-                    $response_header = 2;
-                    die('002 Could not connect: ' . mysql_error());
+                else 
+                {
+                    $Respuesta_Encabezado = 2;
+                    die('002 No se puede conectar: ' . mysql_error());
                 }
                 // Closing connection
-                mysql_close($link);
+                mysql_close($Enlace);
             }
-             else {
-                    die('003 Could not connect: ' . mysql_error());
+            else 
+            {
+                    die('003 No se puede conectar: ' . mysql_error());
             }
-        return $response;
+            return $Respuesta;
         }
 
-        function update_to_db($query)
+        function FncActualizar($Consulta)
         {
-            $response = FALSE;
-            $link = mysql_connect($this->host, $this->user, $this->password);
-            if($link)
+            $Respuesta = FALSE;
+            $Enlace = mysql_connect($this->host, $this->user, $this->password);
+            if($Enlace)
             {
-                //echo "link<br>";
-                $db_selected = mysql_select_db($this->namedb);
-                if ($db_selected)
+                //echo "Enlace<br>";
+                $db_seleccionada = mysql_select_db($this->namedb);
+                if ($db_seleccionada)
                 {
-                    $result = mysql_query($query, $link);
+                    $Resultado = mysql_query($Consulta, $Enlace);
 
-                    if($result)
+                    if($Resultado)
                     {
-                        $response = TRUE;
+                        $Respuesta = TRUE;
                          // Free resultset
                         $this->transac_id = mysql_affected_rows();
-                        //mysql_free_result($result);
-                    }  else {
+                        //mysql_free_result($Resultado);
+                    }  
+                    else 
+                    {
                         //$message  = 'Invalid query: ' . mysql_error() . "\n";
                         //$message .= 'Whole query: ' . $query;
-                        die('001 Could not connect: ' . mysql_error());
-
+                        die('001 No se puede conectar: ' . mysql_error());
                     }
                 }
-                else {
-                    $response_header = 2;
-                    die('002 Could not connect: ' . mysql_error());
+                else 
+                {
+                    $Respuesta_Encabezado = 2;
+                    die('002 No se puede conectar: ' . mysql_error());
                 }
                 // Closing connection
-                mysql_close($link);
+                mysql_close($Enlace);
             }
-             else {
-                    die('003 Could not connect: ' . mysql_error());
+            else 
+            {
+                    die('003 No se puede conectar: ' . mysql_error());
             }
-            return $response;
+            return $Respuesta;
         }
     }
 ?>

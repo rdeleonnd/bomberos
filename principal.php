@@ -8,17 +8,19 @@
 		<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap-theme.css"/>
 		<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap-datetimepicker.css" />
 		<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap-datetimepicker-standalone.css" />
+		<link rel="stylesheet" type="text/css" href="select2/select2.css" />
 		<link rel="stylesheet" type="text/css" href="css/submenus.css" />
 		<script type="text/javascript" src="jquery/js/jquery-1.10.2.js"></script>
 		<script type="text/javascript" src="funciones/Moment.js"></script>
 		<script type="text/javascript" src="bootstrap/dist/js/bootstrap.js"></script>
 		<script type="text/javascript" src="bootstrap/dist/js/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="select2/select2.js"></script>
 		<script type="text/javascript" src="funciones/funciones.js"></script>
 		<script type="text/javascript" src="funciones/principal.js"></script>
 	</head>
 	<body>
-		<?php 
-			include('funciones/funciones.php');
+		<?php  
+			include_once('funciones/funciones.php');
 		?>
 		</br><p align="center"><img src="img/logotipo.png"></p>
 		<hr size="10" width="85%" style="#0000FF" />

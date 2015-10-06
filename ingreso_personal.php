@@ -54,6 +54,7 @@
 					<div class="form-group">
 						<label class="control-label col-xs-3">Sexo del empleado:</label>
 						<div class="col-xs-3">
+							<div class="col-xs-3" id="divsexo"></div>
 							<input type="text" class="form-control" id="sexo" name="sexo">
 						</div>
 					</div>
@@ -94,5 +95,12 @@
         $('#nacimiento').datetimepicker({
         	format: 'DD/MM/YYYY'
         });
+        $('#divsexo2').select2();
     });
 </script>
+<?php 
+include_once('funciones/funciones.php');
+	$Consulta = "SELECT idusuario as id, usuario as nombre FROM usuario;";
+	echo FncCrearCombo($Consulta,"divsexo2",'','','','','');
+
+?>
