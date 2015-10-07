@@ -53,17 +53,25 @@
 				<tr>
 					<div class="form-group">
 						<label class="control-label col-xs-3">Sexo del empleado:</label>
-						<div class="col-xs-3">
+						<div class="col-xs-1">
 							<div class="col-xs-3" id="divsexo"></div>
-							<input type="text" class="form-control" id="sexo" name="sexo">
+							<select class="form-control" id="sexo" name="sexo">
+								<option value="Hombre">Hombre</option>
+								<option value="Mujer">Mujer</option>
+							</select>
 						</div>
 					</div>
 				</tr>
 				<tr>
 					<div class="form-group">
 						<label class="control-label col-xs-3">Estado civil del empleado:</label>
-						<div class="col-xs-3">
-							<input type="text" class="form-control" id="estado_civil" name="estado_civil">
+						<div class="col-xs-1">
+							<select class="form-control" id="estado_civil" name="estado_civil">
+								<option value="Soltero">Solter@</option>
+								<option value="Casado">Casad@</option>
+								<option value="Divorciado">Divorciad@</option>
+								<option value="Viudo">Viud@</option>
+							</select>
 						</div>
 					</div>
 				</tr>
@@ -78,8 +86,13 @@
 				<tr>
 					<div class="form-group">
 						<label class="control-label col-xs-3">Asalariado:</label>
-						<div class="col-xs-3">
-							<input type="text" class="form-control" id="sueldo" name="sueldo">
+						<div class="form-inline col-xs-3">
+							<select id="estado_sueldo" name="estado_sueldo" class="form-control col-xs-2">
+								<option value="SI">SI</option>
+								<option value="NO">NO</option>
+							</select>
+							 <label class="form-inline " for="sueldo">Ingrese el Sueldo:</label>
+							<input type="text" class="form-control allownumericwithdecimal" id="sueldo" name="sueldo" value="0.00">
 						</div>
 					</div>
 				</tr>
@@ -95,6 +108,29 @@
         $('#nacimiento').datetimepicker({
         	format: 'DD/MM/YYYY'
         });
+
+        $('#estado_sueldo').change(function(){
+        	Sueldo = $('#estado_sueldo').val();
+        	if(Sueldo == 'SI')
+        	{
+        		$('#sueldo').prop('disabled', false);
+        		$('#sueldo').val('0.00');
+        	}
+        	else
+        	{
+        		$('#sueldo').prop('disabled', true);
+        		$('#sueldo').val('0.00');
+        	}
+        });
+
+        $(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
+            //this.value = this.value.replace(/[^0-9\.]/g,'');
+		    $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
+
         $('#divsexo2').select2();
     });
 </script>

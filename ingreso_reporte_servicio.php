@@ -10,9 +10,17 @@
 			$ConsultaSexo = "";
 		?>
 		<form class="form-horizontal">
-			<table align="center" class="table table-bordered" style="width: 60%">
+			<table align="center" class="table table-bordered" style="width: 90%">
 				<tr>
-					<td rowspan=4 align="justify">Recibo No. <input type="text" id="recibo" name="recibo"> </td>
+					
+						<img class="img-thumbnail" src="img/logotipo.png">
+						<div class="form-inline">
+							<label class="control-label col-xs-3"> Reporte # :</label>
+							<div class="col-xs-3">
+								<input class="form-control" type="text" id="recibo" name="recibo"> 
+							</div>
+						</div>
+					
 					<td>
 						Direccion del Traslado<input type="text" id="direccion_traslado" name="direccion_traslado">
 					</td>
