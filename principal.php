@@ -17,6 +17,7 @@
 		<script type="text/javascript" src="select2/select2.js"></script>
 		<script type="text/javascript" src="funciones/funciones.js"></script>
 		<script type="text/javascript" src="funciones/principal.js"></script>
+		<script type="text/javascript" src="funciones/jqueury.numeric.js"></script>
 	</head>
 	<body>
 		<?php  

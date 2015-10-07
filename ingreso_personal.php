@@ -7,7 +7,7 @@
 	<body>
 		<form class="form-horizontal ">
 			<table align="center" class="table table-bordered" >
-				<tr>
+				<tr class="form-group">
 					<div class="form-group">
 						<label class="control-label col-xs-3">Codigo del empleado:</label>
 						<div class="col-xs-1">

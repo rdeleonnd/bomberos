@@ -13,68 +13,107 @@
 			<table align="center" class="table table-bordered" style="width: 90%">
 				<tr>
 					
-						<img class="img-thumbnail" src="img/logotipo.png">
-						<div class="form-inline">
-							<label class="control-label col-xs-3"> Reporte # :</label>
-							<div class="col-xs-3">
-								<input class="form-control" type="text" id="recibo" name="recibo"> 
-							</div>
+					<img class="img-thumbnail" src="img/logotipo.png">
+					<div class="form-group">
+						<label class="control-label col-xs-3"> Reporte # :</label>
+						<div class="col-xs-2">
+							<input class="form-control" type="text" id="recibo" name="recibo"> 
 						</div>
-					
-					<td>
-						Direccion del Traslado<input type="text" id="direccion_traslado" name="direccion_traslado">
-					</td>
+					</div>
 				</tr>
 				<tr>
-					<td>
-						Nombre del paciente<input type="text" id="nombre_paciente" name="nombre_paciente">
-					</td>
-				</tr>	
-				<tr>
-					<td>
-						Direccion del paciente<input type="text" id="direccion_paciente" name="direccion_paciente">
-					</td>
+					<div class="form-group">
+						<label class="control-label col-xs-3"> Direccion del Traslado:</label>
+						<div class="col-xs-3">
+							<input class="form-control" type="text" id="direccion_traslado" name="direccion_traslado"> 
+						</div>
+					</div>
 				</tr>
 				<tr>
-					<td>
-						Edad<input type="text" id="edad" name="edad" size="2"><?php //echo FncCrearCombo($ConsultaRango,'rango_edad', '', '','' ,'','');?>
-						Sexo<?php //echo FncCrearCombo($ConsultaSexo,'sexo', '', '','' ,'','');?>
-					</td>
+					<div class="form-group">
+						<label class="control-label col-xs-3">Nombre del Paciente:</label>
+						<div class="col-xs-3">
+							<input class="form-control" type="text" id="nombre_paciente" name="nombre_paciente">
+						</div>
+					</div>
 				</tr>
 				<tr>
-					<td colspan="3">
-						Se Traslado a <input type="text" id="traslado_a" name="traslado_a" size="100">
-					</td>
+					<div class="form-group">
+						<label class="control-label col-xs-3">Direccion del paciente:</label>
+						<div class="col-xs-3">
+							<input class="form-control" type="text" id="direccion_paciente" name="direccion_paciente">
+						</div>
+					</div>
 				</tr>
 				<tr>
-					<td>
-						Forma de aviso<input type="text" id="aviso" name="aviso">
-					</td>
-					<td>
-						Telefono <input type="text" id="telefono" name="telefono">
-					</td>
+					<div class="form-group">
+						<label class="control-label col-xs-3">Edad:</label>
+						<div class="form-inline col-xs-6">
+							<input class="form-control col-xs-1" type="text" id="edad" name="edad" >
+							<select id="rango_edad" name="rango_edad" class="form-control col-xs-1">
+								<option value="A" select>Años</option>
+								<option value="M">Meses</option>
+								<option value="D">Dias</option>
+							</select>
+							<label class="form-inline " for="sexo"> Sexo de la Persona:</label>
+							<select class="form-control" id="sexo" name="sexo">
+								<option value="Hombre">Hombre</option>
+								<option value="Mujer">Mujer</option>
+							</select>
+						</div>
+					</div>
 				</tr>
 				<tr>
-					<td colspan="3">
-						Telefonista de turno<input id="telefonista" name="telefonista" size="100">
-					</td>
+					<div class="form-group">
+						<label class="control-label col-xs-3">Se Traslado a:</label>
+						<div class="col-xs-3" >
+							<input class="form-control" type="text" id="traslado_a" name="traslado_a">
+						</div>
+					</div>
 				</tr>
 				<tr>
-					<td>
-						Unidad No. <input type="text" id="unidad" name="unidad">
-					</td>
-					<td>
-						Hora de Salida <input type"text" id="hora_salida" name="hora_salida">
-					</td>
-					<td>
-						Hora de Entrada <input type"text" id="hora_entrada" name="hora_entrada">
-					</td>
+					<div class="form-group">
+						<label class="control-label col-xs-3">Forma de aviso:</label>
+						<div class="form-inline col-xs-6">
+							<input class="form-control" type="text" id="aviso" name="aviso">
+							<label class="form-inline" for="telefono">Telefono:</label>
+							<input class="form-control" type="text" id="telefono" name="telefono">
+						</div>
+					</div>
 				</tr>
 				<tr>
-					<td colspan="3">
-						Nombre del Piloto 
-						Fecha <input type="text" id="fecha" name="fecha">
-					</td>
+					<div class="form-group">
+						<label class="control-label col-xs-3">Telefonista de turno:</label>
+						<div class="col-xs-3">
+							<input class="form-control" id="telefonista" name="telefonista">
+						</div>
+					</div>
+				</tr>
+				<tr>
+					<div class="form-group">
+						<label class="control-label col-xs-3">Unidad No:</label>
+						<div class="form-inline col-xs-6">
+							<input class="form-control" type="text" id="unidad" name="unidad">
+							<label class="form-inline" for="hora_salida">Hora de Salida:</label>
+							<input class="form-control" type"text" id="hora_salida" name="hora_salida">
+							<label class="form-inline" for="hora_entrada">Hora de Entrada:</label>
+							<input class="form-control" type"text" id="hora_entrada" name="hora_entrada">
+						</div>
+					</div>
+				</tr>
+				<tr>
+					<div class="form-group">
+						<label class="control-label">Nombre del Piloto:</label>
+						<div class="form-inline col-xs-6">
+							<?php 
+								include_once('funciones/funciones.php');
+								$Consulta = "SELECT idusuario as id, usuario as nombre FROM usuario;";
+								echo FncCrearCombo($Consulta,"divsexo2",'','','','','');
+							?>
+							<label class="form-inline" for="fecha">Fecha:</label>
+							<input class="form-control" type="text" id="fecha" name="fecha">
+						</div>
+					</div>
 				</tr>
 				<tr>
 					<td colspan="3">
@@ -117,4 +156,9 @@
 		</form>
 	</body>
 </html>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#edad').ForceNumericOnly();	
+	});
+</script>
 
