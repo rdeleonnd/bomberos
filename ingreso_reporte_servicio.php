@@ -13,8 +13,7 @@
 			<table align="center" class="table table-bordered" style="width: 90%">
 				<tr>
 					<div class="form-group">
-						<img class="img-thumbnail col-xs-1" src="img/logotipo.png">
-						<label class="control-label col-xs-2"> Reporte # :</label>
+						<label class="control-label col-xs-3"> Reporte # :</label>
 						<div class="col-xs-2">
 							<input class="form-control" type="text" id="recibo" name="recibo"> 
 						</div>
