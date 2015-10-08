@@ -12,16 +12,13 @@
 		<form class="form-horizontal">
 			<table align="center" class="table table-bordered" style="width: 90%">
 				<tr>
-					
-					<img class="img-thumbnail" src="img/logotipo.png">
 					<div class="form-group">
-						<label class="control-label col-xs-3"> Reporte # :</label>
+						<img class="img-thumbnail col-xs-1" src="img/logotipo.png">
+						<label class="control-label col-xs-2"> Reporte # :</label>
 						<div class="col-xs-2">
 							<input class="form-control" type="text" id="recibo" name="recibo"> 
 						</div>
 					</div>
-				</tr>
-				<tr>
 					<div class="form-group">
 						<label class="control-label col-xs-3"> Direccion del Traslado:</label>
 						<div class="col-xs-3">
@@ -103,38 +100,62 @@
 				</tr>
 				<tr>
 					<div class="form-group">
-						<label class="control-label">Nombre del Piloto:</label>
+						<label class="control-label col-xs-3">Nombre del Piloto:</label>
 						<div class="form-inline col-xs-6">
 							<?php 
-								include_once('funciones/funciones.php');
+								
 								$Consulta = "SELECT idusuario as id, usuario as nombre FROM usuario;";
-								echo FncCrearCombo($Consulta,"divsexo2",'','','','','');
+								echo FncCrearCombo($Consulta,"piloto",'class="form-control col-xs-3"','','','','');
 							?>
 							<label class="form-inline" for="fecha">Fecha:</label>
-							<input class="form-control" type="text" id="fecha" name="fecha">
+							<div class='input-group date col-xs-2' id='datetimepicker1'>
+			                   <input class="form-control" type="text" id="fecha" name="fecha">
+			                    <span class="input-group-addon">
+			                        <span class="glyphicon glyphicon-calendar"></span>
+			                    </span>
+			                </div>
 						</div>
 					</div>
 				</tr>
 				<tr>
-					<td colspan="3">
-						Kilometraje de Salida <input type="text" id="kilometraje_salida" name="kilometraje_salida">
-						Kilometraje de Entrada <input type="text" id="kilometraje_entrada" name="kilometraje_entrada">
-					</td>
+					<div class="form-group">
+						<label class="control-label col-xs-3">Kilometraje de Salida:</label>
+						<div class="form-inline cols-xs-6">
+							<input class="form-control" type="text" id="kilometraje_salida" name="kilometraje_salida">
+							<label class="form-inline" for="kilometraje_entrada">Kilometraje de Entrada:</label>
+							<input class="form-control" type="text" id="kilometraje_entrada" name="kilometraje_entrada">
+						</div>
+					</div>
 				</tr>
 				<tr>
-					<td colspan="3">
-						Bombero que hizo el reporte
-					</td>
+					<div class="form-group">
+						<label class="control-label col-xs-3">Bombero que hizo el reporte:</label>
+						<div class="form-inline col-xs-6">
+							<?php 
+								$Consulta = "SELECT idusuario as id, usuario as nombre FROM usuario;";
+								echo FncCrearCombo($Consulta,"bombero_reporte",'class="form-control col-xs-3"','','','','');
+							?>
+						</div>
+					</div>
 				</tr>
 				<tr>
-					<td colspan="3">
-						Bomberos Asistentes
-					</td>
+					<div class="form-group">
+						<label class="control-label col-xs-3">Bomberos Asistentes:</label>
+						<div class="form-inline col-xs-6">
+							<?php 
+								$Consulta = "SELECT idusuario as id, usuario as nombre FROM usuario;";
+								echo FncCrearCombo($Consulta,"bombero_asistente",'class="form-control col-xs-3"','','','','');
+							?>
+						</div>
+					</div>
 				</tr>
 				<tr>
-					<td colspan="3">
-						Observaciones
-					</td>
+					<div class="form-group">
+						<label class="control-label col-xs-3">Observaciones:</label>
+						<div class="col-xs-6">
+							<textarea class="form-control" rows="3" placeholder="Campo de texto" id="observaciones" name="observaciones" maxlength="1000"></textarea>
+						</div>
+					</div>
 				</tr>
 				<tr>
 					<div class="form-group">
@@ -159,6 +180,20 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#edad').ForceNumericOnly();	
+		$('#kilometraje_salida').ForceNumericOnly();
+		$('#kilometraje_entrada').ForceNumericOnly();
+
+		$('#datetimepicker1').datetimepicker({
+			locale: 'es',
+        	format: 'DD/MM/YYYY'
+		});
+		$('#fecha').datetimepicker({
+			locale: 'es',
+        	format: 'DD/MM/YYYY'
+		});
+		$('#kilometraje_entrada').change(function(){
+			$('#kilometros_recorridos').val($('#kilometraje_entrada').val()-$('#kilometraje_salida').val());
+		});
 	});
 </script>
 

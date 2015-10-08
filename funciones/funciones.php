@@ -2,8 +2,8 @@
 	
 	function FncCrearCombo($Consulta,$Nombre,$Funcion,$Prefijo,$Sufijo,$Seleccionado,$Error)
 	{   
-		include_once('conexion/configuracion_db.php');
-		include_once('conexion/conexion.php'); 
+		include('conexion/configuracion_db.php');
+		require_once('conexion/conexion.php'); 
 		$MyOps = new DB($Usuario,$Clave,$DB,$Host);
 		$count=0;
 		$combo="<select id ='".$Nombre."' name ='".$Nombre."' ".$Funcion." >";

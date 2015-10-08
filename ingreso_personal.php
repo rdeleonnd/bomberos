@@ -103,9 +103,11 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#datetimepicker1').datetimepicker({
+        	locale: 'es',
         	format: 'DD/MM/YYYY'
         });
         $('#nacimiento').datetimepicker({
+        	locale: 'es',
         	format: 'DD/MM/YYYY'
         });
 

@@ -6,27 +6,22 @@
 	</head>
 	<body>
 		<form class="form-horizontal">
-			<table align="center" class="table table-bordered" style="width: 60%">
+			<table align="center" class="table table-bordered" >
 				<tr>
 					<div class="form-group">
-						
-						<div class="col-xs-6">
-							<input type="text" class="form-control" id="nombre" name="nombre" size="100">
+						<label class="control-label col-xs-3">(NOMBRE DEL COMITE, ASOCIACION, FUNDACION U OTRO)</label>
+						<div class="col-xs-5">
+							<input class="form-control col-xs-3" type="text" id="nombre" name="nombre">
 						</div>
 					</div>
 				</tr>
-				<tr align="center">
-					<label class="control-label col-xs-3">(NOMBRE DEL COMITE, ASOCIACION, FUNDACION U OTRO)</label>
-				</tr>
 				<tr>
-					<td align="center">
-						<input type="text" id="lugar" name="lugar" size="100">
-					</td>
-				</tr>
-				<tr>
-					<td align="center">
-						(LUGAR, MUNICIPIO Y DEPARTAMENTO)
-					</td>
+					<div class="form-group">
+						<label class="control-label col-xs-3">(LUGAR, MUNICIPIO Y DEPARTAMENTO)</label>
+						<div class="col-md-5">
+							<input class="form-control col-xs-3" type="text" id="lugar" name="lugar">
+						</div>
+					</div>
 				</tr>
 				<tr>
 					<td>
