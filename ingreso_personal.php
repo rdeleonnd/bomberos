@@ -34,7 +34,7 @@
 				<tr>
 					<div class="form-group">
 						<label class="control-label col-xs-3">Direccion del empleado:</label>
-						<div class="col-xs-3">
+						<div class="col-xs-4">
 							<input type="text" class="form-control" id="direccion" name="direccion">
 						</div>
 					</div>
@@ -42,18 +42,20 @@
 				<tr>
 		            <div class="form-group">
 		            	<label class="control-label col-xs-3">Fecha de Nacimiento del empleado :</label>
-		                <div class='input-group date col-xs-1' id='datetimepicker1'>
-		                    <input type='text' class="form-control" id="nacimiento" name="nacimiento"/>
-		                    <span class="input-group-addon">
-		                        <span class="glyphicon glyphicon-calendar"></span>
-		                    </span>
-		                </div>
+		            	<div class="col-xs-2">
+		            		<div class='input-group date' id='datetimepicker1'>
+			                    <input type='text' class="form-control" id="nacimiento" name="nacimiento"/>
+			                    <span class="input-group-addon">
+			                        <span class="glyphicon glyphicon-calendar"></span>
+			                    </span>
+			                </div>
+		            	</div>
 		            </div>
 				</tr>
 				<tr>
 					<div class="form-group">
 						<label class="control-label col-xs-3">Sexo del empleado:</label>
-						<div class="col-xs-1">
+						<div class="col-xs-2">
 							<div class="col-xs-3" id="divsexo"></div>
 							<select class="form-control" id="sexo" name="sexo">
 								<option value="Hombre">Hombre</option>
@@ -65,7 +67,7 @@
 				<tr>
 					<div class="form-group">
 						<label class="control-label col-xs-3">Estado civil del empleado:</label>
-						<div class="col-xs-1">
+						<div class="col-xs-2">
 							<select class="form-control" id="estado_civil" name="estado_civil">
 								<option value="Soltero">Solter@</option>
 								<option value="Casado">Casad@</option>
@@ -85,15 +87,24 @@
 				</tr>
 				<tr>
 					<div class="form-group">
-						<label class="control-label col-xs-3">Asalariado:</label>
-						<div class="form-inline col-xs-3">
-							<select id="estado_sueldo" name="estado_sueldo" class="form-control col-xs-2">
-								<option value="SI">SI</option>
-								<option value="NO">NO</option>
-							</select>
-							 <label class="form-inline " for="sueldo">Ingrese el Sueldo:</label>
-							<input type="text" class="form-control allownumericwithdecimal" id="sueldo" name="sueldo" value="0.00">
-						</div>
+				        <label class="control-label col-xs-3">Asalariado:</label>
+				        <div class="col-xs-1">
+				            <div class="input-group">
+				                <select id="estado_sueldo" name="estado_sueldo" class="form-control col-xs-4">
+									<option value="SI">SI</option>
+									<option value="NO">NO</option>
+								</select>
+				            </div>
+				        </div>
+				        <div class="col-xs-2">
+				            <div class="input-group">
+				            	<label class="input-group-addon">Ingrese el Sueldo:</label>
+								<input type="text" class="form-control allownumericwithdecimal" id="sueldo" name="sueldo" value="0.00">
+				            </div>
+				        </div>
+			            <div class="input-group">
+			                <button type="button" class="btn btn-info" id="guardar" name="guardar">Guardar</button>
+			            </div>
 					</div>
 				</tr>
 			</table>
