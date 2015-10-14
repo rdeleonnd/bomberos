@@ -56,7 +56,6 @@
 					<div class="form-group">
 						<label class="control-label col-xs-3">Sexo del empleado:</label>
 						<div class="col-xs-2">
-							<div class="col-xs-3" id="divsexo"></div>
 							<select class="form-control" id="sexo" name="sexo">
 								<option value="Hombre">Hombre</option>
 								<option value="Mujer">Mujer</option>

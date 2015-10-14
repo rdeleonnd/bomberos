@@ -26,15 +26,19 @@
 				<tr>
 					<div class="form-group">
 						<label class="control-label col-xs-3">Fecha:</label>
-						<div class="form-inline col-xs-6">
-							<div class='input-group date col-xs-2' id='datetimepicker1'>
+						<div class="col-xs-2">
+							<div class='input-group date' id='datetimepicker1'>
 			                   <input class="form-control" type="text" id="fecha" name="fecha">
 			                    <span class="input-group-addon">
 			                        <span class="glyphicon glyphicon-calendar"></span>
 			                    </span>
 			                </div>
-		                	<label class="form-inline" for="ingreso_por">Ingreso por:</label>
-			                <input class="form-control" type="text" id="ingreso_por" name="ingreso_por">
+			            </div>
+			            <div class="col-xs-3">
+			            	<div class="input-group">
+			            		<label class="input-group-addon" for="ingreso_por">Ingreso por:</label>
+			                	<input class="form-control" type="text" id="ingreso_por" name="ingreso_por">
+			            	</div>
 			            </div>
 					</div>
 				</tr>
@@ -58,8 +62,7 @@
 				<tr>
 					<div class="form-group">
 						<label class="control-label col-xs-3">Por contribucion voluntaria:</label>
-						<div class="form-inline col-xs-7">
-							<label class="checkbox-inline"><input id="ChkSI" name="ChkSI" type="checkbox" value="">SI</label>
+						<div class="col-xs-3">
 							<input class="form-control" type="text" id="contribucion" name="contribucion">
 						</div>
 					</div>
@@ -75,7 +78,7 @@
 				<tr>
 					<div class="form-group">
 						<label class="control-label col-xs-3">Segun autorizacion de Gobernacion Departamental No:</label>
-						<div class="col-xs-2">
+						<div class="col-xs-3">
 							<input class="form-control" type="text" id="gobernacion" name="gobernacion">
 						</div>
 					</div>
@@ -94,9 +97,12 @@
 					</div>
 					<div class="form-group">
 						<label class="control-label col-xs-3">No. Cuentadancia o Registro de la Contraloria General de Cuentas:</label>
-						<div class="col-xs-2">
+						<div class="col-xs-3">
 							<input class="form-control" type="text" id="Cuentadancia" name="Cuentadancia">
 						</div>
+						<div class="input-group">
+			                <button type="button" class="btn btn-info" id="guardar" name="guardar">Guardar</button>
+			            </div>
 					</div>
 				</tr>
 			</table>
