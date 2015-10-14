@@ -9,10 +9,13 @@
 			<table align="center" class="table table-bordered" style="width: 50%">
 				<tr>
 					<div class="form-group">
-							<label class="control-label col-xs-3">Ingrese Incidente:</label>
-							<div class="col-xs-3">
-								<input type="text" class="form-control" id="incidente" name="incidente">
-							</div>
+						<label class="control-label col-xs-3">Ingrese Incidente:</label>
+						<div class="col-xs-3">
+							<input type="text" class="form-control" id="incidente" name="incidente">
+						</div>
+						<div class="input-group">
+			                <button type="button" class="btn btn-info" id="guardar" name="guardar">Guardar</button>
+			            </div>
 					</div>
 				</tr>
 			</table>

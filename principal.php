@@ -94,8 +94,8 @@
 			</tr>
 			<tr>
 				<div class="panel panel-success">
-					<div class="panel-heading" id="Encabezado_Panel">
-						<h3 class="panel-title" align="center">Titulo</h3>
+					<div class="panel-heading" id="Encabezado_Panel" name="Encabezado_Panel" align="center">
+						<big></big>
 					</div>
 					<div id="principal" name="principal" class="panel-body" ></div>
 				</div>

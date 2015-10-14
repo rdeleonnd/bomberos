@@ -33,11 +33,13 @@ function cargar_pagina(pagina)
 	{
 		Parametros = "ingreso_reporte_servicio=1";
 		div_dinamico("POST", 'ingreso_reporte_servicio.php', Parametros, Div, false);
+		document.getElementById("Encabezado_Panel").innerHTML = "Ingreso de Reporte de Servicio";
 	}
 	else if(pagina=='ingreso_reporte_donaciones')
 	{
 		Parametros = "ingreso_reporte_donaciones=1";
 		div_dinamico("POST", 'ingreso_reporte_donaciones.php', Parametros, Div, false);
+		document.getElementById("Encabezado_Panel").innerHTML = "Ingreso de Reporte de Donaciones";
 	}
 	else if(pagina=='ingreso_incidentes')
 	{
@@ -53,6 +55,7 @@ function cargar_pagina(pagina)
 	{
 		Parametros = "ingreso_personal=1";
 		div_dinamico("POST", 'ingreso_personal.php', Parametros, Div, false);
+		document.getElementById("Encabezado_Panel").innerHTML = "Ingreso de Personal";
 	}
 	else if(pagina=='ingreso_turnos')
 	{

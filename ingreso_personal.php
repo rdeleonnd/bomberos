@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Ingreso de Personal</title>
+		<script type="text/javascript" src="funciones/ingreso_personal.js"></script>
 	</head>
 	<body>
 		<form class="form-horizontal ">
@@ -101,9 +102,20 @@
 								<input type="text" class="form-control allownumericwithdecimal" id="sueldo" name="sueldo" value="0.00">
 				            </div>
 				        </div>
-			            <div class="input-group">
-			                <button type="button" class="btn btn-info" id="guardar" name="guardar">Guardar</button>
-			            </div>
+					</div>
+				</tr>
+				<tr>
+					<div class="form-group">
+						<label class="control-label col-xs-3">Estado del Bombero:</label>
+						<div class="col-xs-1">
+							<select class="form-control" id="estado" name="estado">
+								<option value="Activo">Activo</option>
+								<option value="Inactivo">Inactivo</option>
+							</select>
+						</div>
+						<div class="input-group">
+				                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
+				        </div>
 					</div>
 				</tr>
 			</table>
@@ -147,8 +159,14 @@
     });
 </script>
 <?php 
-include_once('funciones/funciones.php');
-	$Consulta = "SELECT idusuario as id, usuario as nombre FROM usuario;";
-	echo FncCrearCombo($Consulta,"divsexo2",'','','','','');
+	
+	if(isset($_POST["Ingreso_Personal"]))
+	{
+		echo "Listo";
+	}
+	else
+	{
+		echo "No Listo";
+	}
 
 ?>
