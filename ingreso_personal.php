@@ -119,6 +119,27 @@
 					</div>
 				</tr>
 			</table>
+			<table id="tabla_personal" cellpadding="0" cellspacing="0" border="0" width="100%" class="table table-striped">
+				<thead>
+					<tr>
+						<th> # </th>
+						<th>Codigo del Empleado</th>
+						<th>Nombres del Empleado</th>
+						<th>Apellidos del Empledo</th>
+						<th>Direccion del empleado</th>
+						<th>Fecha de Nacimiento del empleado</th>
+						<th>Sexo del empleado</th>
+						<th>Estado civil del empleado</th>
+						<th>Telefono del empleado</th>
+						<th>Asalariado</th>
+						<th>Sueldo</th>
+						<th>Estado</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+				</tbody>
+			</table>
 		</form>
 	</body>
 </html>
