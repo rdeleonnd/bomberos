@@ -127,13 +127,10 @@
 						<th>Nombres del Empleado</th>
 						<th>Apellidos del Empledo</th>
 						<th>Direccion del empleado</th>
-						<th>Fecha de Nacimiento del empleado</th>
-						<th>Sexo del empleado</th>
-						<th>Estado civil del empleado</th>
 						<th>Telefono del empleado</th>
-						<th>Asalariado</th>
 						<th>Sueldo</th>
 						<th>Estado</th>
+						<th>Modificar</th>
 					</tr>
 				</thead>
 				<tbody>

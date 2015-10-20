@@ -3,6 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Ingreso de Actividades</title>
+		<script type="text/javascript" src="funciones/ingreso_actividades.js"></script>
+
 	</head>
 	<body>
 		<form class="form-horizontal">
@@ -33,7 +35,7 @@
 							</select>
 						</div>
 						<div class="input-group">
-				                <button type="button" class="btn btn-info" id="guardar" name="guardar">Guardar</button>
+				                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
 				        </div>
 					</div>
 				</tr>
@@ -45,4 +47,13 @@
 	$(document).ready(function(){
 	});
 </script>
-<?php ?>
+<?php 
+	if(isset($_POST["Ingreso_Actividades"]))
+	{
+		echo "Listo";
+	}
+	else
+	{
+		echo "No Listo";
+	}
+?>

@@ -3,6 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Asignacion de Actividades</title>
+		<script type="text/javascript" src="funciones/ingreso_asignar_actividades.js"></script>
+
 	</head>
 	<body>
 		<form class="form-horizontal">
@@ -43,7 +45,7 @@
 							?>
 						</div
 						<div class="input-group">
-				                <button type="button" class="btn btn-info" id="guardar" name="guardar">Guardar</button>
+				                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
 				        </div>
 					</div>
 				</tr>
@@ -67,5 +69,12 @@
 	});
 </script>
 <?php 
-
+	if(isset($_POST["Ingreso_Asignar_Actividades"]))
+	{
+		echo "Listo";
+	}
+	else
+	{
+		echo "No Listo";
+	}
 ?>

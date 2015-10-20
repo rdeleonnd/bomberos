@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Asistencia</title>
+		<script type="text/javascript" src="funciones/ingreso_salida_asistencia.js"></script>
 	</head>
 	<body>
 		<form class="form-horizontal">
@@ -46,7 +47,7 @@
 							<textarea class="form-control" rows="3" placeholder="Campo de texto" id="observaciones" name="observaciones" maxlength="1000"></textarea>
 						</div>
 						<div class="input-group">
-				                <button type="button" class="btn btn-info" id="guardar" name="guardar">Guardar</button>
+				                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
 				        </div>
 					</div>
 				</tr>
@@ -61,5 +62,12 @@
 	});
 </script>
 <?php 
-
+	if(isset($_POST["Ingreso_Salida_Asistencia"]))
+	{
+		echo "Listo";
+	}
+	else
+	{
+		echo "No Listo";
+	}
 ?>

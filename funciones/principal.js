@@ -95,5 +95,11 @@ function cargar_pagina(pagina)
 		div_dinamico("POST", 'ingreso_asignar_actividades.php', Parametros, Div, false);
 		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE ASIGNACION DE ACTIVIDADES";
 	}
+	else if(pagina=='ingreso_rangos_estados')
+	{
+		Parametros = "ingreso_rangos_estados=1";
+		div_dinamico("POST", 'ingreso_rangos_estados.php', Parametros, Div, false);
+		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE ASIGNACION DE ACTIVIDADES";
+	}
 	
 }

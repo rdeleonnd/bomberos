@@ -2,12 +2,12 @@
 <html>
 	<head>
 		<title>Ingreso de Servicio</title>
+		<script type="text/javascript" src="funciones/ingreso_reporte_servicio.js"></script>
 	</head>
 	<body>
 		<?php 
 			include('funciones/funciones.php');
-			$ConsultaRango = "";
-			$ConsultaSexo = "";
+			
 		?>
 		<form class="form-horizontal">
 			<table align="center" class="table table-bordered" style="width: 90%">
@@ -201,7 +201,7 @@
 							<input type="text" class="form-control" id="cod" name="cod">
 						</div>
 						<div class="input-group">
-			                <button type="button" class="btn btn-info" id="guardar" name="guardar">Guardar</button>
+			                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
 			            </div>
 					</div>
 				</tr>
@@ -241,4 +241,14 @@
 		$('#piloto').select2();
 	});
 </script>
+<?php
+	if(isset($_POST["Ingreso_Reporte_Servicio"]))
+	{
+		echo "Listo";
+	}
+	else
+	{
+		echo "No Listo";
+	}
+?>
 

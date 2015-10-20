@@ -20,7 +20,6 @@
 		<script type="text/javascript" src="funciones/principal.js"></script>
 		<script type="text/javascript" src="funciones/jqueury.numeric.js"></script>
 
-
 	</head>
 	<body>
 		<?php  
@@ -74,6 +73,8 @@
 							        		<li class="divider"></li>
 							        		<li><a href="#" onclick='cargar_pagina("ingreso_actividades");'>Ingreso de Actividades</a></li>
 							        		<li><a href="#" onclick='cargar_pagina("ingreso_asignar_actividades");'>Ingreso de Asignacion de Actividades</a></li>
+							        		<li class="divider"></li>
+							        		<li><a href="#" onclick='cargar_pagina("ingreso_rangos_estados");'>Ingreso de Rangos y Estados</a></li>
 						        		</li>
 					        		</ul>
 					        	</li>

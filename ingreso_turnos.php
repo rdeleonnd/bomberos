@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Ingreso de Turnos</title>
+		<script type="text/javascript" src="funciones/ingreso_turnos.js"></script>
 	</head>
 	<body>
 		<form class="form-horizontal">
@@ -67,7 +68,7 @@
 		            	</div>
 		            	<div class="col-xs-1">
 				            <div class="input-group">
-				                <button type="button" class="btn btn-info" id="guardar" name="guardar">Guardar</button>
+				                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
 				            </div>
 				        </div>
 		            </div>
@@ -113,5 +114,12 @@
     });
 </script>
 <?php 
-
+	if(isset($_POST["Ingreso_Turnos"]))
+	{
+		echo "Listo";
+	}
+	else
+	{
+		echo "No Listo";
+	}
 ?>
