@@ -99,7 +99,7 @@ function cargar_pagina(pagina)
 	{
 		Parametros = "ingreso_rangos_estados=1";
 		div_dinamico("POST", 'ingreso_rangos_estados.php', Parametros, Div, false);
-		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE ASIGNACION DE ACTIVIDADES";
+		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE RANGOS Y ESTADOS";
 	}
 	
 }

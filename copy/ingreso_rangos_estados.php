@@ -83,12 +83,10 @@
 						$Respuesta = $Conexion->list_orders($Consulta);
 						while ($row = mysql_fetch_assoc($Respuesta))
 						{
-                    		$Modificar = "<image class='btn btn-default' src='img/modificar.png' title='Modificar Registro' onclick='FncMofificarEstado(".$row['idEstado'].", \"".$row['Estado']."\")'>";
-							
 							echo "<tr>
 										<td>".$row['idEstado']."</td>
 										<td>".$row['Estado']."</td>
-										<td>".$Modificar."</td>
+										<td></td>
 									</tr>
 									";
 						}

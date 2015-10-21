@@ -174,7 +174,7 @@
     		return $Resultado;
     	}
 
-        function FncInsertar($Consulta)
+        function Insertar($Consulta)
         {
             $Respuesta = FALSE;
             $Enlace = mysql_connect($this->host, $this->user, $this->password);
