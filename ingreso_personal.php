@@ -6,6 +6,12 @@
 		<script type="text/javascript" src="funciones/ingreso_personal.js"></script>
 	</head>
 	<body>
+		<?php
+			include('funciones/funciones.php');
+			include('funciones/conexion/configuracion_db.php');
+			require_once('funciones/conexion/conexion.php'); 
+			$Conexion = new DB($Usuario,$Clave,$DB,$Host);
+		?>
 		<form class="form-horizontal ">
 			<table align="center" class="table table-bordered" >
 				<tr class="form-group">
@@ -105,17 +111,41 @@
 					</div>
 				</tr>
 				<tr>
+		            <div class="form-group">
+		            	<label class="control-label col-xs-3">Fecha de Ingreso del empleado :</label>
+		            	<div class="col-xs-2">
+		            		<div class='input-group date' id='datetimepicker2'>
+			                    <input type='text' class="form-control" id="ingreso" name="ingreso"/>
+			                    <span class="input-group-addon">
+			                        <span class="glyphicon glyphicon-calendar"></span>
+			                    </span>
+			                </div>
+		            	</div>
+		            </div>
+				</tr>
+				<tr>
 					<div class="form-group">
-						<label class="control-label col-xs-3">Estado del Bombero:</label>
-						<div class="col-xs-1">
-							<select class="form-control" id="estado" name="estado">
-								<option value="Activo">Activo</option>
-								<option value="Inactivo">Inactivo</option>
-							</select>
+						<label class="control-label col-xs-3">Seleccione El Rango:</label>
+						<div class="form-inline col-xs-6">
+							<?php 
+								$Consulta = "SELECT idRango as id, descRango as nombre FROM rango ORDER BY nombre;";
+								echo FncCrearCombo($Consulta,"rango",'class="form-control col-xs-3"','','','','');
+							?>
+						</div>
+					</div>
+				</tr>
+				<tr>
+					<div class="form-group">
+						<label class="control-label col-xs-3">Seleccione El Estado:</label>
+						<div class="form-inline col-xs-3">
+							<?php 
+								$Consulta = "SELECT idEstado as id, Estado as nombre FROM estado ORDER BY nombre;";
+								echo FncCrearCombo($Consulta,"estado",'class="form-control col-xs-3"','','','','');
+							?>
 						</div>
 						<div class="input-group">
-				                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
-				        </div>
+			                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
+			            </div>
 					</div>
 				</tr>
 			</table>
@@ -128,13 +158,41 @@
 						<th>Apellidos del Empledo</th>
 						<th>Direccion del empleado</th>
 						<th>Telefono del empleado</th>
+						<th>Fecha de Ingreso</th>
 						<th>Sueldo</th>
 						<th>Estado</th>
+						<th>Puesto</th>
 						<th>Modificar</th>
 					</tr>
 				</thead>
 				<tbody>
-					
+					<?php
+						$Consulta = "SELECT per.idEmpleado, per.CodEmpleado, per.nombres, per.apellidos, per.direccion, per.telefono, per.fechaIngreso,per.salario, ra.descRango, es.Estado
+									FROM personal per
+									INNER JOIN rango ra ON ra.idRango = per.idRango
+									INNER JOIN estado es ON es.idEstado = per.idEstado;";
+
+						$Respuesta = $Conexion->list_orders($Consulta);
+						while ($row = mysql_fetch_assoc($Respuesta))
+						{
+                    		$Modificar = "<image class='btn btn-default' src='img/modificar.png' title='Modificar Registro' onclick='FncMofificarEstado(".$row['idEmpleado'].", \"".$row['nombres']."\")'>";
+							
+							echo "<tr>
+										<td>".$row['idEmpleado']."</td>
+										<td>".$row['CodEmpleado']."</td>
+										<td>".$row['nombres']."</td>
+										<td>".$row['apellidos']."</td>
+										<td>".$row['direccion']."</td>
+										<td>".$row['telefono']."</td>
+										<td>".$row['fechaIngreso']."</td>
+										<td>".$row['salario']."</td>
+										<td>".$row['descRango']."</td>
+										<td>".$row['Estado']."</td>
+										<td>".$Modificar."</td>
+									</tr>
+									";
+						}
+					?>
 				</tbody>
 			</table>
 		</form>
@@ -146,7 +204,15 @@
         	locale: 'es',
         	format: 'DD/MM/YYYY'
         });
+        $('#datetimepicker2').datetimepicker({
+        	locale: 'es',
+        	format: 'DD/MM/YYYY'
+        });
         $('#nacimiento').datetimepicker({
+        	locale: 'es',
+        	format: 'DD/MM/YYYY'
+        });
+        $('#ingreso').datetimepicker({
         	locale: 'es',
         	format: 'DD/MM/YYYY'
         });
@@ -174,17 +240,28 @@
         });
 
         $('#divsexo2').select2();
+        FncTabla('tabla_personal');
     });
 </script>
 <?php 
 	
 	if(isset($_POST["Ingreso_Personal"]))
 	{
-		echo "Listo";
+		$Guardar = "INSERT INTO personal(`idEmpleado`, `CodEmpleado`, `nombres`, `apellidos`, `direccion`, `fechaNacimiento`, `sexo`, `edoCivil`, `telefono`, `idRango`, `fechaIngreso`, `salario`, `idEstado`) 
+					VALUES ('', '".$_POST["codigo"]."', '".$_POST["nombre"]."', '".$_POST["apellido"]."', '".$_POST["direccion"]."', '".$_POST["nacimiento"]."', 
+							'".$_POST["sexo"]."', '".$_POST["estado_civil"]."', '".$_POST["telefono"]."', '".$_POST["rango"]."', '".$_POST["ingreso"]."', 
+							'".$_POST["sueldo"]."', '".$_POST["estado"]."');";
+		$insert = $Conexion->Insertar($Guardar);
+		
+	
+		echo "<script>
+				alert('Se Guardaron los registros');
+				cargar_pagina('ingreso_personal');
+			</script>";
 	}
 	else
 	{
-		echo "No Listo";
+		
 	}
 
 ?>

@@ -25,33 +25,41 @@
 			        </div>
 	            </div>
 			</tr>
-			<table id='tabla_rango' align='center' width='100%' class='table table-striped' >
-				<thead>
-					<tr>
-						<th> # </th>
-						<th>Rango</th>
-						<th>Modificar</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php
-						$Consulta = "SELECT idRango, descRango
-									FROM rango;";
+			<tr>
+				<div class="form-group">
+					<label class="control-label col-xs-2"></label>
+					<div class="col-xs-5">
+						<table id='tabla_rango' align='center' class='table table-striped' >
+							<thead>
+								<tr>
+									<th> # </th>
+									<th>Rango</th>
+									<th>Modificar</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+									$Consulta = "SELECT idRango, descRango
+												FROM rango;";
 
-						$Respuesta = $Conexion->list_orders($Consulta);
-						while ($row = mysql_fetch_assoc($Respuesta))
-						{
-                    		$Modificar = "<image class='btn btn-default' src='img/modificar.png' title='Modificar Registro' onclick='FncMofificarRango(".$row['idRango'].", \"".$row['descRango']."\")'>";
+									$Respuesta = $Conexion->list_orders($Consulta);
+									while ($row = mysql_fetch_assoc($Respuesta))
+									{
+			                    		$Modificar = "<image class='btn btn-default' src='img/modificar.png' title='Modificar Registro' onclick='FncMofificarRango(".$row['idRango'].", \"".$row['descRango']."\")'>";
 
-							echo "<tr>
-										<td>".$row['idRango']."</td>
-										<td>".$row['descRango']."</td>
-										<td>".$Modificar."</td>
-									</tr>";
-						}
-					?>
-				</tbody>
-			</table>
+										echo "<tr>
+													<td>".$row['idRango']."</td>
+													<td>".$row['descRango']."</td>
+													<td>".$Modificar."</td>
+												</tr>";
+									}
+								?>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+			</tr>
 			<hr size="10" width="80%" style="#0000FF" />
 			<tr>
 				<div class="form-group">
@@ -66,35 +74,41 @@
 			        </div>
 	            </div>
 			</tr>
-			<table id="tabla_estado" align="center" class="table table-striped">
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>Estado</th>
-						<th>Modificar</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php
+			<tr>
+				<div class="form-group">
+					<label class="control-label col-xs-2"></label>
+					<div class="col-xs-5">
+						<table id="tabla_estado" align="center" class="table table-striped">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Estado</th>
+									<th>Modificar</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+									$Consulta = "SELECT idEstado, Estado
+												FROM estado;";
 
-						$Consulta = "SELECT idEstado, Estado
-									FROM estado;";
-
-						$Respuesta = $Conexion->list_orders($Consulta);
-						while ($row = mysql_fetch_assoc($Respuesta))
-						{
-                    		$Modificar = "<image class='btn btn-default' src='img/modificar.png' title='Modificar Registro' onclick='FncMofificarEstado(".$row['idEstado'].", \"".$row['Estado']."\")'>";
-							
-							echo "<tr>
-										<td>".$row['idEstado']."</td>
-										<td>".$row['Estado']."</td>
-										<td>".$Modificar."</td>
-									</tr>
-									";
-						}
-					?>
-				</tbody>
-			</table>
+									$Respuesta = $Conexion->list_orders($Consulta);
+									while ($row = mysql_fetch_assoc($Respuesta))
+									{
+			                    		$Modificar = "<image class='btn btn-default' src='img/modificar.png' title='Modificar Registro' onclick='FncMofificarEstado(".$row['idEstado'].", \"".$row['Estado']."\")'>";
+										
+										echo "<tr>
+													<td>".$row['idEstado']."</td>
+													<td>".$row['Estado']."</td>
+													<td>".$Modificar."</td>
+												</tr>
+												";
+									}
+								?>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</tr>
 		</form>
 	</body>
 </html>

@@ -10,12 +10,16 @@ function FncGuardar()
 	Telefono = $("#telefono").val();
 	Estado_sueldo = $("#estado_sueldo").val();
 	Sueldo = $("#sueldo").val();
+    Ingreso = $("#ingreso").val();
+    Rango = $("#rango").val();    
 	Estado = $("#estado").val();
 
-	if((Codigo != '') && (Nombre != '') && (Apellido != '') && (Direccion != '') && (Nacimiento != '') && (Sexo != '') && (Estado_civil != '') && (Telefono != '') && (Estado_sueldo != '') && (Sueldo != '') && (Estado != ''))
+    alert(Rango);
+
+	if((Codigo != '') && (Nombre != '') && (Apellido != '') && (Direccion != '') && (Nacimiento != '') && (Sexo != '') && (Estado_civil != '') && (Telefono != '') && (Estado_sueldo != '') && (Ingreso != '') && (Sueldo != '') && (Rango != '') && (Estado != ''))
 	{ 
 		Parametros= "Ingreso_Personal=1"+"&codigo="+Codigo+"&nombre="+Nombre+"&apellido="+Apellido+"&direccion="+Direccion+"&nacimiento="+Nacimiento+"&sexo="+Sexo
-					+"&estado_civil="+Estado_civil+"&telefono="+Telefono+"&estado_sueldo="+Estado_sueldo+"&sueldo="+Sueldo+"&Estado="+Estado;
+					+"&estado_civil="+Estado_civil+"&telefono="+Telefono+"&estado_sueldo="+Estado_sueldo+"&sueldo="+Sueldo+"&ingreso="+Ingreso+"&rango="+Rango+"&estado="+Estado;
 		Div=document.getElementById("principal");
 		div_dinamico("POST", 'ingreso_personal.php', Parametros, Div, false);
 	}
@@ -25,12 +29,12 @@ function FncGuardar()
 	}
 }
 
-function fncDataTablesReport(idTable,columns,col)
+function FncTabla(tabla)
 {
-    var oTable=$("#"+idTable).dataTable({
+    var oTable=$("#"+tabla).dataTable({
                     "dom": 'T<"clear">lfrtip',
                     tableTools: {
-                      "sSwfPath": "general_repository/data_tables/extras/TableTools/swf/copy_csv_xls_pdf.swf",
+                      "sSwfPath": "data_tables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
                       "aButtons": [
                         {
                             "sExtends": "xls",
@@ -41,12 +45,11 @@ function fncDataTablesReport(idTable,columns,col)
                         }
                       ]
                     },
-
                     "bPaginate": false,
                     //"bFilter": false,
                     //"bInfo": false,
                     //"bSort": false,
-                    "scrollY": 400,
+                    "scrollY": 200,
                     "scrollX": true,
                     "bScrollCollapse": true,
                     "language": {
@@ -72,13 +75,8 @@ function fncDataTablesReport(idTable,columns,col)
                             "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
                             "sSortDescending": ": Activar para ordenar la columna de manera descendente"
                         }
-                    },
+                    }
 
                 });
-    
-    new $.fn.dataTable.FixedColumns( oTable, {
-        leftColumns: columns,
-        rightColumns: col
-    } );
     //new $.fn.dataTable.FixedHeader( oTable );
 }
