@@ -50,6 +50,7 @@
 							        		<li class="divider"></li>
 							        		<li><a href="#" onclick='cargar_pagina("ingreso_incidentes");'>Ingreso Incidentes</a></li>
 									        <li><a href="#" onclick='cargar_pagina("ingreso_categorias_incidentes");'>Ingreso de Categorias deIncidentes</a></li>
+									        <li><a href="#" onclick='cargar_pagina("ingreso_usuarios");'>Ingreso de Usuarios</a></li>
 						        		</li>
 					        		</ul>
 					        	</li>

@@ -58,7 +58,6 @@
 						</table>
 					</div>
 				</div>
-				
 			</tr>
 			<hr size="10" width="80%" style="#0000FF" />
 			<tr>

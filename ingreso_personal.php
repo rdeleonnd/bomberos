@@ -160,8 +160,8 @@
 						<th>Telefono del empleado</th>
 						<th>Fecha de Ingreso</th>
 						<th>Sueldo</th>
-						<th>Estado</th>
 						<th>Puesto</th>
+						<th>Estado</th>
 						<th>Modificar</th>
 					</tr>
 				</thead>

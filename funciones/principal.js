@@ -101,5 +101,10 @@ function cargar_pagina(pagina)
 		div_dinamico("POST", 'ingreso_rangos_estados.php', Parametros, Div, false);
 		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE RANGOS Y ESTADOS";
 	}
-	
+	else if(pagina=='ingreso_usuarios')
+	{
+		Parametros = "ingreso_usuarios=1";
+		div_dinamico("POST", 'ingreso_usuarios.php', Parametros, Div, false);
+		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE USUARIOS";
+	}
 }

@@ -101,7 +101,7 @@
 						<div class="col-xs-1">
 							<?php 
 								include_once('funciones/funciones.php');
-								$Consulta = "SELECT idusuario as id, usuario as nombre FROM usuario;";
+								$Consulta = "SELECT idUsuario as id, nombreUser as nombre FROM usuario;";
 								echo FncCrearCombo($Consulta,"unidad",'','','','','');
 							?>
 						</div>
@@ -125,7 +125,7 @@
 						<div class="col-xs-3">
 							<?php 
 								
-								$Consulta = "SELECT idusuario as id, usuario as nombre FROM usuario;";
+								$Consulta = "SELECT idUsuario as id, nombreUser as nombre FROM usuario;";
 								echo FncCrearCombo($Consulta,"piloto",'','','','','');
 							?>
 						</div>
@@ -161,7 +161,7 @@
 						<label class="control-label col-xs-3">Bombero que hizo el reporte:</label>
 						<div class="form-inline col-xs-6">
 							<?php 
-								$Consulta = "SELECT idusuario as id, usuario as nombre FROM usuario;";
+								$Consulta = "SELECT idusuario as id, nombreUser as nombre FROM usuario;";
 								echo FncCrearCombo($Consulta,"bombero_reporte",'class="form-control col-xs-3"','','','','');
 							?>
 						</div>
@@ -172,7 +172,7 @@
 						<label class="control-label col-xs-3">Bomberos Asistentes:</label>
 						<div class="form-inline col-xs-6">
 							<?php 
-								$Consulta = "SELECT idusuario as id, usuario as nombre FROM usuario;";
+								$Consulta = "SELECT idUsuario as id, nombreUser as nombre FROM usuario;";
 								echo FncCrearCombo($Consulta,"bombero_asistente",'class="form-control col-xs-3"','','','','');
 							?>
 						</div>

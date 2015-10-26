@@ -6,6 +6,11 @@
 		<script type="text/javascript" src="funciones/ingreso_turnos.js"></script>
 	</head>
 	<body>
+		<?php
+			include('funciones/conexion/configuracion_db.php');
+			require_once('funciones/conexion/conexion.php'); 
+			$Conexion = new DB($Usuario,$Clave,$DB,$Host);
+		?>
 		<form class="form-horizontal">
 			<table>
 				<tr>
@@ -116,7 +121,15 @@
 <?php 
 	if(isset($_POST["Ingreso_Turnos"]))
 	{
-		echo "Listo";
+		$Guardar = "INSERT INTO rango (`idRango`, `descRango`) 
+					VALUES ('','".$_POST["Rango"]."');";
+		$insert = $Conexion->Insertar($Guardar);
+		
+	
+		echo "<script>
+				alert('Se Guardaron los registros');
+				cargar_pagina('ingreso_rangos_estados');
+			</script>";
 	}
 	else
 	{
