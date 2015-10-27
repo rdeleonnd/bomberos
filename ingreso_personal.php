@@ -1,3 +1,19 @@
+<?php
+	session_start();
+	 
+	if (isset($_SESSION['loggedin'])  && $_SESSION['loggedin'] == true)
+	{
+	 
+	}
+	else
+	{
+		echo "<br/>" . "Esta pagina es solo para usuarios registrados." . "<br/>";
+		echo "<br/>" . "<a href='inicio.php'>inicie Sesion Aqui!</a>";
+		 
+		exit;
+	}
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 	<head>

@@ -39,113 +39,141 @@
 			require_once('funciones/conexion/conexion.php'); 
 			$Conexion = new DB($Usuario,$Clave,$DB,$Host);
 			
+			function salir2()
+			{
+				return session_destroy();
+			}
+
 			if(($_POST['Usuario']!="") && ($_POST['Codigo']!=""))
 			{
-				$Consulta= "SELECT * FROM usuario WHERE nombreUser = '".$_POST['Usuario']."' and clave='".$_POST['Codigo']."';";
+				$Consulta= "SELECT us.idPersonal, us.nombreUser, us.clave FROM usuario us 
+							INNER JOIN estado est ON est.idEstado = us.idEstado
+							WHERE nombreUser = '".$_POST['Usuario']."' and clave='".$_POST['Codigo']."'
+							and est.Estado = 'Activo';";
 
 				$Respuesta = $Conexion->list_orders($Consulta);
 				$Filas = mysql_num_rows($Respuesta);
 				
 				if($Filas == 1)
 				{
-					$_SESSION['loggedin'] = true;
-					$_SESSION['username'] = $_POST['Usuario'];
-					$_SESSION['start'] = time();
-					$_SESSION['expire'] = $_SESSION['start'] + (5 * 60) ;
+					while ($row = mysql_fetch_assoc($Respuesta))
+					{
+						$_SESSION['loggedin'] = true;
+						$_SESSION['username'] = $row['Usuario'];
+						$_SESSION['start'] = time();
+						$_SESSION['expire'] = $_SESSION['start'];
+						$_SESSION['idusuario'] = $row['idPersonal'];
+					}
 				}
 				else
 				{
-					echo "<META HTTP-EQUIV='Refresh' CONTENT='1;URL=inicio.php'>";
+					echo "<script>
+							$(document).ready(function(){
+								$('#inicioform').hide();
+							});
+							
+						</script>";
+					include("funciones/debe_loguearse.php");
 				}
 			}
 			else
 			{
+				echo "<script>
+							$(document).ready(function(){
+								$('#inicioform').hide();
+							});
+							
+						</script>";
 				include("funciones/debe_iniciar_sesion.php");
 			}
 		?>
-		</br><p align="center"><img src="img/logotipo.png"></p>
-		<hr size="10" width="85%" style="#0000FF" />
-		<table>
-			<tr>
-				<div class="collapse navbar-collapse js-navbar-collapse">
-					<ul class="nav navbar-nav">
-						<li class="dropdown mega-dropdown">
-					        <a href="" class="dropdown-toggle" data-toggle="dropdown">Reportes/Papeletas<b class="caret"></b></a>
-					        <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-					        	<li class="dropdown-submenu">
-					        		<a tabindex="-1" href="#">Agregar</a>
-					        		<ul class="dropdown-menu">
-					        			<li class="dropdown mega-dropdown">
-						        			<li><a tabindex="-1" href="#" onclick='cargar_pagina("ingreso_reporte_servicio");'>Reporte de Servicios</a></li>
-							        		<li><a href="#" onclick='cargar_pagina("ingreso_reporte_donaciones");'>Recibo de Donaciones</a></li>
-							        		<li class="divider"></li>
-							        		<li><a href="#" onclick='cargar_pagina("ingreso_incidentes");'>Ingreso Incidentes</a></li>
-									        <li><a href="#" onclick='cargar_pagina("ingreso_categorias_incidentes");'>Ingreso de Categorias deIncidentes</a></li>
-									        <li><a href="#" onclick='cargar_pagina("ingreso_usuarios");'>Ingreso de Usuarios</a></li>
-						        		</li>
-					        		</ul>
-					        	</li>
-					        	<li class="dropdown-submenu">
-					        		<a tabindex="-1" href="#">Modificar</a>
-					        		<ul class="dropdown-menu">
-					        			<li class="dropdown mega-dropdown">
-									        
-					        			</li>
-					        		</ul>
-					        	</li>
-					        </ul>
-				        </li>
-						<li class="dropdown mega-dropdown">
-							<a href="" class="dropdown-toggle" data-toggle="dropdown">Personal<b class="caret"></b></a>
-							<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-					        	<li class="dropdown-submenu">
-					        		<a tabindex="-1" href="#">Agregar</a>
-					        		<ul class="dropdown-menu">
-					        			<li class="dropdown mega-dropdown">
-						        			<li><a href="#" onclick='cargar_pagina("ingreso_personal");'>Ingreso de Personal</a></li>
-						        			<li class="divider"></li>
-							        		<li><a href="#" onclick='cargar_pagina("ingreso_turnos");'>Ingreso de Turnos</a></li>
-							        		<li><a href="#" onclick='cargar_pagina("ingreso_asignar_turnos");'>Ingreso de Asignacion de Turnos</a></li>
-							        		<li class="divider"></li>
-							        		<li><a href="#" onclick='cargar_pagina("ingreso_asistencia");'>Inreso de Entrada del Personal</a></li>
-							        		<li><a href="#" onclick='cargar_pagina("ingreso_salida_asistencia");'>Inreso de Salida del Personal</a></li>
-							        		<li class="divider"></li>
-							        		<li><a href="#" onclick='cargar_pagina("ingreso_actividades");'>Ingreso de Actividades</a></li>
-							        		<li><a href="#" onclick='cargar_pagina("ingreso_asignar_actividades");'>Ingreso de Asignacion de Actividades</a></li>
-							        		<li class="divider"></li>
-							        		<li><a href="#" onclick='cargar_pagina("ingreso_rangos_estados");'>Ingreso de Rangos y Estados</a></li>
-						        		</li>
-					        		</ul>
-					        	</li>
-					        	<li class="dropdown-submenu">
-					        		<a tabindex="-1" href="#">Modificar</a>
-					        		<ul class="dropdown-menu">
-					        			<li class="dropdown mega-dropdown">
-									        <li><a href="#" onclick='cargar_pagina("ingreso_incidentes");'></a></li>
-									        <li><a href="#" onclick='cargar_pagina("ingreso_categorias_incidentes");'></a></li>
-					        			</li>
-					        		</ul>
-					        	</li>
-					        </ul>
-						</li>
-						
-					</ul>
-				</div>
-			</tr>
-			<tr>
-				<div class="panel panel-success">
-					<div class="panel-heading" id="Encabezado_Panel" name="Encabezado_Panel" align="center">
-						<big></big>
+		<div id="inicioform">
+			</br><p align="center"><img src="img/logotipo.png"></p>
+			<hr size="10" width="85%" style="#0000FF" />
+			<table id="Principal" name = "Principal">
+				<tr>
+					<div class="collapse navbar-collapse js-navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li class="dropdown mega-dropdown">
+						        <a href="" class="dropdown-toggle" data-toggle="dropdown">Reportes/Papeletas<b class="caret"></b></a>
+						        <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+						        	<li class="dropdown-submenu">
+						        		<a tabindex="-1" href="#">Agregar</a>
+						        		<ul class="dropdown-menu">
+						        			<li class="dropdown mega-dropdown">
+							        			<li><a tabindex="-1" href="#" onclick='cargar_pagina("ingreso_reporte_servicio");'>Reporte de Servicios</a></li>
+								        		<li><a href="#" onclick='cargar_pagina("ingreso_reporte_donaciones");'>Recibo de Donaciones</a></li>
+								        		<li class="divider"></li>
+								        		<li><a href="#" onclick='cargar_pagina("ingreso_incidentes");'>Ingreso Incidentes</a></li>
+										        <li><a href="#" onclick='cargar_pagina("ingreso_categorias_incidentes");'>Ingreso de Categorias deIncidentes</a></li>
+										        <li><a href="#" onclick='cargar_pagina("ingreso_usuarios");'>Ingreso de Usuarios</a></li>
+							        		</li>
+						        		</ul>
+						        	</li>
+						        	<li class="dropdown-submenu">
+						        		<a tabindex="-1" href="#">Modificar</a>
+						        		<ul class="dropdown-menu">
+						        			<li class="dropdown mega-dropdown">
+										        
+						        			</li>
+						        		</ul>
+						        	</li>
+						        </ul>
+					        </li>
+							<li class="dropdown mega-dropdown">
+								<a href="" class="dropdown-toggle" data-toggle="dropdown">Personal<b class="caret"></b></a>
+								<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+						        	<li class="dropdown-submenu">
+						        		<a tabindex="-1" href="#">Agregar</a>
+						        		<ul class="dropdown-menu">
+						        			<li class="dropdown mega-dropdown">
+							        			<li><a href="#" onclick='cargar_pagina("ingreso_personal");'>Ingreso de Personal</a></li>
+							        			<li class="divider"></li>
+								        		<li><a href="#" onclick='cargar_pagina("ingreso_turnos");'>Ingreso de Turnos</a></li>
+								        		<li><a href="#" onclick='cargar_pagina("ingreso_asignar_turnos");'>Ingreso de Asignacion de Turnos</a></li>
+								        		<li class="divider"></li>
+								        		<li><a href="#" onclick='cargar_pagina("ingreso_asistencia");'>Inreso de Entrada del Personal</a></li>
+								        		<li><a href="#" onclick='cargar_pagina("ingreso_salida_asistencia");'>Inreso de Salida del Personal</a></li>
+								        		<li class="divider"></li>
+								        		<li><a href="#" onclick='cargar_pagina("ingreso_actividades");'>Ingreso de Actividades</a></li>
+								        		<li><a href="#" onclick='cargar_pagina("ingreso_asignar_actividades");'>Ingreso de Asignacion de Actividades</a></li>
+								        		<li class="divider"></li>
+								        		<li><a href="#" onclick='cargar_pagina("ingreso_rangos_estados");'>Ingreso de Rangos y Estados</a></li>
+							        		</li>
+						        		</ul>
+						        	</li>
+						        	<li class="dropdown-submenu">
+						        		<a tabindex="-1" href="#">Modificar</a>
+						        		<ul class="dropdown-menu">
+						        			<li class="dropdown mega-dropdown">
+										        <li><a href="#" onclick='cargar_pagina("ingreso_incidentes");'></a></li>
+										        <li><a href="#" onclick='cargar_pagina("ingreso_categorias_incidentes");'></a></li>
+						        			</li>
+						        		</ul>
+						        	</li>
+						        </ul>
+							</li>
+					        <li>
+				        		<image class='btn btn-default' src='img/salir.png' title='Salir del Sistema' onclick='salir();';>
+				        	</li>
+						</ul>
 					</div>
-					<div id="principal" name="principal" class="panel-body" ></div>
+				</tr>
+				<tr>
+					<div class="panel panel-success">
+						<div class="panel-heading" id="Encabezado_Panel" name="Encabezado_Panel" align="center">
+							<big></big>
+						</div>
+						<div id="principal" name="principal" class="panel-body" ></div>
+					</div>
 				</div>
-			</div>
-			</tr>
-		</table>
+				</tr>
+			</table>	
+		</div>
 	</body>
 </html>
 
 <?php 
 
-	
+
 ?>

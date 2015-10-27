@@ -108,3 +108,8 @@ function cargar_pagina(pagina)
 		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE USUARIOS";
 	}
 }
+
+function salir()
+{
+	$('#principal').load("saliendo.php");
+}
