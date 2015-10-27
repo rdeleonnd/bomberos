@@ -16,28 +16,21 @@
 			include('funciones/funciones.php');
 		?>
 		<div class="container" id="log" name ="log">
-			<form class="form-signin">
+			<form class="form-signin" id="log" method="post" action="principal.php">
 				<table >
 					
 				</table>
 				</br><p align="center"><img src="img/logotipo.png"></p>
 				<h1 class="form-signin-heading">Inicio de Sesión</h1></br>
 				<label class="sr-only">Nombre de Usuario</label>
-				<input id="Usuario" class="form-control" placeholder="Nombre de Usuario" required autofocus>
+				<input id="Usuario" name="Usuario" class="form-control" placeholder="Nombre de Usuario" required autofocus>
 				<label for="inputPassword" class="sr-only">Contraseña</label>
-				<input type="password" id="Codigo" class="form-control" placeholder="Contraseña" required>
-				<button class="btn btn-lg btn-success btn-block" type="submit" onclick="FncIngreso();">Ingresar</button>
+				<input type="password" id="Codigo" name="Codigo" class="form-control" placeholder="Contraseña" required>
+				<input class="btn btn-lg btn-success btn-block" type="submit" onclick="" value="Ingresar">
 			</form>
 		</div>
 	</body>
 </html>
 <?php 
-	if(isset($_POST["Sesion"]))
-	{
-		echo "href=";
-	}
-	else
-	{
-		echo "No Listo";
-	}
+	
 ?>

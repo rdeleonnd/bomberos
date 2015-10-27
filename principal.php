@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -30,7 +33,35 @@
 	</head>
 	<body>
 		<?php  
+			
 			include('funciones/funciones.php');
+			include('funciones/conexion/configuracion_db.php');
+			require_once('funciones/conexion/conexion.php'); 
+			$Conexion = new DB($Usuario,$Clave,$DB,$Host);
+			
+			if(($_POST['Usuario']!="") && ($_POST['Codigo']!=""))
+			{
+				$Consulta= "SELECT * FROM usuario WHERE nombreUser = '".$_POST['Usuario']."' and clave='".$_POST['Codigo']."';";
+
+				$Respuesta = $Conexion->list_orders($Consulta);
+				$Filas = mysql_num_rows($Respuesta);
+				
+				if($Filas == 1)
+				{
+					$_SESSION['loggedin'] = true;
+					$_SESSION['username'] = $_POST['Usuario'];
+					$_SESSION['start'] = time();
+					$_SESSION['expire'] = $_SESSION['start'] + (5 * 60) ;
+				}
+				else
+				{
+					echo "<META HTTP-EQUIV='Refresh' CONTENT='1;URL=inicio.php'>";
+				}
+			}
+			else
+			{
+				include("funciones/debe_iniciar_sesion.php");
+			}
 		?>
 		</br><p align="center"><img src="img/logotipo.png"></p>
 		<hr size="10" width="85%" style="#0000FF" />
@@ -116,17 +147,5 @@
 
 <?php 
 
-	$Usuario = "l";
-	$Contrasenia = "p";
-	if(($Usuario!="") && ($Contrasenia!=""))
-	{
-		if(isset($_POST["ingreso_reporte_servicio"]))
-		{
-			
-		}
-	}
-	else
-	{
-		include("funciones/debe_iniciar_sesion.php");
-	}
+	
 ?>

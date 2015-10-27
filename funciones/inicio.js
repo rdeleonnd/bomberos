@@ -1,13 +1,13 @@
 function FncIngreso()
 {
 	Usuario = $("#Usuario").val();
-	Llave = $("#Codigo").val();
+	Clave = $("#Codigo").val();
 	
 	if((Usuario != '') && (Llave != ''))
 	{
-		Parametros = "Sesion=1"+"&Usuario="+Usuario+"&Llave="+Llave;
+		Parametros = "Sesion=1"+"&Usuario="+Usuario+"&Clave="+Clave;
 		Div=document.getElementById("log");
-		div_dinamico("POST", 'inicio.php', Parametros, Div, false);
+		div_dinamico("POST", 'principal.php', Parametros, Div, false);
 	}
 	else
 	{
