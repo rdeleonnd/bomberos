@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 	<head>
+		<meta charset="UTF-8">
 		<title>Inicio de Sesión</title>
 		<link rel="stylesheet" type="text/css" href="jquery/css/ui-lightness/jquery-ui-1.10.4.custom.css" />
 		<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css" />

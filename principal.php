@@ -39,11 +39,6 @@
 			require_once('funciones/conexion/conexion.php'); 
 			$Conexion = new DB($Usuario,$Clave,$DB,$Host);
 			
-			function salir2()
-			{
-				return session_destroy();
-			}
-
 			if(($_POST['Usuario']!="") && ($_POST['Codigo']!=""))
 			{
 				$Consulta= "SELECT us.idPersonal, us.nombreUser, us.clave FROM usuario us 
@@ -59,7 +54,7 @@
 					while ($row = mysql_fetch_assoc($Respuesta))
 					{
 						$_SESSION['loggedin'] = true;
-						$_SESSION['username'] = $row['Usuario'];
+						$_SESSION['username'] = $row['nombreUser'];
 						$_SESSION['start'] = time();
 						$_SESSION['expire'] = $_SESSION['start'];
 						$_SESSION['idusuario'] = $row['idPersonal'];
@@ -75,6 +70,11 @@
 						</script>";
 					include("funciones/debe_loguearse.php");
 				}
+			}
+			else if($_POST['cerrar'])
+			{
+				session_destroy();
+				include("saliendo.php");	
 			}
 			else
 			{
@@ -172,8 +172,6 @@
 		</div>
 	</body>
 </html>
-
 <?php 
-
 
 ?>
