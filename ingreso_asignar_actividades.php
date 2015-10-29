@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -7,19 +10,23 @@
 
 	</head>
 	<body>
+		<?php
+			include('funciones/funciones.php');
+			include('funciones/conexion/configuracion_db.php');
+			require_once('funciones/conexion/conexion.php'); 
+			$Conexion = new DB($Usuario,$Clave,$DB,$Host);
+		?>
 		<form class="form-horizontal">
 			<table>
 				<tr>
 					<div class="form-group">
-						<label class="control-label col-xs-3">Fecha de Asigancion de Actividad:</label>
-						<div class="col-xs-2">
-		            		<div class='input-group date' id='datetimepicker1'>
-			                    <input type='text' class="form-control" id="fecha_inicio" name="fecha_inicio"/>
-			                    <span class="input-group-addon">
-			                        <span class="glyphicon glyphicon-calendar"></span>
-			                    </span>
-			                </div>
-		            	</div>
+						<label class="control-label col-xs-3">Seleccione nombre del Turno:</label>
+						<div class="col-xs-3">
+							<?php 
+								$Consulta = "SELECT id_turno as id, nombreTurno as nombre FROM turno;";
+								echo FncCrearCombo($Consulta,"turno",'','','','','');
+							?>
+						</div
 					</div>
 				</tr>
 				<tr>
@@ -27,8 +34,7 @@
 						<label class="control-label col-xs-3">Nombre de la activiad:</label>
 						<div class="col-xs-3">
 							<?php 
-								include_once('funciones/funciones.php');
-								$Consulta = "SELECT idusuario as id, usuario as nombre FROM usuario;";
+								$Consulta = "SELECT idActividad as id, nombre as nombre FROM actividad;";
 								echo FncCrearCombo($Consulta,"nombre",'','','','','');
 							?>
 						</div
@@ -39,8 +45,7 @@
 						<label class="control-label col-xs-3">Usuario a Asignar:</label>
 						<div class="col-xs-3">
 							<?php 
-								include_once('funciones/funciones.php');
-								$Consulta = "SELECT idusuario as id, usuario as nombre FROM usuario;";
+								$Consulta = "SELECT idEmpleado as id, codEmpleado as nombre FROM Personal;";
 								echo FncCrearCombo($Consulta,"usuario",'','','','','');
 							?>
 						</div
@@ -64,6 +69,7 @@
         	format: 'DD/MM/YYYY'
         });
         
+        $('#turno').select2();
 		$('#nombre').select2();
 		$('#usuario').select2();
 	});
@@ -71,7 +77,15 @@
 <?php 
 	if(isset($_POST["Ingreso_Asignar_Actividades"]))
 	{
-		echo "Listo";
+		$Guardar = "INSERT INTO asignacionactividad (`idAsignacion`, `idEmpleado`, `idTurno`, `idActividad`, `idUsuario`)
+					VALUES ('', '".$_POST["Usuario"]."', '".$_POST["Turno"]."', '".$_POST["Nombre"]."', '".$_SESSION['idusuario']."');";
+		$insert = $Conexion->Insertar($Guardar);
+		
+	
+		echo "<script>
+				alert('Se Guardaron los registros');
+				cargar_pagina('ingreso_asignar_actividades');
+			</script>";
 	}
 	else
 	{

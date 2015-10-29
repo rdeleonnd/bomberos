@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -6,6 +9,11 @@
 		<script type="text/javascript" src="funciones/ingreso_salida_asistencia.js"></script>
 	</head>
 	<body>
+		<?php
+			include('funciones/conexion/configuracion_db.php');
+			require_once('funciones/conexion/conexion.php'); 
+			$Conexion = new DB($Usuario,$Clave,$DB,$Host);
+		?>
 		<form class="form-horizontal">
 			<table>
 				<tr>
@@ -22,7 +30,7 @@
 						<div class="col-xs-3">
 							<?php 
 								include_once('funciones/funciones.php');
-								$Consulta = "SELECT idusuario as id, usuario as nombre FROM usuario;";
+								$Consulta = "SELECT id_turno as id, nombreTurno as nombre FROM turno;";
 								echo FncCrearCombo($Consulta,"nombre",'','','','','');
 							?>
 						</div>
@@ -30,11 +38,11 @@
 				</tr>
 				<tr>
 					<div class="form-group">
-						<label class="control-label col-xs-3">Usuario:</label>
+						<label class="control-label col-xs-3">Codigo del Empleado:</label>
 						<div class="col-xs-3">
 							<?php 
 								include_once('funciones/funciones.php');
-								$Consulta = "SELECT idusuario as id, usuario as nombre FROM usuario;";
+								$Consulta = "SELECT idEmpleado as id, codEmpleado as nombre FROM Personal;";
 								echo FncCrearCombo($Consulta,"usuario",'','','','','');
 							?>
 						</div>
@@ -64,7 +72,15 @@
 <?php 
 	if(isset($_POST["Ingreso_Salida_Asistencia"]))
 	{
-		echo "Listo";
+		$Guardar = "INSERT INTO asistenciasalida (`idAsistenciaSalida`, `idEmpleado`, `fecha`, `observaciones`, `id_turno`, `idUsuario`) 
+					VALUES ('', '".$_POST["Usuario"]."', now(), '".$_POST["Observaciones"]."', '".$_POST["Nombre"]."', '".$_SESSION['idusuario']."');";
+		$insert = $Conexion->Insertar($Guardar);
+		
+	
+		echo "<script>
+				alert('Se Guardaron los registros');
+				cargar_pagina('ingreso_salida_asistencia');
+			</script>";
 	}
 	else
 	{
