@@ -71,11 +71,6 @@
 					include("funciones/debe_loguearse.php");
 				}
 			}
-			else if($_POST['cerrar'])
-			{
-				session_destroy();
-				include("saliendo.php");	
-			}
 			else
 			{
 				echo "<script>
@@ -87,91 +82,90 @@
 				include("funciones/debe_iniciar_sesion.php");
 			}
 		?>
-		<div id="inicioform">
-			</br><p align="center"><img src="img/logotipo.png"></p>
-			<hr size="10" width="85%" style="#0000FF" />
-			<table id="Principal" name = "Principal">
-				<tr>
-					<div class="collapse navbar-collapse js-navbar-collapse">
-						<ul class="nav navbar-nav">
-							<li class="dropdown mega-dropdown">
-						        <a href="" class="dropdown-toggle" data-toggle="dropdown">Reportes/Papeletas<b class="caret"></b></a>
-						        <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-						        	<li class="dropdown-submenu">
-						        		<a tabindex="-1" href="#">Agregar</a>
-						        		<ul class="dropdown-menu">
-						        			<li class="dropdown mega-dropdown">
-							        			<li><a tabindex="-1" href="#" onclick='cargar_pagina("ingreso_reporte_servicio");'>Reporte de Servicios</a></li>
-								        		<li><a href="#" onclick='cargar_pagina("ingreso_reporte_donaciones");'>Recibo de Donaciones</a></li>
-								        		<li class="divider"></li>
-								        		<li><a href="#" onclick='cargar_pagina("ingreso_incidentes");'>Ingreso Incidentes</a></li>
-										        <li><a href="#" onclick='cargar_pagina("ingreso_categorias_incidentes");'>Ingreso de Categorias deIncidentes</a></li>
-										        <li><a href="#" onclick='cargar_pagina("ingreso_usuarios");'>Ingreso de Usuarios</a></li>
-							        		</li>
-						        		</ul>
-						        	</li>
-						        	<li class="dropdown-submenu">
-						        		<a tabindex="-1" href="#">Modificar</a>
-						        		<ul class="dropdown-menu">
-						        			<li class="dropdown mega-dropdown">
-										        
-						        			</li>
-						        		</ul>
-						        	</li>
-						        </ul>
-					        </li>
-							<li class="dropdown mega-dropdown">
-								<a href="" class="dropdown-toggle" data-toggle="dropdown">Personal<b class="caret"></b></a>
-								<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-						        	<li class="dropdown-submenu">
-						        		<a tabindex="-1" href="#">Agregar</a>
-						        		<ul class="dropdown-menu">
-						        			<li class="dropdown mega-dropdown">
-							        			<li><a href="#" onclick='cargar_pagina("ingreso_personal");'>Ingreso de Personal</a></li>
-							        			<li class="divider"></li>
-								        		<li><a href="#" onclick='cargar_pagina("ingreso_turnos");'>Ingreso de Turnos</a></li>
-								        		<li><a href="#" onclick='cargar_pagina("ingreso_asignar_turnos");'>Ingreso de Asignacion de Turnos</a></li>
-								        		<li class="divider"></li>
-								        		<li><a href="#" onclick='cargar_pagina("ingreso_asistencia");'>Inreso de Entrada del Personal</a></li>
-								        		<li><a href="#" onclick='cargar_pagina("ingreso_salida_asistencia");'>Inreso de Salida del Personal</a></li>
-								        		<li class="divider"></li>
-								        		<li><a href="#" onclick='cargar_pagina("ingreso_actividades");'>Ingreso de Actividades</a></li>
-								        		<li><a href="#" onclick='cargar_pagina("ingreso_asignar_actividades");'>Ingreso de Asignacion de Actividades</a></li>
-								        		<li class="divider"></li>
-								        		<li><a href="#" onclick='cargar_pagina("ingreso_rangos_estados");'>Ingreso de Rangos y Estados</a></li>
-							        		</li>
-						        		</ul>
-						        	</li>
-						        	<li class="dropdown-submenu">
-						        		<a tabindex="-1" href="#">Modificar</a>
-						        		<ul class="dropdown-menu">
-						        			<li class="dropdown mega-dropdown">
-										        <li><a href="#" onclick='cargar_pagina("ingreso_incidentes");'></a></li>
-										        <li><a href="#" onclick='cargar_pagina("ingreso_categorias_incidentes");'></a></li>
-						        			</li>
-						        		</ul>
-						        	</li>
-						        </ul>
-							</li>
-					        <li>
-				        		<image class='btn btn-default' src='img/salir.png' title='Salir del Sistema' onclick='salir();';>
-				        	</li>
-						</ul>
-					</div>
-				</tr>
-				<tr>
-					<div class="panel panel-success">
-						<div class="panel-heading" id="Encabezado_Panel" name="Encabezado_Panel" align="center">
-							<big></big>
+		<form id="principalform" method="post" action="principal.php">
+			<div id="inicioform">
+				</br><p align="center"><img src="img/logotipo.png"></p>
+				<hr size="10" width="85%" style="#0000FF" />
+				<table id="Principal" name = "Principal">
+					<tr>
+						<div class="collapse navbar-collapse js-navbar-collapse">
+							<ul class="nav navbar-nav">
+								<li class="dropdown mega-dropdown">
+							        <a href="" class="dropdown-toggle" data-toggle="dropdown">Reportes/Papeletas<b class="caret"></b></a>
+							        <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+							        	<li class="dropdown-submenu">
+							        		<a tabindex="-1" href="#">Agregar</a>
+							        		<ul class="dropdown-menu">
+							        			<li class="dropdown mega-dropdown">
+								        			<li><a tabindex="-1" href="#" onclick='cargar_pagina("ingreso_reporte_servicio");'>Reporte de Servicios</a></li>
+									        		<li><a href="#" onclick='cargar_pagina("ingreso_reporte_donaciones");'>Recibo de Donaciones</a></li>
+									        		<li class="divider"></li>
+									        		<li><a href="#" onclick='cargar_pagina("ingreso_incidentes");'>Ingreso Incidentes</a></li>
+											        <li><a href="#" onclick='cargar_pagina("ingreso_categorias_incidentes");'>Ingreso de Categorias deIncidentes</a></li>
+											        <li><a href="#" onclick='cargar_pagina("ingreso_usuarios");'>Ingreso de Usuarios</a></li>
+								        		</li>
+							        		</ul>
+							        	</li>
+							        	<li class="dropdown-submenu">
+							        		<a tabindex="-1" href="#">Modificar</a>
+							        		<ul class="dropdown-menu">
+							        			<li class="dropdown mega-dropdown">
+											        
+							        			</li>
+							        		</ul>
+							        	</li>
+							        </ul>
+						        </li>
+								<li class="dropdown mega-dropdown">
+									<a href="" class="dropdown-toggle" data-toggle="dropdown">Personal<b class="caret"></b></a>
+									<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+							        	<li class="dropdown-submenu">
+							        		<a tabindex="-1" href="#">Agregar</a>
+							        		<ul class="dropdown-menu">
+							        			<li class="dropdown mega-dropdown">
+								        			<li><a href="#" onclick='cargar_pagina("ingreso_personal");'>Ingreso de Personal</a></li>
+								        			<li class="divider"></li>
+									        		<li><a href="#" onclick='cargar_pagina("ingreso_turnos");'>Ingreso de Turnos</a></li>
+									        		<li><a href="#" onclick='cargar_pagina("ingreso_asignar_turnos");'>Ingreso de Asignacion de Turnos</a></li>
+									        		<li class="divider"></li>
+									        		<li><a href="#" onclick='cargar_pagina("ingreso_asistencia");'>Inreso de Entrada del Personal</a></li>
+									        		<li><a href="#" onclick='cargar_pagina("ingreso_salida_asistencia");'>Inreso de Salida del Personal</a></li>
+									        		<li class="divider"></li>
+									        		<li><a href="#" onclick='cargar_pagina("ingreso_actividades");'>Ingreso de Actividades</a></li>
+									        		<li><a href="#" onclick='cargar_pagina("ingreso_asignar_actividades");'>Ingreso de Asignacion de Actividades</a></li>
+									        		<li class="divider"></li>
+									        		<li><a href="#" onclick='cargar_pagina("ingreso_rangos_estados");'>Ingreso de Rangos y Estados</a></li>
+								        		</li>
+							        		</ul>
+							        	</li>
+							        	<li class="dropdown-submenu">
+							        		<a tabindex="-1" href="#">Modificar</a>
+							        		<ul class="dropdown-menu">
+							        			<li class="dropdown mega-dropdown">
+											        <li><a href="#" onclick='cargar_pagina("ingreso_incidentes");'></a></li>
+											        <li><a href="#" onclick='cargar_pagina("ingreso_categorias_incidentes");'></a></li>
+							        			</li>
+							        		</ul>
+							        	</li>
+							        </ul>
+								</li>
+						        <li>
+					        		<input class="btn btn-lg btn-danger btn-block" type="submit" onclick="" value="Salir">
+					        	</li>
+							</ul>
 						</div>
-						<div id="principal" name="principal" class="panel-body" ></div>
+					</tr>
+					<tr>
+						<div class="panel panel-success">
+							<div class="panel-heading" id="Encabezado_Panel" name="Encabezado_Panel" align="center">
+								<big></big>
+							</div>
+							<div id="principal" name="principal" class="panel-body" ></div>
+						</div>
 					</div>
-				</div>
-				</tr>
-			</table>	
-		</div>
+					</tr>
+				</table>	
+			</div>
+		</form>
 	</body>
 </html>
-<?php 
-
-?>

@@ -111,8 +111,8 @@ function cargar_pagina(pagina)
 
 function salir()
 {
-	$('#inicioform').hide();
-	Div=document.getElementById("inicioform");
+	
+	Div=document.getElementById("principal");
 	Parametros = "cerrar=1";
 	div_dinamico("POST", 'principal.php', Parametros, Div, false);
 }

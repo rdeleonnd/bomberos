@@ -10,7 +10,7 @@ function FncGuardar()
 
 	if((Nombre != '') && (Fecha_inicio != '') && (Hora_inicio != '') && (Fecha_fin != '') && (Hora_fin != ''))
 	{
-		Parametros = "Ingreso_Turnos=1"+"&Nombre="+"&Fecha_inicio="+Fecha_inicio+"&Hora_inicio="+Hora_inicio+"&Fecha_fin="+Fecha_fin+"&Hora_fin="+Hora_fin;
+		Parametros = "Ingreso_Turnos=1"+"&Nombre="+Nombre+"&Fecha_inicio="+Fecha_inicio+"&Hora_inicio="+Hora_inicio+"&Fecha_fin="+Fecha_fin+"&Hora_fin="+Hora_fin;
 		Div=document.getElementById("principal");
 		div_dinamico("POST", 'ingreso_turnos.php', Parametros, Div, false);
 	}

@@ -28,7 +28,7 @@
 						<div class="col-xs-3">
 							<?php 
 								include_once('funciones/funciones.php');
-								$Consulta = "SELECT idusuario as id, usuario as nombre FROM usuario;";
+								$Consulta = "SELECT id_turno as id, nombreTurno as nombre FROM turno;";
 								echo FncCrearCombo($Consulta,"nombre",'','','','','');
 							?>
 						</div>
@@ -40,7 +40,7 @@
 						<div class="col-xs-3">
 							<?php 
 								include_once('funciones/funciones.php');
-								$Consulta = "SELECT idusuario as id, usuario as nombre FROM usuario;";
+								$Consulta = "SELECT idusuario as id, nombreUser as nombre FROM usuario;";
 								echo FncCrearCombo($Consulta,"usuario",'','','','','');
 							?>
 						</div>

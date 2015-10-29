@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -73,7 +76,9 @@
 		            	</div>
 		            	<div class="col-xs-1">
 				            <div class="input-group">
-				                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
+				            	<?php 
+				                	echo "<button type='button' class='btn btn-info' id='guardar' name='guardar' onclick='FncGuardar();'>Guardar</button>";
+				            	?>
 				            </div>
 				        </div>
 		            </div>
@@ -121,14 +126,14 @@
 <?php 
 	if(isset($_POST["Ingreso_Turnos"]))
 	{
-		$Guardar = "INSERT INTO rango (`idRango`, `descRango`) 
-					VALUES ('','".$_POST["Rango"]."');";
+		$Guardar = "INSERT INTO turno (`id_turno`, `fechaInicio`, `fechaFin`, `nombreTurno`, `horaInicio`, `horaFin`, `idUsuario`) 
+					VALUES ('', '".$_POST["Fecha_inicio"]."', '".$_POST["Fecha_fin"]."', '".$_POST["Nombre"]."', '".$_POST["Hora_inicio"]."', '".$_POST["Hora_fin"]."', '".$_SESSION['idusuario']."');";
 		$insert = $Conexion->Insertar($Guardar);
 		
 	
 		echo "<script>
 				alert('Se Guardaron los registros');
-				cargar_pagina('ingreso_rangos_estados');
+				cargar_pagina('ingreso_turnos');
 			</script>";
 	}
 	else
