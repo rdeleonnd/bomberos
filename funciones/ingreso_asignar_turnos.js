@@ -1,6 +1,7 @@
 function FncGuardar()
 {
 	Fecha_inicio = $("#fecha_inicio").val();
+	Fecha_inicio = Fecha_inicio.substring(6,10)+Fecha_inicio.substring(3,5)+Fecha_inicio.substring(0,2); 
 	Nombre = $("#nombre").val();
 	Usuario = $("#usuario").val();
 
