@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -7,7 +10,9 @@
 	<body>
 		<?php 
 			include('funciones/funciones.php');
-			
+			include('funciones/conexion/configuracion_db.php');
+			require_once('funciones/conexion/conexion.php'); 
+			$Conexion = new DB($Usuario,$Clave,$DB,$Host);
 		?>
 		<form class="form-horizontal">
 			<table align="center" class="table table-bordered" style="width: 90%">
@@ -15,13 +20,13 @@
 					<div class="form-group">
 						<label class="control-label col-xs-3"> Reporte # :</label>
 						<div class="col-xs-2">
-							<input class="form-control" type="text" id="recibo" name="recibo"> 
+							<input class="form-control" type="text" id="recibo" name="recibo" required> 
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-xs-3"> Direccion del Traslado:</label>
 						<div class="col-xs-5">
-							<input class="form-control" type="text" id="direccion_traslado" name="direccion_traslado"> 
+							<input class="form-control" type="text" id="direccion_traslado" name="direccion_traslado" required> 
 						</div>
 					</div>
 				</tr>
@@ -29,7 +34,7 @@
 					<div class="form-group">
 						<label class="control-label col-xs-3">Nombre del Paciente:</label>
 						<div class="col-xs-5">
-							<input class="form-control" type="text" id="nombre_paciente" name="nombre_paciente">
+							<input class="form-control" type="text" id="nombre_paciente" name="nombre_paciente" required>
 						</div>
 					</div>
 				</tr>
@@ -37,7 +42,7 @@
 					<div class="form-group">
 						<label class="control-label col-xs-3">Direccion del paciente:</label>
 						<div class="col-xs-5">
-							<input class="form-control" type="text" id="direccion_paciente" name="direccion_paciente">
+							<input class="form-control" type="text" id="direccion_paciente" name="direccion_paciente" required>
 						</div>
 					</div>
 				</tr>
@@ -45,7 +50,7 @@
 					<div class="form-group">
 						<label class="control-label col-xs-3">Edad:</label>
 						<div class="col-xs-1">
-							<input class="form-control" type="text" id="edad" name="edad" >
+							<input class="form-control" type="text" id="edad" name="edad" required>
 						</div>
 						<div class="col-xs-1">
 							<select id="rango_edad" name="rango_edad" class="form-control">
@@ -69,7 +74,7 @@
 					<div class="form-group">
 						<label class="control-label col-xs-3">Se Traslado a:</label>
 						<div class="col-xs-5" >
-							<input class="form-control" type="text" id="traslado_a" name="traslado_a">
+							<input class="form-control" type="text" id="traslado_a" name="traslado_a" required>
 						</div>
 					</div>
 				</tr>
@@ -77,12 +82,12 @@
 					<div class="form-group">
 						<label class="control-label col-xs-3">Forma de aviso:</label>
 						<div class="col-xs-3">
-							<input class="form-control" type="text" id="aviso" name="aviso">
+							<input class="form-control" type="text" id="aviso" name="aviso" required>
 						</div>
 						<div class="col-xs-2">
 				            <div class="input-group">
 				            	<label class="input-group-addon">Telefono:</label>
-				            	<input class="form-control" type="text" id="telefono" name="telefono">
+				            	<input class="form-control" type="text" id="telefono" name="telefono" required>
 				            </div>
 				        </div>
 					</div>
@@ -91,7 +96,7 @@
 					<div class="form-group">
 						<label class="control-label col-xs-3">Telefonista de turno:</label>
 						<div class="col-xs-3">
-							<input class="form-control" id="telefonista" name="telefonista">
+							<input class="form-control" id="telefonista" name="telefonista" required>
 						</div>
 					</div>
 				</tr>
@@ -108,13 +113,13 @@
 						<div class="col-xs-2">
 							<div class="input-group">
 								<label class="input-group-addon" for="hora_salida">Hora de Salida:</label>
-								<input class="form-control" type"text" id="hora_salida" name="hora_salida">
+								<input class="form-control" type"text" id="hora_salida" name="hora_salida" required>
 							</div>
 						</div>
 						<div class="col-xs-2">
 							<div class="input-group">
 								<label class="input-group-addon" for="hora_entrada">Hora de Entrada:</label>
-								<input class="form-control" type"text" id="hora_entrada" name="hora_entrada">
+								<input class="form-control" type"text" id="hora_entrada" name="hora_entrada" required>
 							</div>
 						</div>
 					</div>
@@ -124,8 +129,7 @@
 						<label class="control-label col-xs-3">Nombre del Piloto:</label>
 						<div class="col-xs-3">
 							<?php 
-								
-								$Consulta = "SELECT idUsuario as id, nombreUser as nombre FROM usuario;";
+								$Consulta = "SELECT idEmpleado id, concat(CodEmpleado, ' | ' , nombres) nombre from personal ORDER BY nombre;";
 								echo FncCrearCombo($Consulta,"piloto",'','','','','');
 							?>
 						</div>
@@ -146,12 +150,12 @@
 					<div class="form-group">
 						<label class="control-label col-xs-3">Kilometraje de Salida:</label>
 						<div class="col-xs-2">
-							<input class="form-control" type="text" id="kilometraje_salida" name="kilometraje_salida">
+							<input class="form-control" type="text" id="kilometraje_salida" name="kilometraje_salida" required>
 						</div>
 						<div class="col-xs-3">
 							<div class="input-group">
 								<label class="input-group-addon" for="kilometraje_entrada">Kilometraje de Entrada:</label>
-								<input class="form-control" type="text" id="kilometraje_entrada" name="kilometraje_entrada">
+								<input class="form-control" type="text" id="kilometraje_entrada" name="kilometraje_entrada" required>
 							</div>
 						</div>
 					</div>
@@ -159,10 +163,10 @@
 				<tr>
 					<div class="form-group">
 						<label class="control-label col-xs-3">Bombero que hizo el reporte:</label>
-						<div class="form-inline col-xs-6">
+						<div class="col-xs-3">
 							<?php 
-								$Consulta = "SELECT idusuario as id, nombreUser as nombre FROM usuario;";
-								echo FncCrearCombo($Consulta,"bombero_reporte",'class="form-control col-xs-3"','','','','');
+								$Consulta = "SELECT idEmpleado id, concat(CodEmpleado, ' | ' , nombres) nombre from personal ORDER BY nombre;";
+								echo FncCrearCombo($Consulta,"bombero_reporte",'','','','','');
 							?>
 						</div>
 					</div>
@@ -239,12 +243,23 @@
 
 		$('#unidad').select2();
 		$('#piloto').select2();
+		$('#bombero_reporte').select2();
 	});
 </script>
 <?php
 	if(isset($_POST["Ingreso_Reporte_Servicio"]))
 	{
-		echo "Listo";
+		$Guardar = "INSERT INTO reporte(`noReporte`, `direccionTraslado`, `direccionPaciente`, `edad`, `sexo`, `lugar_asistencia`, `aviso`, `telefonista`, `unidad_no`, `horaSalida`, `horaEntrada`, `piloto`, `fecha`, `kmSalida`, `kmEntrada`, `kmRecorridos`, `bomberoReporte`, `observaciones`, `idIncidente`, `idUsuario`)
+					VALUES ('', '".$_POST["codigo"]."', '".$_POST["nombre"]."', '".$_POST["apellido"]."', '".$_POST["direccion"]."', '".$_POST["nacimiento"]."', 
+							'".$_POST["sexo"]."', '".$_POST["estado_civil"]."', '".$_POST["telefono"]."', '".$_POST["rango"]."', '".$_POST["ingreso"]."', 
+							'".$_POST["sueldo"]."', '".$_POST["estado"]."');";
+		$insert = $Conexion->Insertar($Guardar);
+		
+	
+		echo "<script>
+				alert('Se Guardaron los registros');
+				cargar_pagina('ingreso_personal');
+			</script>";
 	}
 	else
 	{

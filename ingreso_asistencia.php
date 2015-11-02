@@ -11,6 +11,7 @@
 	</head>
 	<body>
 		<?php
+			include('funciones/funciones.php');
 			include('funciones/conexion/configuracion_db.php');
 			require_once('funciones/conexion/conexion.php'); 
 			$Conexion = new DB($Usuario,$Clave,$DB,$Host);
@@ -30,7 +31,6 @@
 						<label class="control-label col-xs-3">Nombre del Turno:</label>
 						<div class="col-xs-3">
 							<?php 
-								include_once('funciones/funciones.php');
 								$Consulta = "SELECT id_turno as id, nombreTurno as nombre FROM turno;";
 								echo FncCrearCombo($Consulta,"nombre",'','','','','');
 							?>
@@ -42,7 +42,6 @@
 						<label class="control-label col-xs-3">Codigo de Empleado:</label>
 						<div class="col-xs-3">
 							<?php 
-								include_once('funciones/funciones.php');
 								$Consulta = "SELECT idEmpleado as id, codEmpleado as nombre FROM Personal;";
 								echo FncCrearCombo($Consulta,"usuario",'','','','','');
 							?>

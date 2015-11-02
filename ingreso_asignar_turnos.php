@@ -1,3 +1,7 @@
+<?php
+	session_start();
+?>
+<!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -7,6 +11,12 @@
 
 	</head>
 	<body>
+		<?php
+			include('funciones/funciones.php');
+			include('funciones/conexion/configuracion_db.php');
+			require_once('funciones/conexion/conexion.php'); 
+			$Conexion = new DB($Usuario,$Clave,$DB,$Host);
+		?>
 		<form class="form-horizontal">
 			<table>
 				<tr>
@@ -27,7 +37,6 @@
 						<label class="control-label col-xs-3">Nombre del Turno:</label>
 						<div class="col-xs-3">
 							<?php 
-								include_once('funciones/funciones.php');
 								$Consulta = "SELECT id_turno as id, nombreTurno as nombre FROM turno;";
 								echo FncCrearCombo($Consulta,"nombre",'','','','','');
 							?>
@@ -39,7 +48,6 @@
 						<label class="control-label col-xs-3">Usuario a Asignar:</label>
 						<div class="col-xs-3">
 							<?php 
-								include_once('funciones/funciones.php');
 								$Consulta = "SELECT idusuario as id, nombreUser as nombre FROM usuario;";
 								echo FncCrearCombo($Consulta,"usuario",'','','','','');
 							?>
@@ -57,11 +65,11 @@
     $(document).ready(function () {
         $('#datetimepicker1').datetimepicker({
         	locale: 'es',
-        	format: 'DD/MM/YYYY, h:mm:ss a'
+        	format: 'DD/MM/YYYY'
         });
         $('#fecha_inicio').datetimepicker({
         	locale: 'es',
-        	format: 'DD/MM/YYYY, h:mm:ss a'
+        	format: 'DD/MM/YYYY'
         });
 
         $('#usuario').select2();
@@ -72,7 +80,15 @@
 <?php 
 	if(isset($_POST["Ingreso_Asignacion_Turnos"]))
 	{
-		echo "Listo";
+		$Guardar = "INSERT INTO asignacionturno (`idasigTurno`, `fecha`, `idTurno`, `idEmpleado`, `idUsuario`)
+					VALUES ('', '".$_POST["Fecha_inicio"]."', '".$_POST["Nombre"]."', '".$_POST["Usuario"]."', '".$_SESSION['idusuario']."');";
+		$insert = $Conexion->Insertar($Guardar);
+		
+	
+		echo "<script>
+				alert('Se Guardaron los registros');
+				cargar_pagina('ingreso_asignar_turnos');
+			</script>";
 	}
 	else
 	{

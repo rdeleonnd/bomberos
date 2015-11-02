@@ -19,7 +19,7 @@
 					<div class="col-xs-3">
 						<?php 
 							$Consulta = "SELECT per.idEmpleado id, concat(per.nombres, ' ', per.apellidos) nombre FROM personal per ORDER BY nombre;";
-							echo FncCrearCombo($Consulta,"empleado",'class="form-control col-xs-3"','','','','');
+							echo FncCrearCombo($Consulta,"empleado",'','','','','');
 						?>
 					</div>
 				</div>

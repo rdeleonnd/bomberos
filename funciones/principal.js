@@ -51,7 +51,7 @@ function cargar_pagina(pagina)
 	{
 		Parametros = "ingreso_categorias_incidentes=1";
 		div_dinamico("POST", 'ingreso_categorias_incidentes.php', Parametros, Div, false);
-		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE CATEGORIAS DE INCIDENTES";
+		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE INCIDENTES";
 	}
 	else if(pagina=='ingreso_personal')
 	{

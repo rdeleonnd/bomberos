@@ -140,6 +140,7 @@
 			
 		echo "<script>
 				alert('Se Guardaron los registros');
+				cargar_pagina('ingreso_rangos_estados');
 			</script>";
 	}
 	else

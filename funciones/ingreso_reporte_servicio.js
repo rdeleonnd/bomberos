@@ -16,6 +16,7 @@ function FncGuardar()
 	Hora_entrada = $("#hora_entrada").val();
 	Piloto = $("#piloto").val();
 	Fecha = $("#fecha").val();
+	Fecha = Fecha.substring(6,10)+Fecha.substring(3,5)+Fecha.substring(0,2);
 	Kilometraje_salida = $("#kilometraje_salida").val();
 	Kilometraje_entrada = $("#kilometraje_entrada").val();
 	Bombero_reporte = $("#bombero_reporte").val();
