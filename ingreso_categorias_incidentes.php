@@ -6,7 +6,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Ingreso de Actividades</title>
-		<script type="text/javascript" src="funciones/ingreso_actividades.js"></script>
+		<script type="text/javascript" src="funciones/ingreso_categorias_incidentes.js"></script>
 
 	</head>
 	<body>
@@ -31,10 +31,12 @@
 				</tr>
 				<tr>
 					<div class="form-group">
-						<label class="control-label col-xs-3">Seleccione la Categoria del Incidente:</label>
+						<label class="control-label col-xs-3">Seleccione la Sub-Categoria del Incidente:</label>
 						<div class="col-xs-3" id="divsubcategoria">
 							<?php 
-								$Consulta = "SELECT idCausa id, descCausa nombre from causa ORDER BY nombre;";
+								$Consulta = "SELECT idCausa id, descCausa nombre from causa
+											 WHERE codServicio = '".$_POST["ID"]."'
+											 ORDER BY nombre;";
 								echo FncCrearCombo($Consulta,"subcategoria",'','','','','');
 							?>
 						</div>
@@ -59,10 +61,8 @@
 </html>
 <script>
 	$(document).ready(function(){
-		Categoria = $('#categoria').val();
-		FncComboCategoria(Categoria,'divsubcategoria','inv_serie_rev');
         $('#categoria').change(function(){
-            FncComboCategoria(this.value,'divSerieTransEstado','inv_serie_rev');
+            FncComboCategoria(this.value,'divsubcategoria');
         });
 
 		$('#categoria').select2();
@@ -82,8 +82,9 @@
 				cargar_pagina('ingreso_actividades');
 			</script>";
 	}
-	else
+	else if(isset($_POST["subcategoria"]))
 	{
-		echo "No Listo";
+		
+		
 	}
 ?>

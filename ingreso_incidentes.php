@@ -112,7 +112,7 @@
 									$Respuesta = $Conexion->list_orders($Consulta);
 									while ($row = mysql_fetch_assoc($Respuesta))
 									{
-			                    		$Modificar = "<image class='btn btn-default' src='img/modificar.png' title='Modificar Registro' onclick='FncMofificarEstado(".$row['idCausa'].", \"".$row['descCausa']."\", \"".$row['codServicio']."\")'>";
+			                    		$Modificar = "<image class='btn btn-default' src='img/modificar.png' title='Modificar Registro' onclick='FncMofificarEstado(".$row['idCausa'].", \"".$row['descCausa']."\", \"".$row['descServicio']."\")'>";
 										
 										echo "<tr>
 													<td>".$row['idCausa']."</td>

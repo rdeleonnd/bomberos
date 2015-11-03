@@ -97,5 +97,5 @@ function FncComboCategoria(ID,div)
 {
     div=document.getElementById(div);
     strParam="subcategoria=1"+"&ID="+ID;
-    ajax_dynamic_div("POST",'ingreso_categorias_incidentes.php',strParam,div,false);
+    div_dinamico("POST",'ingreso_categorias_incidentes.php',strParam,div,false);
 }
