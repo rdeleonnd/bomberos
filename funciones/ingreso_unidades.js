@@ -1,13 +1,17 @@
 function FncGuardar()
 {
-    Subcategorias = $("#subcategorias").val();
-	Incidente = $("#incidente").val();
+	Codigo = $("#codigo").val();
+	Modelo = $("#modelo").val();
+	Tipo = $("#tipo").val();
+	Ingreso = $("#ingreso").val();
+    Ingreso = Ingreso.substring(6,10)+Ingreso.substring(3,5)+Ingreso.substring(0,2); 
+	Chasis = $("#chasis").val();
 
-	if(Incidente != '')
-	{
-		Parametros = "Ingreso_Incidente=1"+"&Subcategorias="+Subcategorias+"&Incidente="+Incidente;
+	if((Codigo != '') && (Modelo != '') && (Ingreso != '') && (Chasis != ''))
+	{ 
+		Parametros= "Ingreso_unidad=1"+"&Codigo="+Codigo+"&Modelo="+Modelo+"&Tipo="+Tipo+"&Ingreso="+Ingreso+"&Chasis="+Chasis;
 		Div=document.getElementById("principal");
-		div_dinamico("POST", 'ingreso_categorias_incidentes.php', Parametros, Div, false);
+		div_dinamico("POST", 'ingreso_unidades.php', Parametros, Div, false);
 	}
 	else
 	{
@@ -65,16 +69,4 @@ function FncTabla(tabla)
 
                 });
     //new $.fn.dataTable.FixedHeader( oTable );
-}
-
-function FncMofificarRango(id, rango)
-{
-    $("#rango").val(rango);
-}
-
-function FncComboCategoria(ID,div)
-{
-    div=document.getElementById(div);
-    strParam="subcategorias=1"+"&ID="+ID;
-    div_dinamico("POST",'combos.php',strParam,div,false);
 }

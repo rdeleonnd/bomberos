@@ -201,10 +201,26 @@
 				<tr>
 					<div class="form-group">
 						<label class="control-label col-xs-3">COD:</label>
-						<div class="col-xs-2">
-							<input type="text" class="form-control" id="cod" name="cod">
+						<div class="col-xs-3">
+							<?php 
+								$Consulta = "SELECT codServicio id, descServicio nombre from servicio ORDER BY nombre;";
+								echo FncCrearCombo($Consulta,"categoria",'','','','','');
+							?>
 						</div>
-						<div class="input-group">
+					</div>
+				</tr>
+				<tr>
+					<div class="form-group">
+						<label class="control-label col-xs-3">Seleccione la Sub-Categoria del Incidente:</label>
+						<div class="col-xs-3" id="divsubcategoria">
+							
+						</div>
+					</div>
+				</tr>
+				<tr>
+					<div class="form-group">
+						<label class="control-label col-xs-3"></label>
+						<div class="input-group ">
 			                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
 			            </div>
 					</div>
@@ -239,6 +255,12 @@
         $('#hora_entrada').datetimepicker({
         	locale: 'es',
         	format: 'LT'
+        });
+
+        FncComboCategoria(1,'divsubcategoria');
+        $('#categoria').change(function(){
+            FncComboCategoria(this.value,'divsubcategoria');
+            $('#subcategorias').select2();
         });
 
 		$('#unidad').select2();

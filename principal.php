@@ -100,8 +100,8 @@
 								        			<li><a tabindex="-1" href="#" onclick='cargar_pagina("ingreso_reporte_servicio");'>Reporte de Servicios</a></li>
 									        		<li><a href="#" onclick='cargar_pagina("ingreso_reporte_donaciones");'>Recibo de Donaciones</a></li>
 									        		<li class="divider"></li>
-									        		<li><a href="#" onclick='cargar_pagina("ingreso_incidentes");'>Ingreso Incidentes</a></li>
-											        <li><a href="#" onclick='cargar_pagina("ingreso_categorias_incidentes");'>Ingreso de Categorias deIncidentes</a></li>
+									        		<li><a href="#" onclick='cargar_pagina("ingreso_incidentes");'>Ingreso de Categorias de Incidentes</a></li>
+											        <li><a href="#" onclick='cargar_pagina("ingreso_categorias_incidentes");'>Ingreso de Incidentes</a></li>
 											        <li><a href="#" onclick='cargar_pagina("ingreso_usuarios");'>Ingreso de Usuarios</a></li>
 								        		</li>
 							        		</ul>
@@ -145,6 +145,30 @@
 											        <li><a href="#" onclick='cargar_pagina("ingreso_incidentes");'></a></li>
 											        <li><a href="#" onclick='cargar_pagina("ingreso_categorias_incidentes");'></a></li>
 							        			</li>
+							        		</ul>
+							        	</li>
+							        </ul>
+								</li>
+								<li class="dropdown mega-dropdown">
+									<a href="" class="dropdown-toggle" data-toggle="dropdown">Administracion<b class="caret"></b></a>
+									<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+							        	<li class="dropdown-submenu">
+							        		<a tabindex="-1" href="#">Agregar</a>
+							        		<ul class="dropdown-menu">
+							        			<li class="dropdown mega-dropdown">
+								        			<li><a href="#" onclick='cargar_pagina("ingreso_unidades");'>Ingreso de Unidades</a></li>
+								        			<li class="divider"></li>
+									        		<li><a href="#" onclick='cargar_pagina("ingreso_turnos");'>Ingreso de Turnos</a></li>
+									        		<li><a href="#" onclick='cargar_pagina("ingreso_asignar_turnos");'>Ingreso de Asignacion de Turnos</a></li>
+									        		<li class="divider"></li>
+									        		<li><a href="#" onclick='cargar_pagina("ingreso_asistencia");'>Inreso de Entrada del Personal</a></li>
+									        		<li><a href="#" onclick='cargar_pagina("ingreso_salida_asistencia");'>Inreso de Salida del Personal</a></li>
+									        		<li class="divider"></li>
+									        		<li><a href="#" onclick='cargar_pagina("ingreso_actividades");'>Ingreso de Actividades</a></li>
+									        		<li><a href="#" onclick='cargar_pagina("ingreso_asignar_actividades");'>Ingreso de Asignacion de Actividades</a></li>
+									        		<li class="divider"></li>
+									        		<li><a href="#" onclick='cargar_pagina("ingreso_rangos_estados");'>Ingreso de Rangos y Estados</a></li>
+								        		</li>
 							        		</ul>
 							        	</li>
 							        </ul>

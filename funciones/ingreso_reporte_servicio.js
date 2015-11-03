@@ -44,7 +44,11 @@ function FncGuardar()
 	{
 		alert("Ingrese todos los campos");
 	}
-	
+}
 
-
+function FncComboCategoria(ID,div)
+{
+    div=document.getElementById(div);
+    strParam="subcategorias=1"+"&ID="+ID;
+    div_dinamico("POST",'combos.php',strParam,div,false);
 }

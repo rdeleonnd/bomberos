@@ -45,7 +45,7 @@ function cargar_pagina(pagina)
 	{
 		Parametros = "ingreso_incidentes=1";
 		div_dinamico("POST", 'ingreso_incidentes.php', Parametros, Div, false);
-		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE INCIDENTES";
+		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE CATEGORIA DE INCIDENTES";
 	}
 	else if(pagina=='ingreso_categorias_incidentes')
 	{
@@ -106,6 +106,12 @@ function cargar_pagina(pagina)
 		Parametros = "ingreso_usuarios=1";
 		div_dinamico("POST", 'ingreso_usuarios.php', Parametros, Div, false);
 		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE USUARIOS";
+	}
+	else if(pagina=='ingreso_unidades')
+	{
+		Parametros = "ingreso_unidades=1";
+		div_dinamico("POST", 'ingreso_unidades.php', Parametros, Div, false);
+		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE UNIDADES";
 	}
 }
 
