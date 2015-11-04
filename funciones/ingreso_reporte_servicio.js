@@ -52,3 +52,10 @@ function FncComboCategoria(ID,div)
     strParam="subcategorias=1"+"&ID="+ID;
     div_dinamico("POST",'combos.php',strParam,div,false);
 }
+
+function FncComboIncidente(ID,div)
+{
+    div=document.getElementById(div);
+    strParam="incidente=1"+"&ID="+ID;
+    div_dinamico("POST",'combos.php',strParam,div,false);
+}

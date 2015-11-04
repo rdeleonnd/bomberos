@@ -8,4 +8,11 @@
 					 ORDER BY nombre;";
 		echo FncCrearCombo($Consulta,"subcategorias",'','','','','');	
 	}
+	else if(isset($_POST["incidente"]))
+	{
+		$Consulta = "SELECT idIncidente id, descIncidente nombre from incidente
+					 WHERE idCausa = '".$_POST["ID"]."'
+					 ORDER BY nombre;";
+		echo FncCrearCombo($Consulta,"incideente",'','','','','');	
+	}
 ?>

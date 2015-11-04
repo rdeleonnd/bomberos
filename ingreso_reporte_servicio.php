@@ -106,7 +106,7 @@
 						<div class="col-xs-1">
 							<?php 
 								include_once('funciones/funciones.php');
-								$Consulta = "SELECT idUsuario as id, nombreUser as nombre FROM usuario;";
+								$Consulta = "SELECT idUnidad as id, unidad_no as nombre FROM unidad;";
 								echo FncCrearCombo($Consulta,"unidad",'','','','','');
 							?>
 						</div>
@@ -174,11 +174,8 @@
 				<tr>
 					<div class="form-group">
 						<label class="control-label col-xs-3">Bomberos Asistentes:</label>
-						<div class="form-inline col-xs-6">
-							<?php 
-								$Consulta = "SELECT idUsuario as id, nombreUser as nombre FROM usuario;";
-								echo FncCrearCombo($Consulta,"bombero_asistente",'class="form-control col-xs-3"','','','','');
-							?>
+						<div class="col-xs-2">
+							<input class="form-control" type="text" id="bombero_asistente" name="bombero_asistente" required>
 						</div>
 					</div>
 				</tr>
@@ -213,6 +210,14 @@
 					<div class="form-group">
 						<label class="control-label col-xs-3">Seleccione la Sub-Categoria del Incidente:</label>
 						<div class="col-xs-3" id="divsubcategoria">
+							
+						</div>
+					</div>
+				</tr>
+				<tr>
+					<div class="form-group">
+						<label class="control-label col-xs-3">Seleccione el Incidente:</label>
+						<div class="col-xs-3" id="divincidente">
 							
 						</div>
 					</div>
@@ -263,9 +268,17 @@
             $('#subcategorias').select2();
         });
 
+        FncComboIncidente(1,'divincidente');
+        $('#subcategorias').change(function(){
+            FncComboIncidente(this.value,'divincidente');
+            $('#incidente').select2();
+        });
+
 		$('#unidad').select2();
 		$('#piloto').select2();
-		$('#bombero_reporte').select2();
+		$('#categoria').select2();
+		$('#subcategorias').select2();
+		$('#incidente').select2();
 	});
 </script>
 <?php
