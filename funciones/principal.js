@@ -113,6 +113,19 @@ function cargar_pagina(pagina)
 		div_dinamico("POST", 'ingreso_unidades.php', Parametros, Div, false);
 		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE UNIDADES";
 	}
+	else if(pagina=='ingreso_lubricantes')
+	{
+		Parametros = "ingreso_lubricantes=1";
+		div_dinamico("POST", 'ingreso_lubricantes.php', Parametros, Div, false);
+		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE LUBRICANTES";
+	}
+	else if(pagina=='ingreso_reparaciones')
+	{
+		Parametros = "ingreso_reparaciones=1";
+		div_dinamico("POST", 'ingreso_reparaciones.php', Parametros, Div, false);
+		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE REPARACIONES";
+	}
+	
 }
 
 function salir()

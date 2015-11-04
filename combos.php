@@ -13,6 +13,10 @@
 		$Consulta = "SELECT idIncidente id, descIncidente nombre from incidente
 					 WHERE idCausa = '".$_POST["ID"]."'
 					 ORDER BY nombre;";
-		echo FncCrearCombo($Consulta,"incideente",'','','','','');	
+		echo FncCrearCombo($Consulta,"incidentes",'','','','','');
+	}
+	else
+	{
+
 	}
 ?>

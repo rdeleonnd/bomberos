@@ -23,19 +23,22 @@ function FncGuardar()
 	Bombero_asistente = $("#bombero_asistente").val();
 	Observaciones = $("#observaciones").val();
 	Kilometros_recorridos = $("#kilometros_recorridos").val();
-	Cod = $("#cod").val();
+	Categoria = $("#categoria").val();
+	Subcategorias = $("#subcategorias").val();
+	Incidentes = $("#incidentes").val();
+	Categoria.concat(Subcategorias, ' ', Incidentes);
 
 	if((Recibo != '') && (direccion_traslado != '') && (Nombre_paciente != '') && (Direccion_paciente != '') && (Edad != '') && (Rango_edad != '') && (Sexo != '') 
 		&& (Traslado_a != '') && (Aviso != '') && (Telefono != '') && (Telefonista != '') && (Unidad != '') && (Hora_salida != '') && (Hora_entrada != '')
 		&& (Piloto != '') && (Fecha != '') && (Kilometraje_salida != '') && (Kilometraje_entrada != '') && (Bombero_reporte != '') && (Bombero_asistente != '')
-		&& (Observaciones != '') && (Kilometros_recorridos != '') && (Cod != ''))
+		&& (Observaciones != '') && (Kilometros_recorridos != '') && (Categoria != '') && (Subcategorias != '') && (Incidentes != ''))
 	{
 		Parametros = "Ingreso_Reporte_Servicio=1"+"&Recibo="+Recibo+"&Direccion_traslado="+Direccion_traslado+"&Nombre_paciente="+Nombre_paciente
 						+"&Direccion_paciente="+Direccion_paciente+"&Edad="+Edad+"&Rango_edad="+Rango_edad+"&Sexo="+Sexo+"&Traslado_a="+Traslado_a
 						+"&Aviso="+Aviso+"&Telefono="+Telefono+"&Telefonista="+Telefonista+"&Unidad="+Unidad+"&Hora_salida="+Hora_salida+"&Hora_entrada="+Hora_entrada
 						+"&Piloto="+Piloto+"&Fecha="+Fecha+"&Kilometraje_salida="+Kilometraje_salida+"&Kilometraje_entrada="+Kilometraje_entrada
 						+"&Bombero_reporte="+Bombero_reporte+"&Bombero_asistente="+Bombero_asistente+"&Observaciones="+Observaciones+"&Kilometros_recorridos="
-						+Kilometros_recorridos+"&Cod="+Cod;
+						+Kilometros_recorridos+"&Categoria="+Categoria;
 
 		Div=document.getElementById("principal");
 		div_dinamico("POST", 'ingreso_reporte_servicio.php', Parametros, Div, false);

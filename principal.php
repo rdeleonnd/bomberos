@@ -158,8 +158,8 @@
 							        			<li class="dropdown mega-dropdown">
 								        			<li><a href="#" onclick='cargar_pagina("ingreso_unidades");'>Ingreso de Unidades</a></li>
 								        			<li class="divider"></li>
-									        		<li><a href="#" onclick='cargar_pagina("ingreso_turnos");'>Ingreso de Turnos</a></li>
-									        		<li><a href="#" onclick='cargar_pagina("ingreso_asignar_turnos");'>Ingreso de Asignacion de Turnos</a></li>
+									        		<li><a href="#" onclick='cargar_pagina("ingreso_lubricantes");'>Ingreso de Lubricantes</a></li>
+									        		<li><a href="#" onclick='cargar_pagina("ingreso_reparaciones");'>Ingreso de Reparaciones</a></li>
 									        		<li class="divider"></li>
 									        		<li><a href="#" onclick='cargar_pagina("ingreso_asistencia");'>Inreso de Entrada del Personal</a></li>
 									        		<li><a href="#" onclick='cargar_pagina("ingreso_salida_asistencia");'>Inreso de Salida del Personal</a></li>

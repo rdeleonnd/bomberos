@@ -96,7 +96,10 @@
 					<div class="form-group">
 						<label class="control-label col-xs-3">Telefonista de turno:</label>
 						<div class="col-xs-3">
-							<input class="form-control" id="telefonista" name="telefonista" required>
+							<?php 
+								$Consulta = "SELECT idEmpleado id, concat(CodEmpleado, ' | ' , nombres) nombre from personal ORDER BY nombre;";
+								echo FncCrearCombo($Consulta,"telefonista",'','','','','');
+							?>
 						</div>
 					</div>
 				</tr>
@@ -105,7 +108,6 @@
 						<label class="control-label col-xs-3">Unidad No:</label>
 						<div class="col-xs-1">
 							<?php 
-								include_once('funciones/funciones.php');
 								$Consulta = "SELECT idUnidad as id, unidad_no as nombre FROM unidad;";
 								echo FncCrearCombo($Consulta,"unidad",'','','','','');
 							?>
@@ -174,7 +176,7 @@
 				<tr>
 					<div class="form-group">
 						<label class="control-label col-xs-3">Bomberos Asistentes:</label>
-						<div class="col-xs-2">
+						<div class="col-xs-5">
 							<input class="form-control" type="text" id="bombero_asistente" name="bombero_asistente" required>
 						</div>
 					</div>
@@ -263,31 +265,41 @@
         });
 
         FncComboCategoria(1,'divsubcategoria');
+        ValSubCategorias = $('#subcategorias').val();
+		FncComboIncidente(ValSubCategorias,'divincidente');
         $('#categoria').change(function(){
             FncComboCategoria(this.value,'divsubcategoria');
             $('#subcategorias').select2();
+
+            ValSubCategorias = $('#subcategorias').val();
+
+            FncComboIncidente(ValSubCategorias,'divincidente');
+	        $('#subcategorias').change(function(){
+	            FncComboIncidente(this.value,'divincidente');
+	            $('#incidentes').select2();
+	        });
         });
 
-        FncComboIncidente(1,'divincidente');
-        $('#subcategorias').change(function(){
-            FncComboIncidente(this.value,'divincidente');
-            $('#incidente').select2();
-        });
-
+        
+        $('#telefonista').select2();
+        $('#bombero_reporte').select2();
 		$('#unidad').select2();
 		$('#piloto').select2();
 		$('#categoria').select2();
 		$('#subcategorias').select2();
-		$('#incidente').select2();
+		$('#incidentes').select2();
 	});
 </script>
 <?php
 	if(isset($_POST["Ingreso_Reporte_Servicio"]))
 	{
-		$Guardar = "INSERT INTO reporte(`noReporte`, `direccionTraslado`, `direccionPaciente`, `edad`, `sexo`, `lugar_asistencia`, `aviso`, `telefonista`, `unidad_no`, `horaSalida`, `horaEntrada`, `piloto`, `fecha`, `kmSalida`, `kmEntrada`, `kmRecorridos`, `bomberoReporte`, `observaciones`, `idIncidente`, `idUsuario`)
-					VALUES ('', '".$_POST["codigo"]."', '".$_POST["nombre"]."', '".$_POST["apellido"]."', '".$_POST["direccion"]."', '".$_POST["nacimiento"]."', 
-							'".$_POST["sexo"]."', '".$_POST["estado_civil"]."', '".$_POST["telefono"]."', '".$_POST["rango"]."', '".$_POST["ingreso"]."', 
-							'".$_POST["sueldo"]."', '".$_POST["estado"]."');";
+		$Guardar = "INSERT INTO reporte(`noReporte`, `direccionTraslado`, `direccionPaciente`, `edad`, `rangoedad`, `sexo`, `lugar_asistencia`, `aviso`, `Telefono`, `telefonista`, `unidad_no`, `horaSalida`, 
+										`horaEntrada`, `piloto`, `fecha`, `kmSalida`, `kmEntrada`, `kmRecorridos`, `bomberoReporte`, `asistentes`, `observaciones`, `idIncidente`, `idUsuario`)
+					VALUES ('', '".$_POST["Recibo"]."', '".$_POST["Direccion_traslado"]."', '".$_POST["Nombre_paciente"]."', '".$_POST["Direccion_paciente"]."', '".$_POST["Edad"]."', '".$_POST["Rango_edad"]."',
+							'".$_POST["Sexo"]."', '".$_POST["Traslado_a"]."', '".$_POST["Aviso"]."', '".$_POST["Telefono"]."', '".$_POST["Telefonista"]."', '".$_POST["Unidad"]."', '".$_POST["Hora_salida"]."', 
+							'".$_POST["Hora_entrada"]."', '".$_POST["Piloto"]."', '".$_POST["Fecha"]."', '".$_POST["Kilometraje_salida"]."', '".$_POST["Kilometraje_entrada"]."', '".$_POST["Kilometros_recorridos"]."',
+							'".$_POST["bomberoReporte"]."', '".$_POST["Bombero_asistente"]."', '".$_POST["Observaciones"]."', '".$_POST["Categoria"]."', '".$_SESSION['idusuario']."');";
+		echo $Guardar;
 		$insert = $Conexion->Insertar($Guardar);
 		
 	

@@ -121,7 +121,7 @@
 				        <div class="col-xs-2">
 				            <div class="input-group">
 				            	<label class="input-group-addon">Ingrese el Sueldo:</label>
-								<input type="text" class="form-control allownumericwithdecimal" id="sueldo" name="sueldo" value="0.00">
+								<input type="text" class="form-control allownumericwithdecimal" id="sueldo" name="sueldo">
 				            </div>
 				        </div>
 					</div>
