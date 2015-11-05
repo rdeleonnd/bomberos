@@ -161,10 +161,10 @@
 									        		<li><a href="#" onclick='cargar_pagina("ingreso_lubricantes");'>Ingreso de Lubricantes</a></li>
 									        		<li><a href="#" onclick='cargar_pagina("ingreso_reparaciones");'>Ingreso de Reparaciones</a></li>
 									        		<li class="divider"></li>
-									        		<li><a href="#" onclick='cargar_pagina("ingreso_asistencia");'>Inreso de Entrada del Personal</a></li>
-									        		<li><a href="#" onclick='cargar_pagina("ingreso_salida_asistencia");'>Inreso de Salida del Personal</a></li>
+									        		<li><a href="#" onclick='cargar_pagina("ingreso_combustibles");'>Inreso de Combustibles</a></li>
+									        		<li><a href="#" onclick='cargar_pagina("ingreso_botas_pantalones");'>Inreso de Botas y Pantalones</a></li>
 									        		<li class="divider"></li>
-									        		<li><a href="#" onclick='cargar_pagina("ingreso_actividades");'>Ingreso de Actividades</a></li>
+									        		<li><a href="#" onclick='cargar_pagina("ingreso_casco_chaqueton");'>Ingreso Cascos y Chaquetones</a></li>
 									        		<li><a href="#" onclick='cargar_pagina("ingreso_asignar_actividades");'>Ingreso de Asignacion de Actividades</a></li>
 									        		<li class="divider"></li>
 									        		<li><a href="#" onclick='cargar_pagina("ingreso_rangos_estados");'>Ingreso de Rangos y Estados</a></li>

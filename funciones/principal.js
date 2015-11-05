@@ -125,7 +125,24 @@ function cargar_pagina(pagina)
 		div_dinamico("POST", 'ingreso_reparaciones.php', Parametros, Div, false);
 		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE REPARACIONES";
 	}
-	
+	else if(pagina=='ingreso_combustibles')
+	{
+		Parametros = "ingreso_combustibles=1";
+		div_dinamico("POST", 'ingreso_combustible.php', Parametros, Div, false);
+		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE COMBUSTIBLES";
+	}
+	else if(pagina=='ingreso_botas_pantalones')
+	{
+		Parametros = "ingreso_botas_pantalones=1";
+		div_dinamico("POST", 'ingreso_botas_pantalones.php', Parametros, Div, false);
+		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE BOTAS Y PANTALONES";
+	}
+	else if(pagina=='ingreso_casco_chaqueton')
+	{
+		Parametros = "ingreso_casco_chaqueton=1";
+		div_dinamico("POST", 'ingreso_casco_chaqueton.php', Parametros, Div, false);
+		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE CASCOS Y CHAQUETON";
+	}
 }
 
 function salir()
