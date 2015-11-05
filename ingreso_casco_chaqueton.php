@@ -88,9 +88,17 @@
 </script>
 <?php 
 	
-	if(isset($_POST["Ingreso_Personal"]))
+	if(isset($_POST["Ingreso_Casco_Chaqueton"]))
 	{
-		echo "Listo";
+		$Guardar = "INSERT INTO cascochaqueton (`idEquipo`, `nombre`, `codAnterior`, `codReciente`, `asignadoA`, `observaciones`, `idUsuario`)
+					VALUES ('', '".$_POST["Nombre"]."', '".$_POST["Cod_anterior"]."', '".$_POST["Cod_reciente"]."', '".$_POST["Empleado"]."', '".$_POST["Descripcion"]."', '".$_SESSION['idusuario']."');";
+		echo $Guardar ;
+		$insert = $Conexion->Insertar($Guardar);
+		
+		echo "<script>
+				alert('Se Guardaron los registros');
+				cargar_pagina('ingreso_casco_chaqueton');
+			</script>";
 	}
 	else
 	{

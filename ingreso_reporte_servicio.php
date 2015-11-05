@@ -293,8 +293,8 @@
 <?php
 	if(isset($_POST["Ingreso_Reporte_Servicio"]))
 	{
-		$Guardar = "INSERT INTO reporte(`noReporte`, `direccionTraslado`, `direccionPaciente`, `edad`, `rangoedad`, `sexo`, `lugar_asistencia`, `aviso`, `Telefono`, `telefonista`, `unidad_no`, `horaSalida`, 
-										`horaEntrada`, `piloto`, `fecha`, `kmSalida`, `kmEntrada`, `kmRecorridos`, `bomberoReporte`, `asistentes`, `observaciones`, `idIncidente`, `idUsuario`)
+		$Guardar = "INSERT INTO reporte (`idReporte`, `noReporte`, `direccionTraslado`, `paciente`, `direccionPaciente`, `edad`, `rangoedad`, `sexo`, `lugar_asistencia`, `aviso`, `Telefono`, `telefonista`, `unidad_no`, 
+											`horaSalida`, `horaEntrada`, `piloto`, `fecha`, `kmSalida`, `kmEntrada`, `kmRecorridos`, `bomberoReporte`, `asistentes`, `observaciones`, `idIncidente`, `idUsuario`)
 					VALUES ('', '".$_POST["Recibo"]."', '".$_POST["Direccion_traslado"]."', '".$_POST["Nombre_paciente"]."', '".$_POST["Direccion_paciente"]."', '".$_POST["Edad"]."', '".$_POST["Rango_edad"]."',
 							'".$_POST["Sexo"]."', '".$_POST["Traslado_a"]."', '".$_POST["Aviso"]."', '".$_POST["Telefono"]."', '".$_POST["Telefonista"]."', '".$_POST["Unidad"]."', '".$_POST["Hora_salida"]."', 
 							'".$_POST["Hora_entrada"]."', '".$_POST["Piloto"]."', '".$_POST["Fecha"]."', '".$_POST["Kilometraje_salida"]."', '".$_POST["Kilometraje_entrada"]."', '".$_POST["Kilometros_recorridos"]."',

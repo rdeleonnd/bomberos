@@ -6,11 +6,11 @@ function FncGuardar()
     Empleado = $("#empleado").val();
     Descripcion = $("#descripcion").val();
 
-	if(Nombre != '' && Cod_anterior != '' && Cod_reciente != '' && Descripcion != '' && Gasolinera != ''  && Comprobante != '' && Descripcion != '')
+	if(Nombre != '' && Cod_anterior != '' && Cod_reciente != '' && Descripcion != '')
 	{
-		Parametros = "Ingreso_Botas_Pantalones=1"+"&Nombre="+Nombre+"&Cod_anterior="+Cod_anterior+"&Cod_reciente="+Cod_reciente+"&Empleado="+Empleado+"&Descripcion="+Descripcion;
+		Parametros = "Ingreso_Casco_Chaqueton=1"+"&Nombre="+Nombre+"&Cod_anterior="+Cod_anterior+"&Cod_reciente="+Cod_reciente+"&Empleado="+Empleado+"&Descripcion="+Descripcion;
 		Div=document.getElementById("principal");
-		div_dinamico("POST", 'ingreso_botas_pantalones.php', Parametros, Div, false);
+		div_dinamico("POST", 'ingreso_casco_chaqueton.php', Parametros, Div, false);
 	}
 	else
 	{

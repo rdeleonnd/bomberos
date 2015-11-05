@@ -159,8 +159,16 @@
 	
 	if(isset($_POST["Ingreso_Combustibles"]))
 	{
-		echo "Listo";
-	}
+		$Guardar = "INSERT INTO combustible (`idAbastecimiento`, `fecha`, `cantGalones`, `costo`, `kilometraje`, `gasolinera`, `no_vale`, `piloto`, `idUnidad`, `noComprobante`, `descripcion`, `idUsuario`)
+					VALUES ('', '".$_POST["Fecha"]."', '".$_POST["Galones"]."', '".$_POST["Costo"]."', '".$_POST["Kilometraje"]."', '".$_POST["Gasolinera"]."', '".$_POST["Vale"]."',
+							'".$_POST["Piloto"]."', '".$_POST["Unidad"]."', '".$_POST["Comprobante"]."', '".$_POST["Descripcion"]."','".$_SESSION['idusuario']."');";
+		echo $Guardar ;
+		$insert = $Conexion->Insertar($Guardar);
+		
+		echo "<script>
+				alert('Se Guardaron los registros');
+				cargar_pagina('ingreso_combustible');
+			</script>";	}
 	else
 	{
 		echo "No Listo";

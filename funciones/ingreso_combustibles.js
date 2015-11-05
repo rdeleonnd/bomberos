@@ -14,8 +14,8 @@ function FncGuardar()
 
 	if(Fecha != '' && Vale != '' && Galones != '' && Costo != '' && Kilometraje != '' && Gasolinera != ''  && Comprobante != '' && Descripcion != '')
 	{
-		Parametros = "Ingreso_Combustibles=1"+"&Fecha="+Fecha+"&Vale="+Vale+"&Unidad="+Unidad+"&Galones="+Galones+"&Costo="+Costo+"&Kilometraje="+Kilometraje+"&Comprobante="
-                    +Comprobante+"&Descripcion="+Descripcion;
+		Parametros = "Ingreso_Combustibles=1"+"&Fecha="+Fecha+"&Vale="+Vale+"&Unidad="+Unidad+"&Galones="+Galones+"&Costo="+Costo+"&Kilometraje="+Kilometraje
+        +"&Gasolinera="+Gasolinera+"&Piloto="+Piloto+"&Comprobante="+Comprobante+"&Descripcion="+Descripcion;
 		Div=document.getElementById("principal");
 		div_dinamico("POST", 'ingreso_combustible.php', Parametros, Div, false);
 	}

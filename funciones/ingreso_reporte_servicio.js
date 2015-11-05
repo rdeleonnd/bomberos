@@ -23,10 +23,13 @@ function FncGuardar()
 	Bombero_asistente = $("#bombero_asistente").val();
 	Observaciones = $("#observaciones").val();
 	Kilometros_recorridos = $("#kilometros_recorridos").val();
-	Categoria = $("#categoria").val();
-	Subcategorias = $("#subcategorias").val();
-	Incidentes = $("#incidentes").val();
-	Categoria.concat(Subcategorias, ' ', Incidentes);
+	Categoria = $("#categoria option:selected").html();
+	Subcategorias = $("#subcategorias option:selected").html();
+	Incidentes = $("#incidentes option:selected").html();
+	Categoria = Categoria + " " + Subcategorias + " " + Incidentes;
+	alert(Telefonista);
+	alert(Piloto);
+	alert(Bombero_reporte);
 
 	if((Recibo != '') && (direccion_traslado != '') && (Nombre_paciente != '') && (Direccion_paciente != '') && (Edad != '') && (Rango_edad != '') && (Sexo != '') 
 		&& (Traslado_a != '') && (Aviso != '') && (Telefono != '') && (Telefonista != '') && (Unidad != '') && (Hora_salida != '') && (Hora_entrada != '')

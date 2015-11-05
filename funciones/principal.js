@@ -143,6 +143,18 @@ function cargar_pagina(pagina)
 		div_dinamico("POST", 'ingreso_casco_chaqueton.php', Parametros, Div, false);
 		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE CASCOS Y CHAQUETON";
 	}
+	else if(pagina=='ingreso_equipo_hidraulico')
+	{
+		Parametros = "ingreso_equipo_hidraulico=1";
+		div_dinamico("POST", 'ingreso_equipo_hidraulico.php', Parametros, Div, false);
+		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE EQUIPO HIDRAULICO";
+	}
+	else if(pagina=='planilla')
+	{
+		Parametros = "planilla=1";
+		div_dinamico("POST", 'planilla.php', Parametros, Div, false);
+		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE PLANILLA";
+	}
 }
 
 function salir()

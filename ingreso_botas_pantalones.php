@@ -97,7 +97,15 @@
 	
 	if(isset($_POST["Ingreso_Botas_Pantalones"]))
 	{
-		echo "Listo";
+		$Guardar = "INSERT INTO botaspantalones (`idEquipo`, `nombre`, `codigoAnterior`, `codigoReciente`, `talla`, `observacion`, `asignadoA`, `idUsuario`)
+					VALUES ('', '".$_POST["Nombre"]."', '".$_POST["Cod_anterior"]."', '".$_POST["Cod_reciente"]."', '".$_POST["Talla"]."', '".$_POST["Descripcion"]."', '".$_POST["Empleado"]."', '".$_SESSION['idusuario']."');";
+		
+		$insert = $Conexion->Insertar($Guardar);
+		
+		echo "<script>
+				alert('Se Guardaron los registros');
+				cargar_pagina('ingreso_botas_pantalones');
+			</script>";
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Ingreso equipo hidráulico</title>
-		<script type="text/javascript" src="funciones/ingreso_personal.js"></script>
+		<script type="text/javascript" src="funciones/ingreso_equipo_hidraulico.js"></script>
 	</head>
 	<body>
 		<?php
@@ -29,32 +29,35 @@
 					<div class="form-group">
 						<label class="control-label col-xs-3">Código Reciente:</label>
 						<div class="col-xs-2">
-							<input class="form-control" type="text" id="cod_anterior" name="cod_anterior">
+							<input class="form-control" type="text" id="cod_reciente" name="cod_reciente">
 						</div>
-						<div class="col-xs-2">
-				            <label class="control-label col-xs-3">Marca:</label>
-							<div class="col-xs-3">
-							<select class="form-control" id="marca" name="marca">
-								<option value="">Elige Marca</option>
-							</select>
+					</div>
+				</tr>
+				<tr class="form-group">
+					<div class="form-group">
+						<label class="control-label col-xs-3">Marca:</label>
+						<div class="col-xs-4">
+							<input type="text" class="form-control" id="marca" name="marca">
 						</div>
-				        </div>
+					</div>
+				</tr>
+				<tr class="form-group">
+					<div class="form-group">
+						<label class="control-label col-xs-3">Color:</label>
+						<div class="col-xs-4">
+							<input type="text" class="form-control" id="color" name="color">
+						</div>
 					</div>
 				</tr>
 				<tr>
 					<div class="form-group">
 						<label class="control-label col-xs-3">Asignado a:</label>
 						<div class="col-xs-3">
-							<select class="form-control" id="empleado" name="empleado">
-								<option value="">Elige empleado</option>
-							</select>
+							<?php 
+								$Consulta = "SELECT idUnidad as id, unidad_no as nombre FROM unidad;";
+								echo FncCrearCombo($Consulta,"empleado",'','','','','');
+							?>
 						</div>
-						<div class="col-xs-2">
-				            <div class="input-group">
-				            	<label class="input-group-addon">Color:</label>
-				            	<input class="form-control" type="text" id="color" name="color">
-				            </div>
-				        </div>
 					</div>
 				</tr>
 				<tr>
@@ -63,10 +66,6 @@
 						<div class="col-xs-3">
 							<input class="form-control" type="text" id="cantidad" name="cantidad">
 						</div>
-					</div>
-				</tr>
-				<tr>
-					<div class="form-group">						
 						<div class="input-group">
 				                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
 				        </div>
@@ -94,45 +93,22 @@
 </html>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#datetimepicker1').datetimepicker({
-        	locale: 'es',
-        	format: 'DD/MM/YYYY'
-        });
-        $('#nacimiento').datetimepicker({
-        	locale: 'es',
-        	format: 'DD/MM/YYYY'
-        });
-
-        $('#estado_sueldo').change(function(){
-        	Sueldo = $('#estado_sueldo').val();
-        	if(Sueldo == 'SI')
-        	{
-        		$('#sueldo').prop('disabled', false);
-        		$('#sueldo').val('0.00');
-        	}
-        	else
-        	{
-        		$('#sueldo').prop('disabled', true);
-        		$('#sueldo').val('0.00');
-        	}
-        });
-
-        $(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
-            //this.value = this.value.replace(/[^0-9\.]/g,'');
-		    $(this).val($(this).val().replace(/[^0-9\.]/g,''));
-            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
-                event.preventDefault();
-            }
-        });
-
-        $('#divsexo2').select2();
+        $('#empleado').select2();
     });
 </script>
 <?php 
 	
-	if(isset($_POST["Ingreso_Personal"]))
+	if(isset($_POST["Ingreso_Equipo_Hidraulico"]))
 	{
-		echo "Listo";
+		$Guardar = "INSERT INTO hidraulicopersonal (`noEquipo`, `nombre`, `codigoReciente`, `marca`, `color`, `cantidad`, `asignadoA`, `idUsuario`)
+					VALUES ('', '".$_POST["Nombre"]."', '".$_POST["Cod_reciente"]."', '".$_POST["Marca"]."', '".$_POST["Color"]."', '".$_POST["Cantidad"]."', '".$_POST["Empleado"]."', '".$_SESSION['idusuario']."');";
+		
+		$insert = $Conexion->Insertar($Guardar);
+		
+		echo "<script>
+				alert('Se Guardaron los registros');
+				cargar_pagina('ingreso_equipo_hidraulico');
+			</script>";
 	}
 	else
 	{

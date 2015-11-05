@@ -1,17 +1,17 @@
 function FncGuardar()
 {
     Nombre = $("#nombre").val();
-    Cod_anterior = $("#cod_anterior").val();
     Cod_reciente = $("#cod_reciente").val();
+    Marca = $("#marca").val();
+    Color = $("#color").val();
     Empleado = $("#empleado").val();
-    Talla = $("#talla").val();
-    Descripcion = $("#descripcion").val();
+    Cantidad = $("#cantidad").val();
 
-	if(Nombre != '' && Cod_anterior != '' && Cod_reciente != '' && Talla != '' && Descripcion != '')
+	if(Nombre != '' && Cod_reciente != '' && Marca != '' && Color != '' && Empleado != ''  && Cantidad != '')
 	{
-		Parametros = "Ingreso_Botas_Pantalones=1"+"&Nombre="+Nombre+"&Cod_anterior="+Cod_anterior+"&Cod_reciente="+Cod_reciente+"&Empleado="+Empleado+"&Talla="+Talla+"&Descripcion="+Descripcion;
+		Parametros = "Ingreso_Equipo_Hidraulico=1"+"&Nombre="+Nombre+"&Cod_reciente="+Cod_reciente+"&Marca="+Marca+"&Color="+Color+"&Empleado="+Empleado+"&Cantidad="+Cantidad;
 		Div=document.getElementById("principal");
-		div_dinamico("POST", 'ingreso_botas_pantalones.php', Parametros, Div, false);
+		div_dinamico("POST", 'ingreso_equipo_hidraulico.php', Parametros, Div, false);
 	}
 	else
 	{
