@@ -27,9 +27,6 @@ function FncGuardar()
 	Subcategorias = $("#subcategorias option:selected").html();
 	Incidentes = $("#incidentes option:selected").html();
 	Categoria = Categoria + " " + Subcategorias + " " + Incidentes;
-	alert(Telefonista);
-	alert(Piloto);
-	alert(Bombero_reporte);
 
 	if((Recibo != '') && (direccion_traslado != '') && (Nombre_paciente != '') && (Direccion_paciente != '') && (Edad != '') && (Rango_edad != '') && (Sexo != '') 
 		&& (Traslado_a != '') && (Aviso != '') && (Telefono != '') && (Telefonista != '') && (Unidad != '') && (Hora_salida != '') && (Hora_entrada != '')

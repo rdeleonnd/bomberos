@@ -5,12 +5,14 @@ function FncGuardar()
 	Apellido = $("#apellido").val();
 	Direccion = $("#direccion").val();
 	Nacimiento = $("#nacimiento").val();
+    Nacimiento = Nacimiento.substring(6,10)+Nacimiento.substring(3,5)+Nacimiento.substring(0,2); 
 	Sexo = $("#sexo").val();
 	Estado_civil = $("#estado_civil").val();
 	Telefono = $("#telefono").val();
 	Estado_sueldo = $("#estado_sueldo").val();
 	Sueldo = $("#sueldo").val();
     Ingreso = $("#ingreso").val();
+    Ingreso = Ingreso.substring(6,10)+Ingreso.substring(3,5)+Ingreso.substring(0,2); 
     Rango = $("#rango").val();    
 	Estado = $("#estado").val();
 

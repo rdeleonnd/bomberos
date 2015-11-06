@@ -298,8 +298,8 @@
 					VALUES ('', '".$_POST["Recibo"]."', '".$_POST["Direccion_traslado"]."', '".$_POST["Nombre_paciente"]."', '".$_POST["Direccion_paciente"]."', '".$_POST["Edad"]."', '".$_POST["Rango_edad"]."',
 							'".$_POST["Sexo"]."', '".$_POST["Traslado_a"]."', '".$_POST["Aviso"]."', '".$_POST["Telefono"]."', '".$_POST["Telefonista"]."', '".$_POST["Unidad"]."', '".$_POST["Hora_salida"]."', 
 							'".$_POST["Hora_entrada"]."', '".$_POST["Piloto"]."', '".$_POST["Fecha"]."', '".$_POST["Kilometraje_salida"]."', '".$_POST["Kilometraje_entrada"]."', '".$_POST["Kilometros_recorridos"]."',
-							'".$_POST["bomberoReporte"]."', '".$_POST["Bombero_asistente"]."', '".$_POST["Observaciones"]."', '".$_POST["Categoria"]."', '".$_SESSION['idusuario']."');";
-		echo $Guardar;
+							'".$_POST["Bombero_reporte"]."', '".$_POST["Bombero_asistente"]."', '".$_POST["Observaciones"]."', '".$_POST["Categoria"]."', '".$_SESSION['idusuario']."');";
+		
 		$insert = $Conexion->Insertar($Guardar);
 		
 	

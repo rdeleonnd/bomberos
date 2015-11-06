@@ -41,7 +41,7 @@
 			
 			if(($_POST['Usuario']!="") && ($_POST['Codigo']!=""))
 			{
-				$Consulta= "SELECT us.idPersonal, us.nombreUser, us.clave FROM usuario us 
+				$Consulta= "SELECT us.idPersonal, us.nombreUser, us.clave, us.privilegio FROM usuario us 
 							INNER JOIN estado est ON est.idEstado = us.idEstado
 							WHERE nombreUser = '".$_POST['Usuario']."' and clave='".$_POST['Codigo']."'
 							and est.Estado = 'Activo';";
@@ -58,6 +58,7 @@
 						$_SESSION['start'] = time();
 						$_SESSION['expire'] = $_SESSION['start'];
 						$_SESSION['idusuario'] = $row['idPersonal'];
+						$_SESSION['rango'] = $row['privilegio'];
 					}
 				}
 				else
@@ -149,30 +150,35 @@
 							        	</li>
 							        </ul>
 								</li>
-								<li class="dropdown mega-dropdown">
-									<a href="" class="dropdown-toggle" data-toggle="dropdown">Administracion<b class="caret"></b></a>
-									<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-							        	<li class="dropdown-submenu">
-							        		<a tabindex="-1" href="#">Agregar</a>
-							        		<ul class="dropdown-menu">
-							        			<li class="dropdown mega-dropdown">
-								        			<li><a href="#" onclick='cargar_pagina("ingreso_unidades");'>Ingreso de Unidades</a></li>
-								        			<li class="divider"></li>
-									        		<li><a href="#" onclick='cargar_pagina("ingreso_lubricantes");'>Ingreso de Lubricantes</a></li>
-									        		<li><a href="#" onclick='cargar_pagina("ingreso_reparaciones");'>Ingreso de Reparaciones</a></li>
-									        		<li class="divider"></li>
-									        		<li><a href="#" onclick='cargar_pagina("ingreso_combustibles");'>Inreso de Combustibles</a></li>
-									        		<li><a href="#" onclick='cargar_pagina("ingreso_botas_pantalones");'>Inreso de Botas y Pantalones</a></li>
-									        		<li class="divider"></li>
-									        		<li><a href="#" onclick='cargar_pagina("ingreso_casco_chaqueton");'>Ingreso Cascos y Chaquetones</a></li>
-									        		<li><a href="#" onclick='cargar_pagina("ingreso_equipo_hidraulico");'>Ingreso de Equipo Hidraulico</a></li>
-									        		<li class="divider"></li>
-									        		<li><a href="#" onclick='cargar_pagina("planilla");'>Ingreso de Planilla</a></li>
-								        		</li>
-							        		</ul>
-							        	</li>
-							        </ul>
-								</li>
+								<?php 
+									if($_SESSION['rango'] == 'Administrador')
+									{
+										echo "<li class='dropdown mega-dropdown'>
+												<a href='' class='dropdown-toggle' data-toggle='dropdown'>Administracion<b class='caret'></b></a>
+												<ul class='dropdown-menu multi-level' role='menu' aria-labelledby='dropdownMenu'>
+										        	<li class='dropdown-submenu'>
+										        		<a tabindex='-1' href='#'>Agregar</a>
+										        		<ul class='dropdown-menu'>
+										        			<li class='dropdown mega-dropdown'>
+											        			<li><a href='#' onclick='cargar_pagina('ingreso_unidades');'>Ingreso de Unidades</a></li>
+											        			<li class='divider'></li>
+												        		<li><a href='#' onclick='cargar_pagina('ingreso_lubricantes');'>Ingreso de Lubricantes</a></li>
+												        		<li><a href='#' onclick='cargar_pagina('ingreso_reparaciones');'>Ingreso de Reparaciones</a></li>
+												        		<li class='divider'></li>
+												        		<li><a href='#' onclick='cargar_pagina('ingreso_combustibles');'>Inreso de Combustibles</a></li>
+												        		<li><a href='#' onclick='cargar_pagina('ingreso_botas_pantalones');'>Inreso de Botas y Pantalones</a></li>
+												        		<li class='divider'></li>
+												        		<li><a href='#' onclick='cargar_pagina('ingreso_casco_chaqueton');'>Ingreso Cascos y Chaquetones</a></li>
+												        		<li><a href='#' onclick='cargar_pagina('ingreso_equipo_hidraulico');'>Ingreso de Equipo Hidraulico</a></li>
+												        		<li class='divider'></li>
+												        		<li><a href='#' onclick='cargar_pagina('planilla');'>Ingreso de Planilla</a></li>
+											        		</li>
+										        		</ul>
+										        	</li>
+										        </ul>
+											</li>";
+									}
+								?>
 						        <li>
 					        		<input class="btn btn-lg btn-danger btn-block" type="submit" onclick="" value="Salir">
 					        	</li>
