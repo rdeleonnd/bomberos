@@ -215,7 +215,7 @@
             return $Respuesta;
         }
 
-        function FncActualizar($Consulta)
+        function Actualizar($Consulta)
         {
             $Respuesta = FALSE;
             $Enlace = mysql_connect($this->host, $this->user, $this->password);

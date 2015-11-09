@@ -84,8 +84,12 @@
 		                <input type="text" class="form-control" id="subcategoria" name="subcategoria">
 	            	</div>
 	            	<div class="col-xs-1">
-			            <div class="input-group">
-			                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardarSubCategoria();">Guardar</button>
+			            <div class="input-group" id="divBtnGuardar">
+			                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
+			            </div> 
+			            <div class="input-group" id="divBtnModificar" style="display:none;">
+			                <button type="button" class="btn btn-success" id="guardar" name="guardar" onclick="FncModificacion()" >Actualizar</button>
+			                <button type="button" class="btn btn-danger" id="guardar" name="guardar" onclick="FncCancelar();">Cancelar</button>
 			            </div>
 			        </div>
 	            </div>
@@ -128,6 +132,7 @@
 					</div>
 				</div>
 			</tr>
+			<input id="Inputactualizacion" value="" hidden>
 		</form>
 	</body>
 </html>
@@ -136,6 +141,7 @@
 		FncTabla('tabla_incidente');
 		FncTabla('tabla_subcategoria');
 		$('#categoria').select2();
+		
 	})
 </script>
 <?php 

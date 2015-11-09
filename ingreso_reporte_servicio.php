@@ -227,11 +227,16 @@
 				<tr>
 					<div class="form-group">
 						<label class="control-label col-xs-3"></label>
-						<div class="input-group ">
+						<div class="input-group" id="divBtnGuardar">
 			                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
+			            </div> 
+			            <div class="input-group" id="divBtnModificar" style="display:none;">
+			                <button type="button" class="btn btn-success" id="guardar" name="guardar" onclick="FncModificacion()" >Actualizar</button>
+			                <button type="button" class="btn btn-danger" id="guardar" name="guardar" onclick="FncCancelar();">Cancelar</button>
 			            </div>
 					</div>
 				</tr>
+				<input id="Inputactualizacion" value="" hidden>
 			</table>
 		</form>
 	</body>

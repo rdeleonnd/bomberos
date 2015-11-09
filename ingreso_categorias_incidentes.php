@@ -38,18 +38,60 @@
 					</div>
 				</tr>
 				<tr>
+					<div class="form-group">
+		            	<label class="control-label col-xs-3">Ingrese el nombre del  Incidente:</label>
+		            	<div class="col-xs-3">
+			                <input type="text" class="form-control" id="incidente" name="incidente">
+		            	</div>
+		            	<div class="col-xs-1">
+				            <div class="input-group" id="divBtnGuardar">
+				                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
+				            </div> 
+				            <div class="input-group" id="divBtnModificar" style="display:none;">
+				                <button type="button" class="btn btn-success" id="guardar" name="guardar" onclick="FncModificacion()" >Actualizar</button>
+				                <button type="button" class="btn btn-danger" id="guardar" name="guardar" onclick="FncCancelar();">Cancelar</button>
+				            </div>
+				        </div>
+		            </div>
+				</tr>
+				<tr>
 				<div class="form-group">
-	            	<label class="control-label col-xs-3">Ingrese el nombre del  Incidente:</label>
-	            	<div class="col-xs-3">
-		                <input type="text" class="form-control" id="incidente" name="incidente">
-	            	</div>
-	            	<div class="col-xs-1">
-			            <div class="input-group">
-			                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
-			            </div>
-			        </div>
-	            </div>
+					<label class="control-label col-xs-1"></label>
+					<div class="col-xs-6" >
+						<table id='tabla_incidente' align='center' class='table table-striped' >
+							<thead>
+								<tr>
+									<th>No</th>
+									<th>Incidente</th>
+									<th>Sub-Categoria</th>
+									<th>Modificar</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+									$Consulta = "SELECT inc.idIncidente, inc.descIncidente, inc.idCausa, cau.descCausa
+												from incidente inc
+												INNER JOIN causa cau ON cau.idCausa = inc.idCausa;";
+
+									$Respuesta = $Conexion->list_orders($Consulta);
+									while ($row = mysql_fetch_assoc($Respuesta))
+									{
+			                    		$Modificar = "<image class='btn btn-default' src='img/modificar.png' title='Modificar Registro' onclick='FncMofificar(".$row['idIncidente'].", \"".$row['descIncidente']."\", \"".$row['idCausa']."\")'>";
+
+										echo "<tr>
+													<td>".$row['idIncidente']."</td>
+													<td>".$row['descIncidente']."</td>
+													<td>".$row['descCausa']."</td>
+													<td>".$Modificar."</td>
+												</tr>";
+									}
+								?>
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</tr>
+			<input id="Inputactualizacion" value="" hidden>
 			</table>
 		</form>
 	</body>
@@ -64,6 +106,7 @@
 
 		$('#categoria').select2();
 		$('#subcategorias').select2();
+		FncTabla('tabla_incidente');
 	});
 </script>
 <?php 

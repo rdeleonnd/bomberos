@@ -159,7 +159,6 @@ function cargar_pagina(pagina)
 
 function salir()
 {
-	
 	Div=document.getElementById("principal");
 	Parametros = "cerrar=1";
 	div_dinamico("POST", 'principal.php', Parametros, Div, false);

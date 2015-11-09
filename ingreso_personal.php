@@ -275,6 +275,17 @@
 				cargar_pagina('ingreso_personal');
 			</script>";
 	}
+	else if(isset($_POST["Modificar"]))
+	{
+		$Actualizar = "UPDATE usuario SET  idPersonal='".$_POST["Empleado"]."', nombreUser='".$_POST["Nombre"]."', clave='".$_POST["Clave"]."', idEstado='".$_POST["Estado"]."', privilegio='".$_POST["Privilegio"]."'
+                  		WHERE idUsuario='".$_POST["ID"]."';";
+        $Result = $Conexion->Actualizar($Actualizar);
+	
+		echo "<script>
+				alert('Se Modificaron los registros');
+				cargar_pagina('ingreso_usuarios');
+			</script>";
+	}
 	else
 	{
 		

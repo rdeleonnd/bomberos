@@ -60,15 +60,19 @@
 							<option value="Secretari@">Secretari@</option>
 						</select>
 					</div>
-					<div class="input-group">
+					<div class="input-group" id="divBtnGuardar">
 		                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
+		            </div> 
+		            <div class="input-group" id="divBtnModificar" style="display:none;">
+		                <button type="button" class="btn btn-success" id="actualizar" name="actualizar" onclick="FncModificacion()" >Actualizar</button>
+		                <button type="button" class="btn btn-danger" id="cancelar" name="cancelar" onclick="FncCancelar();">Cancelar</button>
 		            </div>
 				</div>
 			</tr>
 			<tr>
 				<div class="form-group">
 					<label class="control-label col-xs-1"></label>
-					<div class="col-xs-6">
+					<div class="col-xs-6" >
 						<table id='tabla_usuario' align='center' class='table table-striped' >
 							<thead>
 								<tr>
@@ -91,7 +95,7 @@
 									$Respuesta = $Conexion->list_orders($Consulta);
 									while ($row = mysql_fetch_assoc($Respuesta))
 									{
-			                    		$Modificar = "<image class='btn btn-default' src='img/modificar.png' title='Modificar Registro' onclick='FncMofificarRango(".$row['idUsuario'].", \"".$row['descRango']."\")'>";
+			                    		$Modificar = "<image class='btn btn-default' src='img/modificar.png' title='Modificar Registro' onclick='FncMofificar(".$row['idUsuario'].", \"".$row['idPersonal']."\", \"".$row['nombreUser']."\", \"".$row['clave']."\", \"".$row['idEstado']."\", \"".$row['privilegio']."\")'>";
 
 										echo "<tr>
 													<td>".$row['idUsuario']."</td>
@@ -109,6 +113,7 @@
 					</div>
 				</div>
 			</tr>
+			<input id="Inputactualizacion" value="" hidden>
 		</form>
 	</body>
 </html>
@@ -132,6 +137,17 @@
 				cargar_pagina('ingreso_usuarios');
 			</script>";
 		
+	}
+	else if(isset($_POST["Modificar"]))
+	{
+		$Actualizar = "UPDATE usuario SET  idPersonal='".$_POST["Empleado"]."', nombreUser='".$_POST["Nombre"]."', clave='".$_POST["Clave"]."', idEstado='".$_POST["Estado"]."', privilegio='".$_POST["Privilegio"]."'
+                  		WHERE idUsuario='".$_POST["ID"]."';";
+        $Result = $Conexion->Actualizar($Actualizar);
+	
+		echo "<script>
+				alert('Se Modificaron los registros');
+				cargar_pagina('ingreso_usuarios');
+			</script>";
 	}
 	else
 	{

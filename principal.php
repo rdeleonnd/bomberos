@@ -107,14 +107,6 @@
 								        		</li>
 							        		</ul>
 							        	</li>
-							        	<li class="dropdown-submenu">
-							        		<a tabindex="-1" href="#">Modificar</a>
-							        		<ul class="dropdown-menu">
-							        			<li class="dropdown mega-dropdown">
-											        
-							        			</li>
-							        		</ul>
-							        	</li>
 							        </ul>
 						        </li>
 								<li class="dropdown mega-dropdown">
@@ -139,15 +131,6 @@
 								        		</li>
 							        		</ul>
 							        	</li>
-							        	<li class="dropdown-submenu">
-							        		<a tabindex="-1" href="#">Modificar</a>
-							        		<ul class="dropdown-menu">
-							        			<li class="dropdown mega-dropdown">
-											        <li><a href="#" onclick='cargar_pagina("ingreso_incidentes");'></a></li>
-											        <li><a href="#" onclick='cargar_pagina("ingreso_categorias_incidentes");'></a></li>
-							        			</li>
-							        		</ul>
-							        	</li>
 							        </ul>
 								</li>
 								<?php 
@@ -160,18 +143,16 @@
 										        		<a tabindex='-1' href='#'>Agregar</a>
 										        		<ul class='dropdown-menu'>
 										        			<li class='dropdown mega-dropdown'>
-											        			<li><a href='#' onclick='cargar_pagina('ingreso_unidades');'>Ingreso de Unidades</a></li>
+											        			<li><a href='#' onclick='cargar_pagina(\"ingreso_unidades\")'>Ingreso de Unidades</a></li>
 											        			<li class='divider'></li>
-												        		<li><a href='#' onclick='cargar_pagina('ingreso_lubricantes');'>Ingreso de Lubricantes</a></li>
-												        		<li><a href='#' onclick='cargar_pagina('ingreso_reparaciones');'>Ingreso de Reparaciones</a></li>
+												        		<li><a href='#' onclick='cargar_pagina(\"ingreso_lubricantes\");'>Ingreso de Lubricantes</a></li>
+												        		<li><a href='#' onclick='cargar_pagina(\"ingreso_reparaciones\");'>Ingreso de Reparaciones</a></li>
 												        		<li class='divider'></li>
-												        		<li><a href='#' onclick='cargar_pagina('ingreso_combustibles');'>Inreso de Combustibles</a></li>
-												        		<li><a href='#' onclick='cargar_pagina('ingreso_botas_pantalones');'>Inreso de Botas y Pantalones</a></li>
+												        		<li><a href='#' onclick='cargar_pagina(\"ingreso_combustibles\");'>Inreso de Combustibles</a></li>
+												        		<li><a href='#' onclick='cargar_pagina(\"ingreso_botas_pantalones\");'>Inreso de Botas y Pantalones</a></li>
 												        		<li class='divider'></li>
-												        		<li><a href='#' onclick='cargar_pagina('ingreso_casco_chaqueton');'>Ingreso Cascos y Chaquetones</a></li>
-												        		<li><a href='#' onclick='cargar_pagina('ingreso_equipo_hidraulico');'>Ingreso de Equipo Hidraulico</a></li>
-												        		<li class='divider'></li>
-												        		<li><a href='#' onclick='cargar_pagina('planilla');'>Ingreso de Planilla</a></li>
+												        		<li><a href='#' onclick='cargar_pagina(\"ingreso_casco_chaqueton\");'>Ingreso Cascos y Chaquetones</a></li>
+												        		<li><a href='#' onclick='cargar_pagina(\"ingreso_equipo_hidraulico\");'>Ingreso de Equipo Hidraulico</a></li>
 											        		</li>
 										        		</ul>
 										        	</li>
