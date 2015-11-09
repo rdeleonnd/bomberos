@@ -310,7 +310,7 @@
 	
 		echo "<script>
 				alert('Se Guardaron los registros');
-				cargar_pagina('ingreso_personal');
+				cargar_pagina('ingreso_reporte_servicio');
 			</script>";
 	}
 	else

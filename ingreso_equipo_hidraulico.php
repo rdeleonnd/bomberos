@@ -66,34 +66,65 @@
 						<div class="col-xs-3">
 							<input class="form-control" type="text" id="cantidad" name="cantidad">
 						</div>
-						<div class="input-group">
-				                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
-				        </div>
+						<div class="input-group" id="divBtnGuardar">
+			                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
+			            </div> 
+			            <div class="input-group" id="divBtnModificar" style="display:none;">
+			                <button type="button" class="btn btn-success" id="actualizar" name="actualizar" onclick="FncModificacion()" >Actualizar</button>
+			                <button type="button" class="btn btn-danger" id="cancelar" name="cancelar" onclick="FncCancelar();">Cancelar</button>
+			            </div>
 					</div>
 				</tr>
 			</table>
-			<table id="tabla_personal" cellpadding="0" cellspacing="0" border="0" width="100%" class="table table-striped">
+			<table id="tabla_Hidraulico" cellpadding="0" cellspacing="0" border="0" width="100%" class="table table-striped">
 				<thead>
 					<tr>
-						<th> # </th>
-						<th>Nombre</th>
+						<th>No</th>
+						<th>Equipo</th>
+						<th>Codigo Reciente</th>
 						<th>Marca</th>
 						<th>Color</th>
-						<th>Código reciente</th>
-						<th>Asignado a </th>
+						<th>Asignado a Unidad</th>
+						<th>Cantidad</th>
+						<th>Usuario de Registro</th>
 						<th>Modificar</th>
 					</tr>
 				</thead>
 				<tbody>
-					
+					<?php
+						$Consulta = "SELECT hid.noEquipo, hid.nombre, hid.codigoReciente, hid.marca, hid.color, hid.cantidad, hid.asignadoA, un.unidad_no, us.nombreUser
+									FROM hidraulicopersonal hid
+									INNER JOIN unidad un ON un.idUnidad = hid.asignadoA
+									INNER JOIN Usuario us ON us.idUsuario = hid.idUsuario;";
+
+						$Respuesta = $Conexion->list_orders($Consulta);
+						while ($row = mysql_fetch_assoc($Respuesta))
+						{
+                    		$Modificar = "<image class='btn btn-default' src='img/modificar.png' title='Modificar Registro' onclick='FncMofificar(".$row['noEquipo'].", \"".$row['nombre']."\", \"".$row['codigoReciente']."\", \"".$row['marca']."\", \"".$row['color']."\", \"".$row['cantidad']."\", \"".$row['asignadoA']."\")'>";
+
+							echo "<tr>
+										<td>".$row['noEquipo']."</td>
+										<td>".$row['nombre']."</td>
+										<td>".$row['codigoReciente']."</td>
+										<td>".$row['marca']."</td>
+										<td>".$row['color']."</td>
+										<td>".$row['unidad_no']."</td>
+										<td>".$row['cantidad']."</td>
+										<td>".$row['nombreUser']."</td>
+										<td>".$Modificar."</td>
+									</tr>";
+						}
+					?>
 				</tbody>
 			</table>
+			<input id="Inputactualizacion" value="" hidden>
 		</form>
 	</body>
 </html>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#empleado').select2();
+        FncTabla('tabla_Hidraulico');
     });
 </script>
 <?php 
@@ -110,9 +141,20 @@
 				cargar_pagina('ingreso_equipo_hidraulico');
 			</script>";
 	}
+	else if(isset($_POST["Modificar"]))
+	{
+		$Actualizar = "UPDATE hidraulicopersonal SET  nombre = '".$_POST["Nombre"]."', codigoReciente = '".$_POST["Cod_reciente"]."', marca = '".$_POST["Marca"]."', color = '".$_POST["Color"]."', cantidad = '".$_POST["Cantidad"]."', asignadoA = '".$_POST["Empleado"]."', idUsuario = '".$_SESSION['idusuario']."'
+                  		WHERE noEquipo='".$_POST["ID"]."';";
+        $Result = $Conexion->Actualizar($Actualizar);
+	
+		echo "<script>
+				alert('Se Modificaron los registros');
+				cargar_pagina('ingreso_equipo_hidraulico');
+			</script>";
+	}
 	else
 	{
-		echo "No Listo";
+		
 	}
 
 ?>

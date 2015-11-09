@@ -69,3 +69,47 @@ function FncTabla(tabla)
                 });
     //new $.fn.dataTable.FixedHeader( oTable );
 }
+
+function FncMofificar(idEquipo,nombre,codAnterior,codReciente,asignadoA,observaciones)
+{
+    document.getElementById("Encabezado_Panel").innerHTML = "MODIFICACION DE USUARIOS";
+    //$("#empleado option:selected").prop("selected",false);
+   // $("#empleado option[value=" + idPersonal + "]").prop("selected",true);
+   
+    $("#Inputactualizacion").val(idEquipo);
+    $("#nombre").val(nombre);
+    $("#cod_anterior").val(codAnterior);
+    $("#cod_reciente").val(codReciente);
+    $("#empleado").val(asignadoA);
+    $("#descripcion").val(observaciones);
+
+    $("#divBtnGuardar").hide();
+    $("#divBtnModificar").show();
+    $("#tabla_Cascos").hide();
+}
+
+function FncCancelar()
+{
+    cargar_pagina('ingreso_casco_chaqueton');
+}
+
+function FncModificacion()
+{
+    ID = $("#Inputactualizacion").val();
+    Nombre = $("#nombre").val();
+    Cod_anterior = $("#cod_anterior").val();
+    Cod_reciente = $("#cod_reciente").val();
+    Empleado = $("#empleado").val();
+    Descripcion = $("#descripcion").val();
+
+    if(Nombre != '' && Cod_anterior != '' && Cod_reciente != '' && Descripcion != '')
+    {
+        Parametros = "Modificar=1"+"&ID="+ID+"&Nombre="+Nombre+"&Cod_anterior="+Cod_anterior+"&Cod_reciente="+Cod_reciente+"&Empleado="+Empleado+"&Descripcion="+Descripcion;
+        Div=document.getElementById("principal");
+        div_dinamico("POST", 'ingreso_casco_chaqueton.php', Parametros, Div, false);
+    }
+    else
+    {
+        alert("Ingrese todos los campos");
+    }
+}

@@ -70,3 +70,50 @@ function FncTabla(tabla)
                 });
     //new $.fn.dataTable.FixedHeader( oTable );
 }
+
+function FncMofificar(noEquipo,nombre,codigoReciente,marca,color,cantidad,asignadoA)
+{
+    document.getElementById("Encabezado_Panel").innerHTML = "MODIFICACION DE USUARIOS";
+    //$("#empleado option:selected").prop("selected",false);
+   // $("#empleado option[value=" + idPersonal + "]").prop("selected",true);
+   
+    $("#Inputactualizacion").val(noEquipo);
+    $("#nombre").val(nombre);
+    $("#cod_reciente").val(codigoReciente);
+    $("#marca").val(marca);
+    $("#color").val(color);
+    $("#empleado").val(asignadoA);
+    $("#empleado").select2();
+    $("#cantidad").val(cantidad);
+
+    $("#divBtnGuardar").hide();
+    $("#divBtnModificar").show();
+    $("#tabla_Hidraulico").hide();
+}
+
+function FncCancelar()
+{
+    cargar_pagina('ingreso_equipo_hidraulico');
+}
+
+function FncModificacion()
+{
+    ID = $("#Inputactualizacion").val();
+    Nombre = $("#nombre").val();
+    Cod_reciente = $("#cod_reciente").val();
+    Marca = $("#marca").val();
+    Color = $("#color").val();
+    Empleado = $("#empleado").val();
+    Cantidad = $("#cantidad").val();
+
+    if(Nombre != '' && Cod_reciente != '' && Marca != '' && Color != '' && Empleado != ''  && Cantidad != '')
+    {
+        Parametros = "Modificar=1"+"&ID="+ID+"&Nombre="+Nombre+"&Cod_reciente="+Cod_reciente+"&Marca="+Marca+"&Color="+Color+"&Empleado="+Empleado+"&Cantidad="+Cantidad;
+        Div=document.getElementById("principal");
+        div_dinamico("POST", 'ingreso_equipo_hidraulico.php', Parametros, Div, false);
+    }
+    else
+    {
+        alert("Ingrese todos los campos");
+    }
+}

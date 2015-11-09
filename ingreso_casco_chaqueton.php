@@ -56,33 +56,62 @@
 						<div class="col-xs-4">
 							<textarea class="form-control" rows="3" placeholder="Campo de texto" id="descripcion" name="descripcion" maxlength="200"></textarea>
 						</div>
-						<div class="input-group">
-				                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
-				        </div>
+						<div class="input-group" id="divBtnGuardar">
+			                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
+			            </div> 
+			            <div class="input-group" id="divBtnModificar" style="display:none;">
+			                <button type="button" class="btn btn-success" id="actualizar" name="actualizar" onclick="FncModificacion()" >Actualizar</button>
+			                <button type="button" class="btn btn-danger" id="cancelar" name="cancelar" onclick="FncCancelar();">Cancelar</button>
+			            </div>
 					</div>
 				</tr>
 			</table>
-			<table id="tabla_personal" cellpadding="0" cellspacing="0" border="0" width="100%" class="table table-striped">
+			<table id="tabla_Cascos" cellpadding="0" cellspacing="0" border="0" width="100%" class="table table-striped">
 				<thead>
 					<tr>
-						<th> # </th>
-						<th>Nombre</th>
-						<th>Código anterior</th>
-						<th>Código reciente</th>
-						<th>Asignado a </th>
+						<th>No</th>
+						<th>Equipo</th>
+						<th>Codigo Anterior</th>
+						<th>Codigo Reciente</th>
+						<th>Asignado a</th>
+						<th>Observaciones</th>
+						<th>Usuario de Registro</th>
 						<th>Modificar</th>
 					</tr>
 				</thead>
 				<tbody>
-					
+					<?php
+						$Consulta = "SELECT casc.idEquipo, casc.nombre, casc.codAnterior, casc.codReciente, casc.asignadoA, concat(per.CodEmpleado, ' | ' , per.nombres) nombres, casc.observaciones, us.nombreUser
+									FROM cascochaqueton casc
+									INNER JOIN personal per ON per.idEmpleado = casc.asignadoA
+									INNER JOIN Usuario us ON us.idUsuario = casc.idUsuario;";
+
+						$Respuesta = $Conexion->list_orders($Consulta);
+						while ($row = mysql_fetch_assoc($Respuesta))
+						{
+                    		$Modificar = "<image class='btn btn-default' src='img/modificar.png' title='Modificar Registro' onclick='FncMofificar(".$row['idEquipo'].", \"".$row['nombre']."\", \"".$row['codAnterior']."\", \"".$row['codReciente']."\", \"".$row['asignadoA']."\", \"".$row['observaciones']."\")'>";
+
+							echo "<tr>
+										<td>".$row['idEquipo']."</td>
+										<td>".$row['nombre']."</td>
+										<td>".$row['codAnterior']."</td>
+										<td>".$row['codReciente']."</td>
+										<td>".$row['nombres']."</td>
+										<td>".$row['observaciones']."</td>
+										<td>".$row['nombreUser']."</td>
+										<td>".$Modificar."</td>
+									</tr>";
+						}
+					?>
 				</tbody>
 			</table>
+			<input id="Inputactualizacion" value="" hidden>
 		</form>
 	</body>
 </html>
 <script type="text/javascript">
     $(document).ready(function () {
-
+    	FncTabla('tabla_Cascos');
         $('#empleado').select2();
     });
 </script>
@@ -100,9 +129,20 @@
 				cargar_pagina('ingreso_casco_chaqueton');
 			</script>";
 	}
+	else if(isset($_POST["Modificar"]))
+	{
+		$Actualizar = "UPDATE cascochaqueton SET  nombre = '".$_POST["Nombre"]."', codAnterior = '".$_POST["Cod_anterior"]."', codReciente = '".$_POST["Cod_reciente"]."', asignadoA = '".$_POST["Empleado"]."', observaciones = '".$_POST["Descripcion"]."', idUsuario = '".$_SESSION['idusuario']."'
+                  		WHERE idEquipo='".$_POST["ID"]."';";
+        $Result = $Conexion->Actualizar($Actualizar);
+	
+		echo "<script>
+				alert('Se Modificaron los registros');
+				cargar_pagina('ingreso_casco_chaqueton');
+			</script>";
+	}
 	else
 	{
-		echo "No Listo";
+		
 	}
 
 ?>

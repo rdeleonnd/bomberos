@@ -21,7 +21,7 @@
 
 		if($_POST["Usuariob"] != 0)
 		{
-			$Usuario = "WHERE don.idUsuario = ".$_POST["Usuariob"] ."";
+			$Usuario = "AND don.recibe = ".$_POST["Usuariob"] ."";
 		}
 		else
 		{
