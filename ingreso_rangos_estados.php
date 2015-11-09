@@ -18,11 +18,13 @@
 	            	<div class="col-xs-3">
 		                <input type="text" class="form-control" id="rango" name="rango">
 	            	</div>
-	            	<div class="col-xs-1">
-			            <div class="input-group">
-			                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardarRango();">Guardar</button>
-			            </div>
-			        </div>
+	            	<div class="input-group" id="divBtnGuardar">
+		                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardarRango();">Guardar</button>
+		            </div> 
+		            <div class="input-group" id="divBtnModificar" style="display:none;">
+		                <button type="button" class="btn btn-success" id="actualizar" name="actualizar" onclick="FncModificacion()" >Actualizar</button>
+		                <button type="button" class="btn btn-danger" id="cancelar" name="cancelar" onclick="FncCancelar();">Cancelar</button>
+		            </div>
 	            </div>
 			</tr>
 			<tr>
@@ -66,11 +68,13 @@
 	            	<div class="col-xs-3">
 		                <input type="text" class="form-control" id="estado" name="estado">
 	            	</div>
-	            	<div class="col-xs-1">
-			            <div class="input-group">
-			                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardarEstado();">Guardar</button>
-			            </div>
-			        </div>
+	            	<div class="input-group" id="divBtnGuardar2">
+		                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardarEstado();">Guardar</button>
+		            </div> 
+		            <div class="input-group" id="divBtnModificar2" style="display:none;">
+		                <button type="button" class="btn btn-success" id="actualizar" name="actualizar" onclick="FncModificacion2()" >Actualizar</button>
+		                <button type="button" class="btn btn-danger" id="cancelar" name="cancelar" onclick="FncCancelar();">Cancelar</button>
+		            </div>
 	            </div>
 			</tr>
 			<tr>
@@ -108,6 +112,8 @@
 					</div>
 				</div>
 			</tr>
+			<input id="Inputactualizacion" value="" hidden>
+			<input id="Inputactualizacion2" value="" hidden>
 		</form>
 	</body>
 </html>
@@ -140,6 +146,28 @@
 			
 		echo "<script>
 				alert('Se Guardaron los registros');
+				cargar_pagina('ingreso_rangos_estados');
+			</script>";
+	}
+	else if(isset($_POST["Modificar_Rangos"]))
+	{
+		$Actualizar = "UPDATE rango SET  descRango='".$_POST["Rango"]."'
+                  		WHERE idRango='".$_POST["ID"]."';";
+        $Result = $Conexion->Actualizar($Actualizar);
+	
+		echo "<script>
+				alert('Se Modificaron los registros');
+				cargar_pagina('ingreso_rangos_estados');
+			</script>";
+	}
+	else if(isset($_POST["Modificar_Estados"]))
+	{
+		$Actualizar = "UPDATE estado SET  Estado='".$_POST["Estado"]."'
+                  		WHERE idEstado='".$_POST["ID"]."';";
+        $Result = $Conexion->Actualizar($Actualizar);
+	
+		echo "<script>
+				alert('Se Modificaron los registros');
 				cargar_pagina('ingreso_rangos_estados');
 			</script>";
 	}

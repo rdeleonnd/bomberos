@@ -28,7 +28,7 @@
 				</tr>
 				<tr>
 					<div class="form-group">
-						<label class="control-label col-xs-3">(NOMBRE DEL COMITE, ASOCIACION, FUNDACION U OTRO)</label>
+						<label class="control-label col-xs-3">Donante</label>
 						<div class="col-xs-5">
 							<input class="form-control" type="text" id="nombre" name="nombre">
 						</div>
@@ -36,7 +36,7 @@
 				</tr>
 				<tr>
 					<div class="form-group">
-						<label class="control-label col-xs-3">(LUGAR, MUNICIPIO Y DEPARTAMENTO)</label>
+						<label class="control-label col-xs-3">Direccion</label>
 						<div class="col-xs-5">
 							<input class="form-control" type="text" id="lugar" name="lugar">
 						</div>

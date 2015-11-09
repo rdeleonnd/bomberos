@@ -82,25 +82,61 @@ function FncTabla(tabla)
     //new $.fn.dataTable.FixedHeader( oTable );
 }
 
-function fncLoadDataStart(msg){
-    
-    $("#loading_data").html('<p align="center">'+msg+'<br><br><img src="img/cargando.gif" width="40" height="40" /></p>');
-    $("#loading_data").dialog({
-        modal: true,
-        draggable:true,
-        closeOnEscape: false,
-        resizable:false
-    });
-    $('body').css('overflow-y','hidden');
-    $(".ui-dialog-titlebar").hide();
-}
-
 function FncMofificarRango(id, rango)
 {
     $("#rango").val(rango);
+    $("#Inputactualizacion").val(id);
+
+    $("#divBtnGuardar").hide();
+    $("#divBtnModificar").show();
+    $("#tabla_rango").hide();
 }
 
 function FncMofificarEstado(id, estado)
 {
     $("#estado").val(estado);
+    $("#Inputactualizacion2").val(id);
+
+    $("#divBtnGuardar2").hide();
+    $("#divBtnModificar2").show();
+    $("#tabla_estado").hide();
+}
+
+function FncCancelar()
+{
+    cargar_pagina('ingreso_rangos_estados');
+}
+
+function FncModificacion()
+{
+    ID = $("#Inputactualizacion").val();
+    Rango = $("#rango").val();
+
+    if(Rango != '')
+    {
+        Parametros = "Modificar_Rangos=1"+"&ID="+ID+"&Rango="+Rango;
+        Div=document.getElementById("principal");
+        div_dinamico("POST", 'ingreso_rangos_estados.php', Parametros, Div, false);
+    }
+    else
+    {
+        alert("Ingrese todos los campos");
+    } 
+}
+
+function FncModificacion2()
+{
+    ID = $("#Inputactualizacion2").val();
+    Estado = $("#estado").val();
+    
+    if(Estado != '')
+    {
+        Parametros = "Modificar_Estados=1"+"&ID="+ID+"&Estado="+Estado;
+        Div=document.getElementById("principal");
+        div_dinamico("POST", 'ingreso_rangos_estados.php', Parametros, Div, false);
+    }
+    else
+    {
+        alert("Ingrese todos los campos");
+    }
 }
