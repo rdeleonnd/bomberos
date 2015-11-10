@@ -72,7 +72,7 @@ function FncTabla(tabla)
 
 function FncMofificar(idEquipo,nombre,codAnterior,codReciente,asignadoA,observaciones)
 {
-    document.getElementById("Encabezado_Panel").innerHTML = "MODIFICACION DE USUARIOS";
+    document.getElementById("Encabezado_Panel").innerHTML = "MODIFICACION DE CASCO Y CHAQUETONES";
     //$("#empleado option:selected").prop("selected",false);
    // $("#empleado option[value=" + idPersonal + "]").prop("selected",true);
    

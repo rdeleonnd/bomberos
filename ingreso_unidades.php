@@ -67,28 +67,55 @@
 						<div class="col-xs-3">
 							<input type="text" class="form-control" id="chasis" name="chasis">
 						</div>
-						<div class="input-group">
-				                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
-				        </div>
+						<div class="input-group" id="divBtnGuardar">
+			                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
+			            </div> 
+			            <div class="input-group" id="divBtnModificar" style="display:none;">
+			                <button type="button" class="btn btn-success" id="actualizar" name="actualizar" onclick="FncModificacion()" >Actualizar</button>
+			                <button type="button" class="btn btn-danger" id="cancelar" name="cancelar" onclick="FncCancelar();">Cancelar</button>
+			            </div>
 					</div>
 				</tr>
 			</table>
-			<table id="tabla_personal" cellpadding="0" cellspacing="0" border="0" width="100%" class="table table-striped">
+			<table id="tabla_Unidades" cellpadding="0" cellspacing="0" border="0" width="100%" class="table table-striped">
 				<thead>
 					<tr>
-						<th> # </th>
-						<th>Codigo unidad</th>						
-						<th>Tipo</th>
+						<th>No</th>
+						<th>Codigo de Unidad</th>
 						<th>Modelo</th>
-						<th>Fecha de ingreso</th>
-						<th>No. chasis</th>
+						<th>Tipo de vehiculo</th>
+						<th>Fecha de Ingreso</th>
+						<th>Chasis</th>
+						<th>Usuario de Registro</th>
 						<th>Modificar</th>
 					</tr>
 				</thead>
 				<tbody>
-					
+					<?php
+						$Consulta = "SELECT un.idUnidad, un.unidad_no , un.tipo_vehiculo , un.modelo, un.fecha_ingreso,date_format(un.fecha_ingreso, '%d/%m/%Y') as Fecha_ingreso,un.no_chasis, un.idUsuario, u.nombreUser
+									FROM unidad un
+									INNER JOIN usuario u ON u.idUsuario = un.idUsuario;";
+
+						$Respuesta = $Conexion->list_orders($Consulta);
+						while ($row = mysql_fetch_assoc($Respuesta))
+						{
+                    		$Modificar = "<image class='btn btn-default' src='img/modificar.png' title='Modificar Registro' onclick='FncMofificar(".$row['idUnidad'].", \"".$row['unidad_no']."\", \"".$row['modelo']."\", \"".$row['tipo_vehiculo']."\", \"".$row['Fecha_ingreso']."\", \"".$row['no_chasis']."\")'>";
+
+							echo "<tr>
+										<td>".$row['idUnidad']."</td>
+										<td>".$row['unidad_no']."</td>
+										<td>".$row['modelo']."</td>
+										<td>".$row['tipo_vehiculo']."</td>
+										<td>".$row['Fecha_ingreso']."</td>
+										<td>".$row['no_chasis']."</td>
+										<td>".$row['nombreUser']."</td>
+										<td>".$Modificar."</td>
+									</tr>";
+						}
+					?>
 				</tbody>
 			</table>
+			<input id="Inputactualizacion" value="" hidden>
 		</form>
 	</body>
 </html>
@@ -104,6 +131,7 @@
         });
 
         $('#divsexo2').select2();
+        FncTabla('tabla_Unidades');
     });
 </script>
 <?php 
@@ -117,6 +145,17 @@
 	
 		echo "<script>
 				alert('Se Guardaron los registros');
+				cargar_pagina('ingreso_unidades');
+			</script>";
+	}
+	else if(isset($_POST["Modificar"]))
+	{
+		$Actualizar = "UPDATE unidad SET  unidad_no = '".$_POST["Codigo"]."', tipo_vehiculo = '".$_POST["Tipo"]."', modelo = '".$_POST["Modelo"]."', fecha_ingreso = '".$_POST["Ingreso"]."', no_chasis = '".$_POST["Chasis"]."', idUsuario = '".$_SESSION['idusuario']."'
+                  		WHERE idUnidad='".$_POST["ID"]."';";
+        $Result = $Conexion->Actualizar($Actualizar);
+	
+		echo "<script>
+				alert('Se Modificaron los registros');
 				cargar_pagina('ingreso_unidades');
 			</script>";
 	}

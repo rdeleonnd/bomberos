@@ -15,96 +15,98 @@
 			$Conexion = new DB($Usuario,$Clave,$DB,$Host);
 		?>
 		<form class="form-horizontal">
-			<table>
-				<tr>
-					<div class="form-group">
-						<label class="control-label col-xs-3">Nombre del Turno:</label>
-						<div class="col-xs-3">
-							<input type="text" class="form-control" id="nombre" name="nombre">
-						</div>
+			<tr>
+				<div class="form-group">
+					<label class="control-label col-xs-3">Nombre del Turno:</label>
+					<div class="col-xs-3">
+						<input type="text" class="form-control" id="nombre" name="nombre">
 					</div>
-				</tr>
-				<tr>
-					 <div class="form-group">
-		            	<label class="control-label col-xs-3">Fecha de Inicio:</label>
-		            	<div class="col-xs-2">
-		            		<div class='input-group date' id='datepicker1'>
-			                    <input type="text" class="form-control" id="fecha_inicio" name="fecha_inicio">
-			                    <span class="input-group-addon">
-			                        <span class="glyphicon glyphicon-calendar"></span>
-			                    </span>
-			                </div>
-		            	</div>
+				</div>
+			</tr>
+			<tr>
+				<div class="form-group">
+	            	<label class="control-label col-xs-3">Horario de Inicio:</label>
+	            	<div class="col-xs-2">
+	            		<div class='input-group date' id='timepicker1'>
+		                    <input type="text" class="form-control" id="hora_inicio" name="hora_inicio">
+		                    <span class="input-group-addon">
+		                        <span class="glyphicon glyphicon-time"></span>
+		                    </span>
+		                </div>
+	            	</div>
+	            </div>
+			</tr>
+			<tr>
+				<div class="form-group">
+	            	<label class="control-label col-xs-3">Horario de Finalizacion:</label>
+	            	<div class="col-xs-2">
+	            		<div class='input-group date' id='timepicker2'>
+		                    <input type="text" class="form-control" id="hora_fin" name="hora_fin">
+		                    <span class="input-group-addon">
+		                        <span class="glyphicon glyphicon-time"></span>
+		                    </span>
+		                </div>
+	            	</div>
+	            	<div class="col-xs-2">
+			            <div class="input-group" id="divBtnGuardar">
+		                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
+		            </div>  
+		            <div class="input-group" id="divBtnModificar" style="display:none;">
+		                <button type="button" class="btn btn-success" id="actualizar" name="actualizar" onclick="FncModificacion()" >Actualizar</button>
+		                <button type="button" class="btn btn-danger" id="cancelar" name="cancelar" onclick="FncCancelar();">Cancelar</button>
 		            </div>
-				</tr>
-				<tr>
-					<div class="form-group">
-		            	<label class="control-label col-xs-3">Horario de Inicio:</label>
-		            	<div class="col-xs-2">
-		            		<div class='input-group date' id='timepicker1'>
-			                    <input type="text" class="form-control" id="hora_inicio" name="hora_inicio">
-			                    <span class="input-group-addon">
-			                        <span class="glyphicon glyphicon-time"></span>
-			                    </span>
-			                </div>
-		            	</div>
-		            </div>
-				</tr>
-				<tr>
-					<div class="form-group">
-		            	<label class="control-label col-xs-3">Fecha de Fin:</label>
-		            	<div class="col-xs-2">
-		            		<div class='input-group date' id='datepicker2'>
-			                    <input type="text" class="form-control" id="fecha_fin" name="fecha_fin">
-			                    <span class="input-group-addon">
-			                        <span class="glyphicon glyphicon-calendar"></span>
-			                    </span>
-			                </div>
-		            	</div>
-		            </div>
-				</tr>
-				<tr>
-					<div class="form-group">
-		            	<label class="control-label col-xs-3">Horario de Finalizacion:</label>
-		            	<div class="col-xs-2">
-		            		<div class='input-group date' id='timepicker2'>
-			                    <input type="text" class="form-control" id="hora_fin" name="hora_fin">
-			                    <span class="input-group-addon">
-			                        <span class="glyphicon glyphicon-time"></span>
-			                    </span>
-			                </div>
-		            	</div>
-		            	<div class="col-xs-1">
-				            <div class="input-group">
-				            	<?php 
-				                	echo "<button type='button' class='btn btn-info' id='guardar' name='guardar' onclick='FncGuardar();'>Guardar</button>";
-				            	?>
-				            </div>
-				        </div>
-		            </div>
-				</tr>
-			</table>
+			        </div>
+	            </div>
+			</tr>
+			<tr>
+				<div class="form-group">
+					<label class="control-label col-xs-1"></label>
+					<div class="col-xs-6" >
+						<table id='tabla_Turnos' align='center' class='table table-striped' >
+							<thead>
+								<tr>
+									<th>No</th>
+									<th>Nombre del Turno</th>
+									<th>Hora Inicio</th>
+									<th>Hora Fin</th>
+									<th>Usuario de Registro</th>
+									<th>Modificar</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+									$Consulta = "SELECT t.id_turno, t.nombreTurno, t.horaInicio, t.horaFin, u.idUsuario, u.nombreUser
+													FROM turno t
+													INNER JOIN usuario u ON t.idUsuario = u.idUsuario
+													INNER JOIN personal p ON p.idEmpleado = u.idPersonal;";
+
+									$Respuesta = $Conexion->list_orders($Consulta);
+									while ($row = mysql_fetch_assoc($Respuesta))
+									{
+			                    		$Modificar = "<image class='btn btn-default' src='img/modificar.png' title='Modificar Registro' onclick='FncMofificar(".$row['id_turno'].", \"".$row['nombreTurno']."\", \"".$row['horaInicio']."\", \"".$row['horaFin']."\")'>";
+
+										echo "<tr>
+													<td>".$row['id_turno']."</td>
+													<td>".$row['nombreTurno']."</td>
+													<td>".$row['horaInicio']."</td>
+													<td>".$row['horaFin']."</td>
+													<td>".$row['nombreUser']."</td>
+													<td>".$Modificar."</td>
+												</tr>";
+									}
+								?>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</tr>
+			
+			<table id="tabla_Botas" cellpadding="0" cellspacing="0" border="0" width="100%" class="table table-striped">
 		</form>
 	</body>
 </html>
 <script type="text/javascript">
 	 $(document).ready(function () {
-        $('#datepicker1').datetimepicker({
-        	locale: 'es',
-        	format: 'DD/MM/YYYY'
-        });
-        $('#fecha_inicio').datetimepicker({
-        	locale: 'es',
-        	format: 'DD/MM/YYYY'
-        });
-        $('#datepicker2').datetimepicker({
-        	locale: 'es',
-        	format: 'DD/MM/YYYY'
-        });
-        $('#fecha_fin').datetimepicker({
-        	locale: 'es',
-        	format: 'DD/MM/YYYY'
-        });
         $('#timepicker1').datetimepicker({
         	locale: 'es',
         	format: 'LT'
@@ -121,18 +123,31 @@
         	locale: 'es',
         	format: 'LT'
         });
+
+        FncTabla('tabla_Turnos');
     });
 </script>
 <?php 
 	if(isset($_POST["Ingreso_Turnos"]))
 	{
-		$Guardar = "INSERT INTO turno (`id_turno`, `fechaInicio`, `fechaFin`, `nombreTurno`, `horaInicio`, `horaFin`, `idUsuario`) 
-					VALUES ('', '".$_POST["Fecha_inicio"]."', '".$_POST["Fecha_fin"]."', '".$_POST["Nombre"]."', '".$_POST["Hora_inicio"]."', '".$_POST["Hora_fin"]."', '".$_SESSION['idusuario']."');";
+		$Guardar = "INSERT INTO turno (`id_turno`, `nombreTurno`, `horaInicio`, `horaFin`, `idUsuario`) 
+					VALUES ('', '".$_POST["Nombre"]."', '".$_POST["Hora_inicio"]."', '".$_POST["Hora_fin"]."', '".$_SESSION['idusuario']."');";
 		$insert = $Conexion->Insertar($Guardar);
 		
 	
 		echo "<script>
 				alert('Se Guardaron los registros');
+				cargar_pagina('ingreso_turnos');
+			</script>";
+	}
+	else if(isset($_POST["Modificar"]))
+	{
+		$Actualizar = "UPDATE turno SET  nombreTurno = '".$_POST["Nombre"]."', horaInicio = '".$_POST["Hora_inicio"]."', horaFin = '".$_POST["Hora_fin"]."', idUsuario = '".$_SESSION['idusuario']."'
+                  		WHERE id_turno='".$_POST["ID"]."';";
+        $Result = $Conexion->Actualizar($Actualizar);
+	
+		echo "<script>
+				alert('Se Modificaron los registros');
 				cargar_pagina('ingreso_turnos');
 			</script>";
 	}

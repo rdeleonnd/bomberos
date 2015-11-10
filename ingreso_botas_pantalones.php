@@ -62,34 +62,64 @@
 						<div class="col-xs-4">
 							<textarea class="form-control" rows="3" placeholder="Campo de texto" id="descripcion" name="descripcion" maxlength="200"></textarea>
 						</div>
-						<div class="input-group">
-				                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
-				        </div>
+						<div class="input-group" id="divBtnGuardar">
+			                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
+			            </div> 
+			            <div class="input-group" id="divBtnModificar" style="display:none;">
+			                <button type="button" class="btn btn-success" id="actualizar" name="actualizar" onclick="FncModificacion()" >Actualizar</button>
+			                <button type="button" class="btn btn-danger" id="cancelar" name="cancelar" onclick="FncCancelar();">Cancelar</button>
+			            </div>
 					</div>
 				</tr>
 			</table>
-			<table id="tabla_personal" cellpadding="0" cellspacing="0" border="0" width="100%" class="table table-striped">
+			<table id="tabla_Botas" cellpadding="0" cellspacing="0" border="0" width="100%" class="table table-striped">
 				<thead>
 					<tr>
-						<th> # </th>
-						<th>Nombre</th>
+						<th>No</th>
+						<th>Equipo</th>
+						<th>Codigo Anterior</th>
+						<th>Codigo Reciente</th>
+						<th>Asignado a</th>
 						<th>Talla</th>
-						<th>Código anterior</th>
-						<th>Código reciente</th>
-						<th>Asignado a </th>
+						<th>Observaciones</th>
+						<th>Usuario de Registro</th>
 						<th>Modificar</th>
 					</tr>
 				</thead>
 				<tbody>
-					
+					<?php
+						$Consulta = "SELECT bp.idEquipo , bp.nombre, bp.codigoAnterior, bp.codigoReciente, bp.talla, bp.asignadoA, bp.observacion, concat(p.nombres, ' ', p.apellidos) as Asignado, bp.idUsuario , u.nombreUser
+									FROM botaspantalones bp
+									INNER JOIN personal p ON p.idEmpleado = bp.asignadoA
+									INNER JOIN usuario u ON u.idUsuario = bp.idUsuario;";
+
+						$Respuesta = $Conexion->list_orders($Consulta);
+						while ($row = mysql_fetch_assoc($Respuesta))
+						{
+                    		$Modificar = "<image class='btn btn-default' src='img/modificar.png' title='Modificar Registro' onclick='FncMofificar(".$row['idEquipo'].", \"".$row['nombre']."\", \"".$row['codigoAnterior']."\", \"".$row['codigoReciente']."\", \"".$row['asignadoA']."\", \"".$row['talla']."\", \"".$row['observacion']."\")'>";
+
+							echo "<tr>
+										<td>".$row['idEquipo']."</td>
+										<td>".$row['nombre']."</td>
+										<td>".$row['codigoAnterior']."</td>
+										<td>".$row['codigoReciente']."</td>
+										<td>".$row['Asignado']."</td>
+										<td>".$row['talla']."</td>
+										<td>".$row['observacion']."</td>
+										<td>".$row['nombreUser']."</td>
+										<td>".$Modificar."</td>
+									</tr>";
+						}
+					?>
 				</tbody>
 			</table>
+			<input id="Inputactualizacion" value="" hidden>
 		</form>
 	</body>
 </html>
 <script type="text/javascript">
     $(document).ready(function () {
-
+    	FncTabla('tabla_Botas');
         $('#empleado').select2();
     });
 </script>
@@ -107,9 +137,20 @@
 				cargar_pagina('ingreso_botas_pantalones');
 			</script>";
 	}
+	else if(isset($_POST["Modificar"]))
+	{
+		$Actualizar = "UPDATE botaspantalones SET  nombre = '".$_POST["Nombre"]."', codigoAnterior = '".$_POST["Cod_anterior"]."', codigoReciente = '".$_POST["Cod_reciente"]."', talla = '".$_POST["Talla"]."', asignadoA = '".$_POST["Empleado"]."', observacion = '".$_POST["Descripcion"]."', idUsuario = '".$_SESSION['idusuario']."'
+                  		WHERE idEquipo='".$_POST["ID"]."';";
+        $Result = $Conexion->Actualizar($Actualizar);
+	
+		echo "<script>
+				alert('Se Modificaron los registros');
+				cargar_pagina('ingreso_botas_pantalones');
+			</script>";
+	}
 	else
 	{
-		echo "No Listo";
+		
 	}
 
 ?>

@@ -159,8 +159,12 @@
 								echo FncCrearCombo($Consulta,"estado",'class="form-control col-xs-3"','','','','');
 							?>
 						</div>
-						<div class="input-group">
+						<div class="input-group" id="divBtnGuardar">
 			                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
+			            </div> 
+			            <div class="input-group" id="divBtnModificar" style="display:none;">
+			                <button type="button" class="btn btn-success" id="actualizar" name="actualizar" onclick="FncModificacion()" >Actualizar</button>
+			                <button type="button" class="btn btn-danger" id="cancelar" name="cancelar" onclick="FncCancelar();">Cancelar</button>
 			            </div>
 					</div>
 				</tr>
@@ -168,22 +172,25 @@
 			<table id="tabla_personal" cellpadding="0" cellspacing="0" border="0" width="100%" class="table table-striped">
 				<thead>
 					<tr>
-						<th> # </th>
+						<th>No</th>
 						<th>Codigo del Empleado</th>
 						<th>Nombres del Empleado</th>
 						<th>Apellidos del Empledo</th>
 						<th>Direccion del empleado</th>
+						<th>Fecha de Nacimiento</th>
+						<th>Sexo</th>
+						<th>Estado Civil</th>
 						<th>Telefono del empleado</th>
+						<th>Rango</th>
 						<th>Fecha de Ingreso</th>
 						<th>Sueldo</th>
-						<th>Puesto</th>
 						<th>Estado</th>
 						<th>Modificar</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php
-						$Consulta = "SELECT per.idEmpleado, per.CodEmpleado, per.nombres, per.apellidos, per.direccion, per.telefono, per.fechaIngreso,per.salario, ra.descRango, es.Estado
+						$Consulta = "SELECT per.idEmpleado, per.CodEmpleado, per.nombres, per.apellidos, per.direccion, date_format(per.fechaNacimiento, '%d/%m/%Y') as Fecha_nacimiento, per.sexo, per.edoCivil, per.telefono, per.idRango, ra.descRango, date_format(per.fechaIngreso, '%d/%m/%Y') as fechaIngreso,per.salario, per.idEstado, es.Estado
 									FROM personal per
 									INNER JOIN rango ra ON ra.idRango = per.idRango
 									INNER JOIN estado es ON es.idEstado = per.idEstado;";
@@ -191,7 +198,7 @@
 						$Respuesta = $Conexion->list_orders($Consulta);
 						while ($row = mysql_fetch_assoc($Respuesta))
 						{
-                    		$Modificar = "<image class='btn btn-default' src='img/modificar.png' title='Modificar Registro' onclick='FncMofificarEstado(".$row['idEmpleado'].", \"".$row['nombres']."\")'>";
+                    		$Modificar = "<image class='btn btn-default' src='img/modificar.png' title='Modificar Registro' onclick='FncMofificar(".$row['idEmpleado'].", \"".$row['CodEmpleado']."\", \"".$row['nombres']."\", \"".$row['apellidos']."\", \"".$row['direccion']."\", \"".$row['Fecha_nacimiento']."\", \"".$row['sexo']."\", \"".$row['edoCivil']."\", \"".$row['telefono']."\", \"".$row['idRango']."\", \"".$row['fechaIngreso']."\", \"".$row['salario']."\", \"".$row['idEstado']."\")'>";
 							
 							echo "<tr>
 										<td>".$row['idEmpleado']."</td>
@@ -199,10 +206,13 @@
 										<td>".$row['nombres']."</td>
 										<td>".$row['apellidos']."</td>
 										<td>".$row['direccion']."</td>
+										<td>".$row['Fecha_nacimiento']."</td>
+										<td>".$row['sexo']."</td>
+										<td>".$row['edoCivil']."</td>
 										<td>".$row['telefono']."</td>
+										<td>".$row['descRango']."</td>
 										<td>".$row['fechaIngreso']."</td>
 										<td>".$row['salario']."</td>
-										<td>".$row['descRango']."</td>
 										<td>".$row['Estado']."</td>
 										<td>".$Modificar."</td>
 									</tr>
@@ -211,6 +221,7 @@
 					?>
 				</tbody>
 			</table>
+			<input id="Inputactualizacion" value="" hidden>
 		</form>
 	</body>
 </html>
@@ -263,7 +274,8 @@
 	
 	if(isset($_POST["Ingreso_Personal"]))
 	{
-		$Guardar = "INSERT INTO personal(`idEmpleado`, `CodEmpleado`, `nombres`, `apellidos`, `direccion`, `fechaNacimiento`, `sexo`, `edoCivil`, `telefono`, `idRango`, `fechaIngreso`, `salario`, `idEstado`) 
+		$Guardar = "INSERT INTO personal(`idEmpleado`, `CodEmpleado`, `nombres`, `apellidos`, `direccion`, `fechaNacimiento`, `sexo`, `edoCivil`, `telefono`, `idRango`, 
+								`fechaIngreso`, `salario`, `idEstado`) 
 					VALUES ('', '".$_POST["codigo"]."', '".$_POST["nombre"]."', '".$_POST["apellido"]."', '".$_POST["direccion"]."', '".$_POST["nacimiento"]."', 
 							'".$_POST["sexo"]."', '".$_POST["estado_civil"]."', '".$_POST["telefono"]."', '".$_POST["rango"]."', '".$_POST["ingreso"]."', 
 							'".$_POST["sueldo"]."', '".$_POST["estado"]."');";
@@ -277,13 +289,15 @@
 	}
 	else if(isset($_POST["Modificar"]))
 	{
-		$Actualizar = "UPDATE usuario SET  idPersonal='".$_POST["Empleado"]."', nombreUser='".$_POST["Nombre"]."', clave='".$_POST["Clave"]."', idEstado='".$_POST["Estado"]."', privilegio='".$_POST["Privilegio"]."'
-                  		WHERE idUsuario='".$_POST["ID"]."';";
+		$Actualizar = "UPDATE personal SET  CodEmpleado = '".$_POST["codigo"]."', nombres = '".$_POST["nombre"]."', apellidos = '".$_POST["apellido"]."', direccion = '".$_POST["direccion"]."', 
+											fechaNacimiento = '".$_POST["nacimiento"]."', sexo = '".$_POST["sexo"]."', edoCivil = '".$_POST["estado_civil"]."', telefono = '".$_POST["telefono"]."',
+											idRango = '".$_POST["rango"]."', fechaIngreso = '".$_POST["ingreso"]."', salario = '".$_POST["sueldo"]."', idEstado = '".$_POST["estado"]."'
+                  		WHERE idEmpleado='".$_POST["ID"]."';";
         $Result = $Conexion->Actualizar($Actualizar);
 	
 		echo "<script>
 				alert('Se Modificaron los registros');
-				cargar_pagina('ingreso_usuarios');
+				cargar_pagina('ingreso_personal');
 			</script>";
 	}
 	else
