@@ -18,46 +18,104 @@
 			$Conexion = new DB($Usuario,$Clave,$DB,$Host);
 		?>
 		<form class="form-horizontal">
-			<table>
-				<tr>
-					<div class="form-group">
-		            	<label class="control-label col-xs-3">Fecha de Turno:</label>
-						<div class="col-xs-2">
-							<div class='input-group date' id='datetimepicker1'>
-			                    <input type="text" class="form-control" id="fecha_inicio" name="fecha_inicio">
-			                    <span class="input-group-addon">
-			                        <span class="glyphicon glyphicon-calendar"></span>
-			                    </span>
-			                </div>
-						</div>
+			<tr>
+				<div class="form-group">
+	            	<label class="control-label col-xs-3">Fecha de Turno:</label>
+					<div class="col-xs-2">
+						<div class='input-group date' id='datetimepicker1'>
+		                    <input type="text" class="form-control" id="fecha_inicio" name="fecha_inicio">
+		                    <span class="input-group-addon">
+		                        <span class="glyphicon glyphicon-calendar"></span>
+		                    </span>
+		                </div>
+					</div>
+	            </div>
+			</tr>
+			<tr>
+				<div class="form-group">
+					<label class="control-label col-xs-3">Nombre del Turno:</label>
+					<div class="col-xs-3">
+						<?php 
+							$Consulta = "SELECT id_turno as id, nombreTurno as nombre FROM turno;";
+							echo FncCrearCombo($Consulta,"nombre",'','','','','');
+						?>
+					</div>
+				</div>
+			</tr>
+			<tr>
+				<div class="form-group">
+					<label class="control-label col-xs-3">Usuario a Asignar:</label>
+					<div class="col-xs-3">
+						<?php 
+							$Consulta = "SELECT idEmpleado id, concat(CodEmpleado, ' | ' , nombres) nombre from personal ORDER BY nombre;";
+							echo FncCrearCombo($Consulta,"usuario",'','','','','');
+						?>
+					</div>
+					<div class="input-group" id="divBtnGuardar">
+		                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
+		            </div> 
+		            <div class="input-group" id="divBtnModificar" style="display:none;">
+		                <button type="button" class="btn btn-success" id="actualizar" name="actualizar" onclick="FncModificacion()" >Actualizar</button>
+		                <button type="button" class="btn btn-danger" id="cancelar" name="cancelar" onclick="FncCancelar();">Cancelar</button>
 		            </div>
-				</tr>
-				<tr>
-					<div class="form-group">
-						<label class="control-label col-xs-3">Nombre del Turno:</label>
-						<div class="col-xs-3">
+				</div>
+			</tr>
+			<input id="Inputactualizacion" value="" hidden>
+			<hr size="10" width="85%" style="#0000FF" />
+			<div class="panel panel-primary">
+				<div class="panel-heading" id="Encabezado_Panel" name="Encabezado_Panel" align="center">
+					<big>BUSQUEDA DE REGISTROS</big>
+				</div>
+			</div>
+			<tr>
+				<div class="form-group">
+					<label class="control-label col-xs-1">Fecha de Inicio:</label>
+					<div class="col-xs-2">
+						<div class='input-group date' id='datetimepicker1b'>
+		                   <input class="form-control" type="text" id="fechab1" name="fechab1">
+		                    <span class="input-group-addon">
+		                        <span class="glyphicon glyphicon-calendar"></span>
+		                    </span>
+		                </div>
+		            </div>
+		            <label class="control-label col-xs-1">Fecha Fin:</label>
+					<div class="col-xs-2">
+						<div class='input-group date' id='datetimepicker2b'>
+		                   <input class="form-control" type="text" id="fechab2" name="fechab2">
+		                    <span class="input-group-addon">
+		                        <span class="glyphicon glyphicon-calendar"></span>
+		                    </span>
+		                </div>
+		            </div>
+		            <div >
+						<label class="control-label col-xs-1">Nombre del Turno:</label>
+						<div class="col-xs-2">
 							<?php 
 								$Consulta = "SELECT id_turno as id, nombreTurno as nombre FROM turno;";
-								echo FncCrearCombo($Consulta,"nombre",'','','','','');
+								$sufix="<option value='0' select>Todos</option>";
+								echo FncCrearCombo($Consulta,"nombreb",'',$sufix,'','','');
 							?>
 						</div>
 					</div>
-				</tr>
-				<tr>
-					<div class="form-group">
-						<label class="control-label col-xs-3">Usuario a Asignar:</label>
-						<div class="col-xs-3">
-							<?php 
-								$Consulta = "SELECT idusuario as id, nombreUser as nombre FROM usuario;";
-								echo FncCrearCombo($Consulta,"usuario",'','','','','');
-							?>
-						</div>
-						<div class="input-group">
-				                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
-				        </div>
+					<div class="input-group" id="divBtnGuardar">
+		                <button type="button" class="btn btn-success" id="guardar" name="guardar" onclick="FncBuscar();">Buscar</button>
+		            </div> 
+				</div>
+			</tr>
+			<tr>
+				<div class="form-group">
+					<label class="control-label col-xs-1">Usuario:</label>
+					<div class="col-xs-1">
+						<?php 
+							$Consulta = "SELECT idEmpleado id, concat(CodEmpleado, ' | ' , nombres) nombre from personal ORDER BY nombre;";
+							$sufix="<option value='0' select>Todos</option>";
+							echo FncCrearCombo($Consulta,"usuariob",'',$sufix,'','','');
+						?>
 					</div>
-				</tr>
-			</table>
+				</div>
+			</tr>
+			<div  id='mostrar' name='mostrar' >
+			</div>	
 		</form>
 	</body>
 </html>
@@ -72,8 +130,28 @@
         	format: 'DD/MM/YYYY'
         });
 
+        $('#datetimepicker1b').datetimepicker({
+			locale: 'es',
+        	format: 'DD/MM/YYYY'
+		});
+		$('#fechab1').datetimepicker({
+			locale: 'es',
+        	format: 'DD/MM/YYYY'
+		});
+
+		$('#datetimepicker2b').datetimepicker({
+			locale: 'es',
+        	format: 'DD/MM/YYYY'
+		});
+		$('#fechab2').datetimepicker({
+			locale: 'es',
+        	format: 'DD/MM/YYYY'
+		});
+
         $('#usuario').select2();
+        $('#usuariob').select2();
         $('#nombre').select2();
+        $('#nombreb').select2();
 
     });
 </script>

@@ -106,28 +106,66 @@
 						<div class="col-xs-5">
 							<textarea class="form-control" rows="3" placeholder="Campo de texto" id="descripcion" name="descripcion" maxlength="200"></textarea>
 						</div>
-						<div class="input-group">
-				                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
-				        </div>
+						<div class="input-group" id="divBtnGuardar">
+			                <button type="button" class="btn btn-info" id="guardar" name="guardar" onclick="FncGuardar();">Guardar</button>
+			            </div> 
+			            <div class="input-group" id="divBtnModificar" style="display:none;">
+			                <button type="button" class="btn btn-success" id="actualizar" name="actualizar" onclick="FncModificacion()" >Actualizar</button>
+			                <button type="button" class="btn btn-danger" id="cancelar" name="cancelar" onclick="FncCancelar();">Cancelar</button>
+			            </div>
 					</div>
 				</tr>
 			</table>
-			<table id="tabla_personal" cellpadding="0" cellspacing="0" border="0" width="100%" class="table table-striped">
-				<thead>
-					<tr>
-						<th> # </th>
-						<th>Unidad</th>
-						<th>Galones</th>
-						<th>Monto</th>
-						<th>Fecha</th>
-						<th>Piloto</th>						
-						<th>Modificar</th>
-					</tr>
-				</thead>
-				<tbody>
-					
-				</tbody>
-			</table>
+			<input id="Inputactualizacion" value="" hidden>
+			<hr size="10" width="85%" style="#0000FF" />
+			<div class="panel panel-primary">
+				<div class="panel-heading" id="Encabezado_Panel" name="Encabezado_Panel" align="center">
+					<big>BUSQUEDA DE REGISTROS</big>
+				</div>
+			</div>
+			<tr>
+				<div class="form-group">
+					<label class="control-label col-xs-1">Fecha de Inicio:</label>
+					<div class="col-xs-2">
+						<div class='input-group date' id='datetimepicker1b'>
+		                   <input class="form-control" type="text" id="fechab1" name="fechab1">
+		                    <span class="input-group-addon">
+		                        <span class="glyphicon glyphicon-calendar"></span>
+		                    </span>
+		                </div>
+		            </div>
+		            <label class="control-label col-xs-1">Fecha Fin:</label>
+					<div class="col-xs-2">
+						<div class='input-group date' id='datetimepicker2b'>
+		                   <input class="form-control" type="text" id="fechab2" name="fechab2">
+		                    <span class="input-group-addon">
+		                        <span class="glyphicon glyphicon-calendar"></span>
+		                    </span>
+		                </div>
+		            </div>
+		            <label class="control-label col-xs-1"> Comprobante:</label>
+					<div class="col-xs-2">
+						<input class="form-control" type="text" id="recibob" name="recibob"> 
+					</div>
+					<div class="input-group" id="divBtnGuardar">
+		                <button type="button" class="btn btn-success" id="guardar" name="guardar" onclick="FncBuscar();">Buscar</button>
+		            </div> 
+				</div>
+			</tr>
+			<tr>
+				<div class="form-group">
+					<label class="control-label col-xs-1">Unidad:</label>
+					<div class="col-xs-1">
+						<?php 
+							$Consulta = "SELECT idUnidad as id, unidad_no as nombre FROM unidad;";
+							$sufix="<option value='0' select>Todos</option>";
+							echo FncCrearCombo($Consulta,"unidadb",'',$sufix,'','','');
+						?>
+					</div>
+				</div>
+			</tr>
+			<div  id='mostrar' name='mostrar' >
+			</div>	
 		</form>
 	</body>
 </html>
@@ -142,6 +180,24 @@
         	format: 'DD/MM/YYYY'
         });
 
+        $('#datetimepicker1b').datetimepicker({
+			locale: 'es',
+        	format: 'DD/MM/YYYY'
+		});
+		$('#fechab1').datetimepicker({
+			locale: 'es',
+        	format: 'DD/MM/YYYY'
+		});
+
+		$('#datetimepicker2b').datetimepicker({
+			locale: 'es',
+        	format: 'DD/MM/YYYY'
+		});
+		$('#fechab2').datetimepicker({
+			locale: 'es',
+        	format: 'DD/MM/YYYY'
+		});
+
         $(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
             //this.value = this.value.replace(/[^0-9\.]/g,'');
 		    $(this).val($(this).val().replace(/[^0-9\.]/g,''));
@@ -151,6 +207,7 @@
         });
 
         $('#unidad').select2();
+        $('#unidadb').select2();
         $('#piloto').select2();
         $('#kilometraje').ForceNumericOnly();
     });
@@ -162,16 +219,30 @@
 		$Guardar = "INSERT INTO combustible (`idAbastecimiento`, `fecha`, `cantGalones`, `costo`, `kilometraje`, `gasolinera`, `no_vale`, `piloto`, `idUnidad`, `noComprobante`, `descripcion`, `idUsuario`)
 					VALUES ('', '".$_POST["Fecha"]."', '".$_POST["Galones"]."', '".$_POST["Costo"]."', '".$_POST["Kilometraje"]."', '".$_POST["Gasolinera"]."', '".$_POST["Vale"]."',
 							'".$_POST["Piloto"]."', '".$_POST["Unidad"]."', '".$_POST["Comprobante"]."', '".$_POST["Descripcion"]."','".$_SESSION['idusuario']."');";
-		echo $Guardar ;
+		//echo $Guardar ;
 		$insert = $Conexion->Insertar($Guardar);
 		
 		echo "<script>
 				alert('Se Guardaron los registros');
-				cargar_pagina('ingreso_combustible');
-			</script>";	}
+				cargar_pagina('ingreso_combustibles');
+			</script>";	
+	}
+	else if(isset($_POST["Modificar"]))
+	{
+		$Actualizar = "UPDATE combustible SET fecha = '".$_POST["Fecha"]."', cantGalones = '".$_POST["Galones"]."', costo = '".$_POST["Costo"]."', kilometraje = '".$_POST["Kilometraje"]."',  gasolinera = '".$_POST["Gasolinera"]."',
+											no_vale = '".$_POST["Vale"]."', piloto = '".$_POST["Piloto"]."', idUnidad = '".$_POST["Unidad"]."', noComprobante = '".$_POST["Comprobante"]."', descripcion = '".$_POST["Descripcion"]."', 
+											idUsuario = '".$_SESSION['idusuario']."'
+                  		WHERE idAbastecimiento='".$_POST["ID"]."';";
+        $Result = $Conexion->Actualizar($Actualizar);
+	
+		echo "<script>
+				alert('Se Modificaron los registros');
+				cargar_pagina('ingreso_combustibles');
+			</script>";
+	}
 	else
 	{
-		echo "No Listo";
+		
 	}
 
 ?>

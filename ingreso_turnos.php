@@ -100,8 +100,7 @@
 					</div>
 				</div>
 			</tr>
-			
-			<table id="tabla_Botas" cellpadding="0" cellspacing="0" border="0" width="100%" class="table table-striped">
+			<input id="Inputactualizacion" value="" hidden>
 		</form>
 	</body>
 </html>
@@ -109,19 +108,19 @@
 	 $(document).ready(function () {
         $('#timepicker1').datetimepicker({
         	locale: 'es',
-        	format: 'LT'
+        	format: 'H:mm:ss'
         });
         $('#hora_inicio').datetimepicker({
         	locale: 'es',
-        	format: 'LT'
+        	format: 'H:mm:ss'
         });
         $('#timepicker2').datetimepicker({
         	locale: 'es',
-        	format: 'LT'
+        	format: 'H:mm:ss'
         });
         $('#hora_fin').datetimepicker({
         	locale: 'es',
-        	format: 'LT'
+        	format: 'H:mm:ss'
         });
 
         FncTabla('tabla_Turnos');
