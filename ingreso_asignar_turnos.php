@@ -168,8 +168,19 @@
 				cargar_pagina('ingreso_asignar_turnos');
 			</script>";
 	}
+	else if(isset($_POST["Modificar"]))
+	{
+		$Actualizar = "UPDATE asignacionturno SET fecha = '".$_POST["Fecha_inicio"]."', idTurno = '".$_POST["Nombre"]."', idEmpleado = '".$_POST["Usuario"]."', idUsuario = '".$_SESSION['idusuario']."'
+                  		WHERE idasigTurno='".$_POST["ID"]."';";
+        $Result = $Conexion->Actualizar($Actualizar);
+	
+		echo "<script>
+				alert('Se Modificaron los registros');
+				cargar_pagina('ingreso_asignar_turnos');
+			</script>";
+	}
 	else
 	{
-		echo "No Listo";
+		
 	}
 ?>

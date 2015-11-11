@@ -310,11 +310,11 @@
 	}
 	else if(isset($_POST["BuscarAsignacionTurnos"]))
 	{
-		$Fechas = " AND cb.fecha BETWEEN ".$_POST["Fechab1"]." AND ".$_POST["Fechab2"]."";
+		$Fechas = " AND at.fecha BETWEEN ".$_POST["Fechab1"]." AND ".$_POST["Fechab2"]."";
 
-		if($_POST["Recibob"] != '')
+		if($_POST["Turno"] != 0)
 		{
-			$Recibo = " AND cb.noComprobante = '".$_POST['Recibob']."' ";
+			$Recibo = " AND at.idTurno = '".$_POST['Turno']."' ";
 		}
 		else
 		{
@@ -323,7 +323,7 @@
 
 		if($_POST["Usuariob"] != 0)
 		{
-			$Usuario = "AND cb.idUnidad = ".$_POST["Usuariob"] ."";
+			$Usuario = "AND at.idEmpleado = ".$_POST["Usuariob"] ."";
 		}
 		else
 		{
@@ -372,6 +372,209 @@
 				</div>
 				<script>
 					FncTabla('tabla_AsignacionTurnos');
+				</script>";
+	} 
+	else if(isset($_POST["BuscarIngresoPersonal"]))
+	{
+		$Fechas = " AND DATE(ae.fecha) BETWEEN ".$_POST["Fechab1"]." AND ".$_POST["Fechab2"]."";
+
+		if($_POST["Turno"] != 0)
+		{
+			$Recibo = " AND ae.id_Turno = '".$_POST['Turno']."' ";
+		}
+		else
+		{
+			$Recibo  = "";
+		}
+
+		if($_POST["Usuariob"] != 0)
+		{
+			$Usuario = "AND ae.codEmpleado = ".$_POST["Usuariob"] ."";
+		}
+		else
+		{
+			$Usuario  = "";
+		}
+
+		echo "<div class='form-group'>
+					<table id='tabla_IngresoPersonal' cellpadding='0' cellspacing='0' border='0' class='table table-striped'>
+						<thead>
+							<tr>
+								<th>NO</th>
+								<th>Fecha y Hora de Asistencia</th>
+								<th>Nombre de Turno</th>
+								<th>Persona Asignada</th>
+								<th>Observaciones</th>
+								<th>Usuario de Registro</th>
+								<th>Modificar</th>
+							</tr>
+						</thead>
+						<tbody>";
+								$Consulta = "SELECT ae.idAsistenciaEntrada, date_format(ae.fecha, '%d/%m/%Y %H:%m:%s') Fechas, ae.id_Turno, t.nombreTurno, ae.codEmpleado, concat(p.nombres, ' ', p.apellidos) Empleado, ae.observaciones, u.nombreUser
+											FROM asistenciaentrada ae
+											INNER JOIN turno t ON t.id_turno = ae.id_Turno
+											INNER JOIN personal p ON p.idEmpleado = ae.codEmpleado
+											INNER JOIN usuario u ON t.idUsuario = u.idUsuario
+											".$Usuario.$Fechas.$Recibo.";";
+								//echo $Consulta;
+								$Respuesta = $Conexion->list_orders($Consulta);
+								$x=0;
+								while ($row = mysql_fetch_assoc($Respuesta))
+								{
+									$x++;
+									$Modificar = '<image class=btn btn-default src=img/modificar.png title=Modificar Registro onclick="FncModificar(\''.$row["idAsistenciaEntrada"].'\', \''.$row["Fechas"].'\', \''.$row["id_Turno"].'\', \''.$row["codEmpleado"].'\', \''.$row["observaciones"].'\');">';
+									
+									echo '<tr>
+												<td>'.$x.'</td>
+												<td>'.$row["Fechas"].'</td>
+												<td>'.$row["nombreTurno"].'</td>
+												<td>'.$row["Empleado"].'</td>
+												<td>'.$row["observaciones"].'</td>
+												<td>'.$row['nombreUser'].'</td>
+												<td>'.$Modificar.'</td>
+											</tr>
+											';
+								}
+						echo "</tbody>
+					</table>
+				</div>
+				<script>
+					FncTabla('tabla_IngresoPersonal');
+				</script>";
+	}
+	else if(isset($_POST["BuscarSalidaPersonal"]))
+	{
+		$Fechas = " AND DATE(ass.fecha) BETWEEN ".$_POST["Fechab1"]." AND ".$_POST["Fechab2"]."";
+
+		if($_POST["Turno"] != 0)
+		{
+			$Recibo = " AND ass.id_Turno = '".$_POST['Turno']."' ";
+		}
+		else
+		{
+			$Recibo  = "";
+		}
+
+		if($_POST["Usuariob"] != 0)
+		{
+			$Usuario = "AND ass.idEmpleado = ".$_POST["Usuariob"] ."";
+		}
+		else
+		{
+			$Usuario  = "";
+		}
+
+		echo "<div class='form-group'>
+					<table id='tabla_SalidaPersonal' cellpadding='0' cellspacing='0' border='0' class='table table-striped'>
+						<thead>
+							<tr>
+								<th>NO</th>
+								<th>Fecha y Hora de Asistencia</th>
+								<th>Nombre de Turno</th>
+								<th>Persona Asignada</th>
+								<th>Observaciones</th>
+								<th>Usuario de Registro</th>
+								<th>Modificar</th>
+							</tr>
+						</thead>
+						<tbody>";
+								$Consulta = "SELECT ass.idAsistenciaSalida, date_format(ass.fecha, '%d/%m/%Y %H:%m:%s') Fechas, ass.id_Turno, t.nombreTurno, ass.idEmpleado,  concat(p.nombres, ' ', p.apellidos) Empleado, ass.observaciones, u.nombreUser
+											FROM asistenciasalida ass
+											INNER JOIN turno t ON t.id_turno = ass.id_Turno
+											INNER JOIN personal p ON p.idEmpleado = ass.idEmpleado
+											INNER JOIN usuario u ON t.idUsuario = u.idUsuario
+											".$Usuario.$Fechas.$Recibo.";";
+								//echo $Consulta;
+								$Respuesta = $Conexion->list_orders($Consulta);
+								$x=0;
+								while ($row = mysql_fetch_assoc($Respuesta))
+								{
+									$x++;
+									$Modificar = '<image class=btn btn-default src=img/modificar.png title=Modificar Registro onclick="FncModificar(\''.$row["idAsistenciaSalida"].'\', \''.$row["Fechas"].'\', \''.$row["id_Turno"].'\', \''.$row["idEmpleado"].'\', \''.$row["observaciones"].'\');">';
+									
+									echo '<tr>
+												<td>'.$x.'</td>
+												<td>'.$row["Fechas"].'</td>
+												<td>'.$row["nombreTurno"].'</td>
+												<td>'.$row["Empleado"].'</td>
+												<td>'.$row["observaciones"].'</td>
+												<td>'.$row['nombreUser'].'</td>
+												<td>'.$Modificar.'</td>
+											</tr>
+											';
+								}
+						echo "</tbody>
+					</table>
+				</div>
+				<script>
+					FncTabla('tabla_SalidaPersonal');
+				</script>";
+	}  
+	else if(isset($_POST["BuscarAsignacionTareas"]))
+	{
+		$Fechas = " AND DATE(ass.fecha) BETWEEN ".$_POST["Fechab1"]." AND ".$_POST["Fechab2"]."";
+
+		if($_POST["Turno"] != 0)
+		{
+			$Recibo = " AND ass.id_Turno = '".$_POST['Turno']."' ";
+		}
+		else
+		{
+			$Recibo  = "";
+		}
+
+		if($_POST["Usuariob"] != 0)
+		{
+			$Usuario = "AND ass.idEmpleado = ".$_POST["Usuariob"] ."";
+		}
+		else
+		{
+			$Usuario  = "";
+		}
+
+		echo "<div class='form-group'>
+					<table id='tabla_AsignacionTareas' cellpadding='0' cellspacing='0' border='0' class='table table-striped'>
+						<thead>
+							<tr>
+								<th>NO</th>
+								<th>Turno</th>
+								<th>Actividad</th>
+								<th>Persona Asignada</th>
+								<th>Usuario de Registro</th>
+								<th>Modificar</th>
+							</tr>
+						</thead>
+						<tbody>";
+								$Consulta = "SELECT asa.idAsignacion, asa.idEmpleado, concat(p.nombres, ' ', p.apellidos) Empleado, asa.idTurno, t.nombreTurno, asa.idActividad, ac.nombre,  u.nombreUser
+											FROM asignacionactividad asa
+											INNER JOIN turno t ON t.id_turno = asa.idTurno
+											INNER JOIN actividad ac ON ac.idActividad= asa.idActividad
+											INNER JOIN personal p ON p.idEmpleado = asa.idEmpleado
+											INNER JOIN usuario u ON u.idUsuario = asa.idUsuario;
+											".$Usuario.$Fechas.$Recibo.";";
+								//echo $Consulta;
+								$Respuesta = $Conexion->list_orders($Consulta);
+								$x=0;
+								while ($row = mysql_fetch_assoc($Respuesta))
+								{
+									$x++;
+									$Modificar = '<image class=btn btn-default src=img/modificar.png title=Modificar Registro onclick="FncModificar(\''.$row["idAsistenciaSalida"].'\', \''.$row["Fechas"].'\', \''.$row["id_Turno"].'\', \''.$row["idEmpleado"].'\', \''.$row["observaciones"].'\');">';
+									
+									echo '<tr>
+												<td>'.$x.'</td>
+												<td>'.$row["nombreTurno"].'</td>
+												<td>'.$row["nombre"].'</td>
+												<td>'.$row["Empleado"].'</td>
+												<td>'.$row['nombreUser'].'</td>
+												<td>'.$Modificar.'</td>
+											</tr>
+											';
+								}
+						echo "</tbody>
+					</table>
+				</div>
+				<script>
+					FncTabla('tabla_AsignacionTareas');
 				</script>";
 	}  
 ?>

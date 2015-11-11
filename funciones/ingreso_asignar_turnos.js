@@ -78,7 +78,9 @@ function FncModificar(idasigTurno,Fechas,idTurno,idEmpleado)
     $('#Inputactualizacion').val(idasigTurno);
     $("#fecha_inicio").val(Fechas);
 	$("#nombre").val(idTurno);
+    $("#nombre").select2();
 	$("#usuario").val(idEmpleado);
+    $("#usuario").select2();
 
     $("#divBtnGuardar").hide();
     $("#tabla_AsignacionTurnos").hide();
@@ -94,19 +96,16 @@ function FncCancelar()
 function FncModificacion()
 {
     ID = $("#Inputactualizacion").val();
-    Fecha = $("#fecha").val();
-    Fecha = Fecha.substring(6,10)+Fecha.substring(3,5)+Fecha.substring(0,2);
-    Unidad = $("#unidad").val();
-    Kilometraje = $("#kilometraje").val();
-    Costo = $("#costo").val();
-    Comprobante = $("#comprobante").val();
-    Descripcion = $("#descripcion").val();
+    Fecha_inicio = $("#fecha_inicio").val();
+    Fecha_inicio = Fecha_inicio.substring(6,10)+Fecha_inicio.substring(3,5)+Fecha_inicio.substring(0,2); 
+    Nombre = $("#nombre").val();
+    Usuario = $("#usuario").val();
 
-    if(Fecha != '' && Kilometraje != '' && Costo != '' && Comprobante != '' && Descripcion != '')
+    if((Fecha_inicio != ''))
     {
-        Parametros = "Modificar=1"+"&ID="+ID+"&Fecha="+Fecha+"&Unidad="+Unidad+"&Kilometraje="+Kilometraje+"&Costo="+Costo+"&Comprobante="+Comprobante+"&Descripcion="+Descripcion;
+        Parametros = "Modificar=1"+"&ID="+ID+"&Fecha_inicio="+Fecha_inicio+"&Nombre="+Nombre+"&Usuario="+Usuario;
         Div=document.getElementById("principal");
-        div_dinamico("POST", 'ingreso_lubricantes.php', Parametros, Div, false);
+        div_dinamico("POST", 'ingreso_asignar_turnos.php', Parametros, Div, false);
     }
     else
     {
