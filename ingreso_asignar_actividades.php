@@ -19,6 +19,19 @@
 		<form class="form-horizontal">
 			<tr>
 				<div class="form-group">
+	            	<label class="control-label col-xs-3">Fecha de Turno:</label>
+					<div class="col-xs-2">
+						<div class='input-group date' id='datetimepicker1'>
+		                    <input type="text" class="form-control" id="fecha_inicio" name="fecha_inicio">
+		                    <span class="input-group-addon">
+		                        <span class="glyphicon glyphicon-calendar"></span>
+		                    </span>
+		                </div>
+					</div>
+	            </div>
+			</tr>
+			<tr>
+				<div class="form-group">
 					<label class="control-label col-xs-3">Seleccione nombre del Turno:</label>
 					<div class="col-xs-3">
 						<?php 
@@ -85,12 +98,12 @@
 		                </div>
 		            </div>
 		            <div >
-						<label class="control-label col-xs-1">Actividad:</label>
+						<label class="control-label col-xs-1">Seleccione Turno:</label>
 						<div class="col-xs-2">
 							<?php 
-								$Consulta = "SELECT idActividad as id, nombre as nombre FROM actividad;";
+								$Consulta = "SELECT id_turno as id, nombreTurno as nombre FROM turno;";
 								$sufix="<option value='0' select>Todos</option>";
-								echo FncCrearCombo($Consulta,"nombreb",'',$sufix,'','','');
+								echo FncCrearCombo($Consulta,"turnob",'',$sufix,'','','');
 							?>
 						</div>
 					</div>
@@ -100,6 +113,16 @@
 				</div>
 			</tr>
 			<tr>
+				 <div >
+					<label class="control-label col-xs-1">Actividad:</label>
+					<div class="col-xs-2">
+						<?php 
+							$Consulta = "SELECT idActividad as id, nombre as nombre FROM actividad;";
+							$sufix="<option value='0' select>Todos</option>";
+							echo FncCrearCombo($Consulta,"nombreb",'',$sufix,'','','');
+						?>
+					</div>
+				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-1">Usuario:</label>
 					<div class="col-xs-1">
@@ -118,6 +141,14 @@
 </html>
 <script>
 	$(document).ready(function(){
+		$('#datetimepicker1').datetimepicker({
+        	locale: 'es',
+        	format: 'DD/MM/YYYY'
+        });
+        $('#fecha_inicio').datetimepicker({
+        	locale: 'es',
+        	format: 'DD/MM/YYYY'
+        });
         $('#datetimepicker1b').datetimepicker({
 			locale: 'es',
         	format: 'DD/MM/YYYY'
@@ -139,6 +170,7 @@
         $('#turno').select2();
 		$('#nombre').select2();
 		$('#usuario').select2();
+		$('#turnob').select2();
 		$('#nombreb').select2();
 		$('#usuariob').select2();
 	});
@@ -146,8 +178,8 @@
 <?php 
 	if(isset($_POST["Ingreso_Asignar_Actividades"]))
 	{
-		$Guardar = "INSERT INTO asignacionactividad (`idAsignacion`, `idEmpleado`, `idTurno`, `idActividad`, `idUsuario`)
-					VALUES ('', '".$_POST["Usuario"]."', '".$_POST["Turno"]."', '".$_POST["Nombre"]."', '".$_SESSION['idusuario']."');";
+		$Guardar = "INSERT INTO asignacionactividad (`idAsignacion`, `fecha`, `idEmpleado`, `idTurno`, `idActividad`, `idUsuario`)
+					VALUES ('', '".$_POST["Fecha_inicio"]."', '".$_POST["Usuario"]."', '".$_POST["Turno"]."', '".$_POST["Nombre"]."', '".$_SESSION['idusuario']."');";
 		$insert = $Conexion->Insertar($Guardar);
 		
 	
@@ -156,8 +188,19 @@
 				cargar_pagina('ingreso_asignar_actividades');
 			</script>";
 	}
+	else if(isset($_POST["Modificar"]))
+	{
+		$Actualizar = "UPDATE asignacionactividad SET idEmpleado = '".$_POST["Usuario"]."', idTurno = '".$_POST["Turno"]."', idActividad = '".$_POST["Nombre"]."', idUsuario = '".$_SESSION['idusuario']."'
+                  		WHERE idAsignacion='".$_POST["ID"]."';";
+        $Result = $Conexion->Actualizar($Actualizar);
+	
+		echo "<script>
+				alert('Se Modificaron los registros');
+				cargar_pagina('ingreso_asignar_actividades');
+			</script>";
+	}
 	else
 	{
-		echo "No Listo";
+
 	}
 ?>

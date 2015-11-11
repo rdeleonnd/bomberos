@@ -512,20 +512,29 @@
 	}  
 	else if(isset($_POST["BuscarAsignacionTareas"]))
 	{
-		$Fechas = " AND DATE(ass.fecha) BETWEEN ".$_POST["Fechab1"]." AND ".$_POST["Fechab2"]."";
+		$Fechas = " AND asa.fecha BETWEEN ".$_POST["Fechab1"]." AND ".$_POST["Fechab2"]."";
 
 		if($_POST["Turno"] != 0)
 		{
-			$Recibo = " AND ass.id_Turno = '".$_POST['Turno']."' ";
+			$Turno = " AND asa.idTurno = '".$_POST['Turno']."' ";
 		}
 		else
 		{
-			$Recibo  = "";
+			$Turno  = "";
+		}
+
+		if($_POST["Actividad"] != 0)
+		{
+			$Actividad = " AND asa.idActividad = '".$_POST['Actividad']."' ";
+		}
+		else
+		{
+			$Actividad  = "";
 		}
 
 		if($_POST["Usuariob"] != 0)
 		{
-			$Usuario = "AND ass.idEmpleado = ".$_POST["Usuariob"] ."";
+			$Usuario = "AND asa.idEmpleado = ".$_POST["Usuariob"] ."";
 		}
 		else
 		{
@@ -537,6 +546,7 @@
 						<thead>
 							<tr>
 								<th>NO</th>
+								<th>Fecha de Actividad</th>
 								<th>Turno</th>
 								<th>Actividad</th>
 								<th>Persona Asignada</th>
@@ -545,23 +555,24 @@
 							</tr>
 						</thead>
 						<tbody>";
-								$Consulta = "SELECT asa.idAsignacion, asa.idEmpleado, concat(p.nombres, ' ', p.apellidos) Empleado, asa.idTurno, t.nombreTurno, asa.idActividad, ac.nombre,  u.nombreUser
+								$Consulta = "SELECT asa.idAsignacion, date_format(asa.fecha, '%d/%m/%Y') Fechas, asa.idEmpleado, concat(p.nombres, ' ', p.apellidos) as Empleado, asa.idTurno, t.nombreTurno, asa.idActividad, ac.nombre,  u.nombreUser
 											FROM asignacionactividad asa
 											INNER JOIN turno t ON t.id_turno = asa.idTurno
 											INNER JOIN actividad ac ON ac.idActividad= asa.idActividad
 											INNER JOIN personal p ON p.idEmpleado = asa.idEmpleado
-											INNER JOIN usuario u ON u.idUsuario = asa.idUsuario;
-											".$Usuario.$Fechas.$Recibo.";";
+											INNER JOIN usuario u ON u.idUsuario = asa.idUsuario
+											".$Usuario.$Turno.$Fechas.$Actividad.";";
 								//echo $Consulta;
 								$Respuesta = $Conexion->list_orders($Consulta);
 								$x=0;
 								while ($row = mysql_fetch_assoc($Respuesta))
 								{
 									$x++;
-									$Modificar = '<image class=btn btn-default src=img/modificar.png title=Modificar Registro onclick="FncModificar(\''.$row["idAsistenciaSalida"].'\', \''.$row["Fechas"].'\', \''.$row["id_Turno"].'\', \''.$row["idEmpleado"].'\', \''.$row["observaciones"].'\');">';
+									$Modificar = '<image class=btn btn-default src=img/modificar.png title=Modificar Registro onclick="FncModificar(\''.$row["idAsignacion"].'\', \''.$row["Fechas"].'\', \''.$row["idTurno"].'\', \''.$row["idActividad"].'\', \''.$row["idEmpleado"].'\');">';
 									
 									echo '<tr>
 												<td>'.$x.'</td>
+												<td>'.$row["Fechas"].'</td>
 												<td>'.$row["nombreTurno"].'</td>
 												<td>'.$row["nombre"].'</td>
 												<td>'.$row["Empleado"].'</td>

@@ -3,9 +3,10 @@
 			
 	if(isset($_POST["subcategorias"]))
 	{
-		$Consulta = "SELECT idCausa id, descCausa nombre from causa
+		$Consulta = "SELECT idCausa as id, descCausa as nombre from causa
 					 WHERE codServicio = '".$_POST["ID"]."'
 					 ORDER BY nombre;";
+		
 		echo FncCrearCombo($Consulta,"subcategorias",'','','','','');	
 	}
 	else if(isset($_POST["incidente"]))

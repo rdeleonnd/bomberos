@@ -83,12 +83,65 @@ function FncTabla(tabla)
     //new $.fn.dataTable.FixedHeader( oTable );
 }
 
-function FncMofificarRango(id, rango)
+function FncMofificarCategoria(codServicio, descServicio)
 {
-    $("#rango").val(rango);
+    $("#Inputactualizacion").val(codServicio);
+    $("#incidente").val(descServicio);
+
+    $("#divBtnGuardar").hide();
+    $("#divBtnModificar").show();
+    $("#tabla_incidente").hide();
 }
 
-function FncMofificarEstado(id, estado)
+function FncMofificarSubCategoria(idCausa, descCausa, codServicio)
 {
-    $("#estado").val(estado);
+    $("#Inputactualizacion2").val(idCausa);
+    $("#categoria").val(codServicio);
+    $("#categoria").select2();
+    $("#subcategoria").val(descCausa);
+    
+
+    $("#divBtnGuardar2").hide();
+    $("#divBtnModificar2").show();
+    $("#tabla_subcategoria").hide();
+}
+
+function FncCancelar()
+{
+    cargar_pagina('ingreso_incidentes');
+}
+
+function FncModificacion()
+{
+    ID = $("#Inputactualizacion").val();
+    Incidente = $("#incidente").val();
+
+    if(Incidente != '')
+    {
+        Parametros = "Modificar_Categoria=1"+"&ID="+ID+"&Incidente="+Incidente;
+        Div=document.getElementById("principal");
+        div_dinamico("POST", 'ingreso_incidentes.php', Parametros, Div, false);
+    }
+    else
+    {
+        alert("Ingrese todos los campos");
+    } 
+}
+
+function FncModificacion2()
+{
+    ID = $("#Inputactualizacion2").val();
+    Subcategoria = $("#subcategoria").val();
+    Categoria = $("#categoria").val();
+    
+    if(Subcategoria != '')
+    {
+        Parametros = "Modificar_SubCategoria=1"+"&ID="+ID+"&Subcategoria="+Subcategoria+"&Categoria="+Categoria;
+        Div=document.getElementById("principal");
+        div_dinamico("POST", 'ingreso_incidentes.php', Parametros, Div, false);
+    }
+    else
+    {
+        alert("Ingrese todos los campos");
+    }
 }

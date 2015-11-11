@@ -1,12 +1,14 @@
 function FncGuardar()
 {
+    Fecha_inicio = $("#fecha_inicio").val();
+    Fecha_inicio = Fecha_inicio.substring(6,10)+Fecha_inicio.substring(3,5)+Fecha_inicio.substring(0,2); 
 	Turno = $("#turno").val();
 	Nombre = $("#nombre").val();
 	Usuario = $("#usuario").val();
 
-	if((Turno != '') && (Nombre != '') && (Usuario != ''))
+	if((Fecha_inicio != '') && (Turno != '') && (Nombre != '') && (Usuario != ''))
 	{
-		Parametros = "Ingreso_Asignar_Actividades=1"+"&Turno="+Turno+"&Nombre="+Nombre+"&Usuario="+Usuario;
+		Parametros = "Ingreso_Asignar_Actividades=1"+"&Fecha_inicio="+Fecha_inicio+"&Turno="+Turno+"&Nombre="+Nombre+"&Usuario="+Usuario;
 		Div=document.getElementById("principal");
 		div_dinamico("POST", 'ingreso_asignar_actividades.php', Parametros, Div, false);
 	}
@@ -69,19 +71,21 @@ function FncTabla(tabla)
     //new $.fn.dataTable.FixedHeader( oTable );
 }
 
-function FncModificar(idAsistenciaSalida,Fechas,id_Turno,idEmpleado,observaciones)
+function FncModificar(idAsignacion,Fechas,idTurno,idActividad,idEmpleado)
 {
-    document.getElementById("Encabezado_Panel").innerHTML = "MODIFICACION DE SALIDA ASISTENCIA";
+    document.getElementById("Encabezado_Panel").innerHTML = "MODIFICACION DE ASIGNACION DE ACTIVIDADES";
     //$("#empleado option:selected").prop("selected",false);
    // $("#empleado option[value=" + idPersonal + "]").prop("selected",true);
-    $('#Inputactualizacion').val(idAsistenciaSalida);
+    $('#Inputactualizacion').val(idAsignacion);
     $("#fecha_inicio").val(Fechas);
-	$("#nombre").val(id_Turno);
-	$("#nombre").select2();
-	$("#usuario").val(idEmpleado);
-	$("#usuario").select2();
-	$("#observaciones").val(observaciones);
+    $("#turno").val(idTurno);
+    $("#turno").select2();
+    $("#nombre").val(idActividad);
+    $("#nombre").select2();
+    $("#usuario").val(idEmpleado);
+    $("#usuario").select2();
 
+    $('#fecha_inicio').attr('disabled','-1')
     $("#divBtnGuardar").hide();
     $("#tabla_AsignacionTareas").hide();
     $("#divBtnModificar").show();
@@ -90,22 +94,22 @@ function FncModificar(idAsistenciaSalida,Fechas,id_Turno,idEmpleado,observacione
 
 function FncCancelar()
 {
-    cargar_pagina('ingreso_salida_asistencia');   
+    cargar_pagina('ingreso_asignar_actividades');   
 }
 
 function FncModificacion()
 {
     ID = $("#Inputactualizacion").val();
+    Turno = $("#turno").val();
     Nombre = $("#nombre").val();
-	Usuario = $("#usuario").val();
-	Observaciones = $("#observaciones").val();
+    Usuario = $("#usuario").val();
 
-	if(Observaciones != '')
-	{
-		Parametros = "Modificar=1"+"&ID="+ID+"&Nombre="+Nombre+"&Usuario="+Usuario+"&Observaciones="+Observaciones;
-		Div=document.getElementById("principal");
-		div_dinamico("POST", 'ingreso_salida_asistencia.php', Parametros, Div, false);
-	}
+    if((Turno != '') && (Nombre != '') && (Usuario != ''))
+    {
+        Parametros = "Modificar=1"+"&ID="+ID+"&Turno="+Turno+"&Nombre="+Nombre+"&Usuario="+Usuario;
+        Div=document.getElementById("principal");
+        div_dinamico("POST", 'ingreso_asignar_actividades.php', Parametros, Div, false);
+    }
 	else
 	{
 		alert("Ingrese todos los campos");
@@ -118,12 +122,13 @@ function FncBuscar()
     Fechab1 = Fechab1.substring(6,10)+Fechab1.substring(3,5)+Fechab1.substring(0,2);
     Fechab2 = $("#fechab2").val();
     Fechab2 = Fechab2.substring(6,10)+Fechab2.substring(3,5)+Fechab2.substring(0,2);
-    Turno = $("#nombreb").val();
+    Turno = $("#turnob").val();
+    Actividad = $("#nombreb").val();
     Usuariob = $("#usuariob").val();
 
     if ((Fechab1 != '') && (Fechab2 != ''))
     {
-        Parametros = "BuscarAsignacionTareas=1"+"&Fechab1="+Fechab1+"&Fechab2="+Fechab2+"&Turno="+Turno+"&Usuariob="+Usuariob;
+        Parametros = "BuscarAsignacionTareas=1"+"&Fechab1="+Fechab1+"&Fechab2="+Fechab2+"&Turno="+Turno+"&Actividad="+Actividad+"&Usuariob="+Usuariob;
 
         $.post("tablas.php", Parametros, function( data ){
             $( "#mostrar" ).html( data );
