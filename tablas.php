@@ -714,4 +714,88 @@
 					FncTabla('tabla_Servicios');
 				</script>";
 	}  
+	else if(isset($_POST["BuscarGastos"]))
+	{
+		$Fechas = " WHERE d.fecha BETWEEN ".$_POST["Fechab1"]." AND ".$_POST["Fechab2"]."";
+		$Fechas2 = " WHERE e.fecha BETWEEN ".$_POST["Fechab1"]." AND ".$_POST["Fechab2"]."";
+
+		echo "
+				<div class='form-group'>
+					<big><big><label class='control-label col-xs-2 text-primary'>Ingresos</label></big></big>
+		            <big><big><label class='control-label col-xs-5 text-primary'>Egresos</label></big></big>
+				</div>";
+
+		echo "<div class='form-group'>
+				<label class='control-label col-xs-1'></label>
+				<div class='col-xs-4' >
+					<table id='tabla_ingresos' cellpadding='0' cellspacing='0' border='0' class='table table-striped'>
+						<thead>
+							<tr>
+								<th>No.</th>
+								<th>Fecha</th>
+								<th>Ingreso</th>
+								<th>Motivo</th>
+							</tr>
+						</thead>
+							<tbody>";
+									$Consulta = "SELECT d.cantidad, d.motivo, date_format( d.fecha , '%d/%m/%Y') Fechas
+												FROM donacion d
+												".$Fechas.";";
+									//echo $Consulta;
+									$Respuesta = $Conexion->list_orders($Consulta);
+									$x=0;
+									while ($row = mysql_fetch_assoc($Respuesta))
+									{
+										$x++;
+
+										echo '<tr>
+													<td>'.$x.'</td>
+													<td>'.$row["Fechas"].'</td>
+													<td>'.$row["cantidad"].'</td>
+													<td>'.$row["motivo"].'</td>
+												</tr>
+												';
+									}
+						echo "</tbody>
+					</table>
+				</div>
+				<label class='control-label col-xs-1'></label>
+				<div class='col-xs-4' >
+					<table id='tabla_egresos' cellpadding='0' cellspacing='0' border='0' class='table table-striped'>
+						<thead>
+							<tr>
+								<th>No.</th>
+								<th>Fecha</th>
+								<th>Egreso</th>
+								<th>Motivo</th>
+							</tr>
+						</thead>
+							<tbody>";
+									$Consulta = "SELECT  e.monto, e.descripcion, date_format( e.fecha , '%d/%m/%Y') Fechas
+												FROM egreso e
+												".$Fechas2.";";
+									//echo $Consulta;
+									$Respuesta = $Conexion->list_orders($Consulta);
+									$x=0;
+									while ($row = mysql_fetch_assoc($Respuesta))
+									{
+										$x++;
+
+										echo '<tr>
+													<td>'.$x.'</td>
+													<td>'.$row["Fechas"].'</td>
+													<td>'.$row["monto"].'</td>
+													<td>'.$row["descripcion"].'</td>
+												</tr>
+												';
+									}
+						echo "</tbody>
+					</table>
+				</div>
+			</div>
+			<script>
+				FncTabla('tabla_ingresos');
+				FncTabla('tabla_egresos');
+			</script>";
+	}  
 ?>

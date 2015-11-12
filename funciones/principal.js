@@ -153,7 +153,7 @@ function cargar_pagina(pagina)
 	{
 		Parametros = "reporte_saldos=1";
 		div_dinamico("POST", 'reporte_gastos.php', Parametros, Div, false);
-		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE PLANILLA";
+		document.getElementById("Encabezado_Panel").innerHTML = "REPORTE DE INGRESOS Y EGRESOS";
 	}
 }
 
