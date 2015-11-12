@@ -149,10 +149,10 @@ function cargar_pagina(pagina)
 		div_dinamico("POST", 'ingreso_equipo_hidraulico.php', Parametros, Div, false);
 		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE EQUIPO HIDRAULICO";
 	}
-	else if(pagina=='planilla')
+	else if(pagina=='reporte_saldos')
 	{
-		Parametros = "planilla=1";
-		div_dinamico("POST", 'planilla.php', Parametros, Div, false);
+		Parametros = "reporte_saldos=1";
+		div_dinamico("POST", 'reporte_gastos.php', Parametros, Div, false);
 		document.getElementById("Encabezado_Panel").innerHTML = "INGRESO DE PLANILLA";
 	}
 }

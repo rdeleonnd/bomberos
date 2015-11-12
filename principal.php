@@ -153,6 +153,8 @@
 												        		<li class='divider'></li>
 												        		<li><a href='#' onclick='cargar_pagina(\"ingreso_casco_chaqueton\");'>Ingreso Cascos y Chaquetones</a></li>
 												        		<li><a href='#' onclick='cargar_pagina(\"ingreso_equipo_hidraulico\");'>Ingreso de Equipo Hidraulico</a></li>
+												        		<li class='divider'></li>
+												        		<li><a href='#' onclick='cargar_pagina(\"reporte_saldos\");'>Reporte de Saldos</a></li>
 											        		</li>
 										        		</ul>
 										        	</li>

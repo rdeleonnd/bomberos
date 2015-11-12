@@ -588,4 +588,130 @@
 					FncTabla('tabla_AsignacionTareas');
 				</script>";
 	}  
+	else if(isset($_POST["BuscarServicios"]))
+	{
+		$Fechas = " AND r.fecha BETWEEN ".$_POST["Fechab1"]." AND ".$_POST["Fechab2"]."";
+
+		if($_POST["Categoria"] != 0)
+		{
+			$Actividad = " AND r.idIncidente = '".$_POST['Categoria']."' ";
+		}
+		else
+		{
+			$Actividad  = "";
+		}
+
+		if($_POST["Usuariob"] != 0)
+		{
+			$Usuario = "AND r.piloto  = ".$_POST["Usuariob"] ."";
+		}
+		else
+		{
+			$Usuario  = "";
+		}
+
+		echo "<div class='form-group'>
+					<table id='tabla_Servicios' cellpadding='0' cellspacing='0' border='0' class='table table-striped'>
+						<thead>
+							<tr>
+								<th>NO</th>
+								<th>Reporte No.</th>
+								<th>Direccion del Traslado</th>
+								<th>Nombre del Paciente</th>
+								<th>Direccion del paciente</th>
+								<th>Edad</th>
+								<th>Rango Edad</th>
+								<th>Sexo</th>
+								<th>Se Traslado a</th>
+								<th>Forma de aviso</th>
+								<th>Telefono</th>
+								<th>Telefonista de turno</th>
+								<th>Unidad No</th>
+								<th>Hora de Salida</th>
+								<th>Hora de Entrada</th>
+								<th>Nombre del Piloto</th>
+								<th>Fecha de Reporte</th>
+								<th>Kilometraje de Salida</th>
+								<th>Kilometraje de Entrada</th>
+								<th>Bombero que hizo el reporte</th>
+								<th>Bomberos Asistentes</th>
+								<th>Observaciones</th>
+								<th>Kilometros Recorridos</th>
+								<th>Incidente</th>
+								<th>Usuario de Registro</th>
+								<th>Modificar</th>
+							</tr>
+						</thead>
+						<tbody>";
+								$Consulta = "SELECT r.idReporte, r.noReporte, r.direccionTraslado, r.paciente, r.direccionPaciente, r.edad, r.rangoedad,r.sexo, r.lugar_asistencia, r.aviso, r.Telefono, r.telefonista, concat(p.nombres, ' ', p.apellidos) Telefonista, r.unidad_no unid, un.unidad_no, r.horaSalida,
+											r.horaEntrada, r.piloto, concat(p.nombres, ' ', p.apellidos) as Piloto, date_format(r.fecha, '%d/%m/%Y') Fecha, r.kmSalida, r.kmEntrada, r.kmRecorridos, r.bomberoReporte, concat(per.nombres, ' ', per.apellidos) as Bombero_reporte, r.asistentes, r.observaciones, r.idIncidente,  u.nombreUser,
+												(SELECT concat(ser.descServicio, ' ',  cau.descCausa, ' ', inc.descIncidente )
+												from incidente inc
+												INNER JOIN causa cau ON cau.idCausa = inc.idCausa
+												INNER JOIN servicio ser ON ser.codServicio = inc.idservicio
+												WHERE inc.idIncidente = r.idIncidente) Incidente
+											FROM reporte r
+											INNER JOIN unidad un ON un.idUnidad = r.unidad_no
+											INNER JOIN personal p ON p.idEmpleado = r.piloto 
+											INNER JOIN personal per ON per.idEmpleado = r.bomberoReporte
+											INNER JOIN usuario u ON u.idUsuario= r.idUsuario
+											".$Usuario.$Fechas.$Actividad.";";
+								//echo $Consulta;
+								$Respuesta = $Conexion->list_orders($Consulta);
+								$x=0;
+								while ($row = mysql_fetch_assoc($Respuesta))
+								{
+									$x++;
+									$Modificar = '<image class=btn btn-default src=img/modificar.png title=Modificar Registro onclick="FncModificar(\''.$row["idReporte"].'\', \''.$row["noReporte"].'\', \''.$row["direccionTraslado"].'\', \''.$row["paciente"].'\', \''.$row["direccionPaciente"].'\', \''.$row["edad"].'\', \''.$row["rangoedad"].'\', \''.$row["sexo"].'\', \''.$row["lugar_asistencia"].'\', \''.$row["aviso"].'\', \''.$row["Telefono"].'\', \''.$row["telefonista"].'\', \''.$row["unid"].'\', \''.$row["horaSalida"].'\', \''.$row["horaEntrada"].'\', \''.$row["piloto"].'\', \''.$row["Fecha"].'\', \''.$row["kmSalida"].'\', \''.$row["kmEntrada"].'\', \''.$row["bomberoReporte"].'\', \''.$row["asistentes"].'\', \''.$row["observaciones"].'\', \''.$row["kmRecorridos"].'\', \''.$row["idIncidente"].'\');">';
+									
+									if($row["rangoedad"] == 'A')
+									{
+										$Rango = "Años";
+									}
+									else if($row["rangoedad"] == 'M')
+									{
+										$Rango = "Meses";
+									}
+									else
+									{
+										$Rango = "DIAS";
+									}
+
+									echo '<tr>
+												<td>'.$x.'</td>
+												<td>'.$row["noReporte"].'</td>
+												<td>'.$row["direccionTraslado"].'</td>
+												<td>'.$row["paciente"].'</td>
+												<td>'.$row["direccionPaciente"].'</td>
+												<td>'.$row["edad"].'</td>
+												<td>'.$Rango.'</td>
+												<td>'.$row["sexo"].'</td>
+												<td>'.$row["lugar_asistencia"].'</td>
+												<td>'.$row["aviso"].'</td>
+												<td>'.$row["Telefono"].'</td>
+												<td>'.$row["Telefonista"].'</td>
+												<td>'.$row["unidad_no"].'</td>
+												<td>'.$row["horaSalida"].'</td>
+												<td>'.$row["horaEntrada"].'</td>
+												<td>'.$row["Piloto"].'</td>
+												<td>'.$row["Fecha"].'</td>
+												<td>'.$row["kmSalida"].'</td>
+												<td>'.$row["kmEntrada"].'</td>
+												<td>'.$row["Bombero_reporte"].'</td>
+												<td>'.$row["asistentes"].'</td>
+												<td>'.$row["observaciones"].'</td>
+												<td>'.$row["kmRecorridos"].'</td>
+												<td>'.$row["Incidente"].'</td>
+												<td>'.$row['nombreUser'].'</td>
+												<td>'.$Modificar.'</td>
+											</tr>
+											';
+								}
+						echo "</tbody>
+					</table>
+				</div>
+				<script>
+					FncTabla('tabla_Servicios');
+				</script>";
+	}  
 ?>

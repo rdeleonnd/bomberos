@@ -199,28 +199,15 @@
 				</tr>
 				<tr>
 					<div class="form-group">
-						<label class="control-label col-xs-3">COD:</label>
+						<label class="control-label col-xs-3">Incidente:</label>
 						<div class="col-xs-3">
 							<?php 
-								$Consulta = "SELECT codServicio id, descServicio nombre from servicio ORDER BY nombre;";
+								$Consulta = "SELECT inc.idIncidente id,  concat(ser.descServicio, ' ',  cau.descCausa, ' ', inc.descIncidente ) nombre
+											from incidente inc
+											INNER JOIN causa cau ON cau.idCausa = inc.idCausa
+											INNER JOIN servicio ser ON ser.codServicio = inc.idservicio;";
 								echo FncCrearCombo($Consulta,"categoria",'','','','','');
 							?>
-						</div>
-					</div>
-				</tr>
-				<tr>
-					<div class="form-group">
-						<label class="control-label col-xs-3">Seleccione la Sub-Categoria del Incidente:</label>
-						<div class="col-xs-3" id="divsubcategoria">
-							
-						</div>
-					</div>
-				</tr>
-				<tr>
-					<div class="form-group">
-						<label class="control-label col-xs-3">Seleccione el Incidente:</label>
-						<div class="col-xs-3" id="divincidente">
-							
 						</div>
 					</div>
 				</tr>
@@ -237,6 +224,62 @@
 					</div>
 				</tr>
 				<input id="Inputactualizacion" value="" hidden>
+				<hr size="10" width="85%" style="#0000FF" />
+				<div class="panel panel-primary">
+					<div class="panel-heading" id="Encabezado_Panel" name="Encabezado_Panel" align="center">
+						<big>BUSQUEDA DE REGISTROS</big>
+					</div>
+				</div>
+				<tr>
+					<div class="form-group">
+						<label class="control-label col-xs-1">Fecha de Inicio:</label>
+						<div class="col-xs-2">
+							<div class='input-group date' id='datetimepicker1b'>
+			                   <input class="form-control" type="text" id="fechab1" name="fechab1">
+			                    <span class="input-group-addon">
+			                        <span class="glyphicon glyphicon-calendar"></span>
+			                    </span>
+			                </div>
+			            </div>
+			            <label class="control-label col-xs-1">Fecha Fin:</label>
+						<div class="col-xs-2">
+							<div class='input-group date' id='datetimepicker2b'>
+			                   <input class="form-control" type="text" id="fechab2" name="fechab2">
+			                    <span class="input-group-addon">
+			                        <span class="glyphicon glyphicon-calendar"></span>
+			                    </span>
+			                </div>
+			            </div>
+			            <label class="control-label col-xs-1">Piloto</label>
+						<div class="col-xs-3">
+							<?php 
+								$Consulta = "SELECT idEmpleado id, concat(CodEmpleado, ' | ' , nombres) nombre from personal ORDER BY nombre;";
+								$sufix="<option value='0' select>Todos</option>";
+								echo FncCrearCombo($Consulta,"usuariob",'',$sufix,'','','');
+							?>
+						</div>
+						<div class="input-group" id="divBtnGuardar">
+			                <button type="button" class="btn btn-success" id="guardar" name="guardar" onclick="FncBuscar();">Buscar</button>
+			            </div> 
+					</div>
+				</tr>
+				<tr>
+					<div class="form-group">
+						<label class="control-label col-xs-1">Incidente:</label>
+						<div class="col-xs-3">
+							<?php 
+								$Consulta = "SELECT inc.idIncidente id,  concat(ser.descServicio, ' ',  cau.descCausa, ' ', inc.descIncidente ) nombre
+											from incidente inc
+											INNER JOIN causa cau ON cau.idCausa = inc.idCausa
+											INNER JOIN servicio ser ON ser.codServicio = inc.idservicio;";
+								$sufix="<option value='0' select>Todos</option>";
+								echo FncCrearCombo($Consulta,"categoriab",'',$sufix,'','','');
+							?>
+						</div>
+					</div>
+				</tr>
+				<div  id='mostrar' name='mostrar' >
+				</div>	
 			</table>
 		</form>
 	</body>
@@ -255,21 +298,39 @@
 			locale: 'es',
         	format: 'DD/MM/YYYY'
 		});
+		$('#datetimepicker1b').datetimepicker({
+			locale: 'es',
+        	format: 'DD/MM/YYYY'
+		});
+		$('#fechab1').datetimepicker({
+			locale: 'es',
+        	format: 'DD/MM/YYYY'
+		});
+
+		$('#datetimepicker2b').datetimepicker({
+			locale: 'es',
+        	format: 'DD/MM/YYYY'
+		});
+		$('#fechab2').datetimepicker({
+			locale: 'es',
+        	format: 'DD/MM/YYYY'
+		});
+
 		$('#kilometraje_entrada').change(function(){
 			$('#kilometros_recorridos').val($('#kilometraje_entrada').val()-$('#kilometraje_salida').val());
 		});
 
 		$('#hora_salida').datetimepicker({
         	locale: 'es',
-        	format: 'LT'
+        	format: 'H:mm:ss'
         });
 
         $('#hora_entrada').datetimepicker({
         	locale: 'es',
-        	format: 'LT'
+        	format: 'H:mm:ss'
         });
 
-        FncComboCategoria(1,'divsubcategoria');
+        /*FncComboCategoria(1,'divsubcategoria');
         ValSubCategorias = $('#subcategorias').val();
 		FncComboIncidente(ValSubCategorias,'divincidente');
         $('#categoria').change(function(){
@@ -283,7 +344,7 @@
 	            FncComboIncidente(this.value,'divincidente');
 	            $('#incidentes').select2();
 	        });
-        });
+        });*/
 
         
         $('#telefonista').select2();
@@ -291,8 +352,10 @@
 		$('#unidad').select2();
 		$('#piloto').select2();
 		$('#categoria').select2();
-		$('#subcategorias').select2();
-		$('#incidentes').select2();
+		$('#usuariob').select2();
+		$('#categoriab').select2();
+		//$('#subcategorias').select2();
+		//$('#incidentes').select2();
 	});
 </script>
 <?php
@@ -313,9 +376,24 @@
 				cargar_pagina('ingreso_reporte_servicio');
 			</script>";
 	}
+	else if(isset($_POST["Modificar"]))
+	{
+		$Actualizar = "UPDATE reporte SET noReporte = '".$_POST["Recibo"]."', direccionTraslado = '".$_POST["Direccion_traslado"]."', paciente = '".$_POST["Nombre_paciente"]."', direccionPaciente = '".$_POST["Direccion_paciente"]."', 
+										edad = '".$_POST["Edad"]."', rangoedad = '".$_POST["Rango_edad"]."', sexo = '".$_POST["Sexo"]."', lugar_asistencia = '".$_POST["Traslado_a"]."', aviso = '".$_POST["Aviso"]."', Telefono = '".$_POST["Telefono"]."', 
+										telefonista = '".$_POST["Telefonista"]."', unidad_no = '".$_POST["Unidad"]."', horaSalida = '".$_POST["Hora_salida"]."', horaEntrada = '".$_POST["Hora_entrada"]."', piloto = '".$_POST["Piloto"]."', 
+										fecha = '".$_POST["Fecha"]."', kmSalida = '".$_POST["Kilometraje_salida"]."', kmEntrada = '".$_POST["Kilometraje_entrada"]."', kmRecorridos = '".$_POST["Kilometros_recorridos"]."', 
+										bomberoReporte = '".$_POST["Bombero_reporte"]."', asistentes = '".$_POST["Bombero_asistente"]."', observaciones = '".$_POST["Observaciones"]."', idIncidente = '".$_POST["Categoria"]."', idUsuario = '".$_SESSION['idusuario']."'
+                  		WHERE idReporte='".$_POST["ID"]."';";
+        $Result = $Conexion->Actualizar($Actualizar);
+	
+		echo "<script>
+				alert('Se Modificaron los registros');
+				cargar_pagina('ingreso_reporte_servicio');
+			</script>";
+	}
 	else
 	{
-		echo "No Listo";
+		
 	}
 ?>
 
