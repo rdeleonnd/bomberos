@@ -29,7 +29,7 @@ function FncTabla(tabla)
                       "aButtons": [
                         {
                             "sExtends": "xls",
-                            "sButtonText": "Exportar EXCEL",
+                            "sButtonText": "  Exportar EXCEL",
                             "oSelectorOpts": {
                                 page: 'current'
                             }

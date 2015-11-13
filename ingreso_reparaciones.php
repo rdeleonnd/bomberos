@@ -193,7 +193,7 @@
 	}
 	else
 	{
-		echo "No Listo";
+		
 	}
 
 ?>

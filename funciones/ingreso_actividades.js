@@ -36,7 +36,7 @@ function FncTabla(tabla)
                     //"bFilter": false,
                     //"bInfo": false,
                     //"bSort": false,
-                    "scrollY": 200,
+                    "scrollY": 400,
                     "scrollX": true,
                     "bScrollCollapse": true,
                     "language": {

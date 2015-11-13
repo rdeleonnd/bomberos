@@ -175,6 +175,6 @@
 	}
 	else
 	{
-		echo "No Listo";
+		
 	}
 ?>
