@@ -265,7 +265,15 @@
 				</tr>
 				<tr>
 					<div class="form-group">
-						<label class="control-label col-xs-1">Incidente:</label>
+						<label class="control-label col-xs-1">Unidad No:</label>
+						<div class="col-xs-1">
+							<?php 
+								$Consulta = "SELECT idUnidad as id, unidad_no as nombre FROM unidad ORDER BY nombre;";
+								$sufix="<option value='0' select>Todos</option>";
+								echo FncCrearCombo($Consulta,"unidadb",'',$sufix,'','','');
+							?>
+						</div>
+						<label class="control-label col-xs-2">Incidente:</label>
 						<div class="col-xs-3">
 							<?php 
 								$Consulta = "SELECT inc.idIncidente id,  concat(ser.descServicio, ' ',  cau.descCausa, ' ', inc.descIncidente ) nombre
@@ -354,6 +362,7 @@
 		$('#categoria').select2();
 		$('#usuariob').select2();
 		$('#categoriab').select2();
+		$('#unidadb').select2();
 		//$('#subcategorias').select2();
 		//$('#incidentes').select2();
 	});

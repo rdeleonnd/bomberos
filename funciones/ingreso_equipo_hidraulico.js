@@ -83,7 +83,6 @@ function FncMofificar(noEquipo,nombre,codigoReciente,marca,color,cantidad,asigna
     $("#marca").val(marca);
     $("#color").val(color);
     $("#empleado").val(asignadoA);
-    $("#empleado").select2();
     $("#cantidad").val(cantidad);
 
     $("#divBtnGuardar").hide();

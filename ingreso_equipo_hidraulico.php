@@ -52,11 +52,8 @@
 				<tr>
 					<div class="form-group">
 						<label class="control-label col-xs-3">Asignado a:</label>
-						<div class="col-xs-3">
-							<?php 
-								$Consulta = "SELECT idUnidad as id, unidad_no as nombre FROM unidad;";
-								echo FncCrearCombo($Consulta,"empleado",'','','','','');
-							?>
+						<div class="col-xs-4">
+							<input type="text" class="form-control" id="empleado" name="empleado" maxlength="50">
 						</div>
 					</div>
 				</tr>
@@ -92,9 +89,8 @@
 				</thead>
 				<tbody>
 					<?php
-						$Consulta = "SELECT hid.noEquipo, hid.nombre, hid.codigoReciente, hid.marca, hid.color, hid.cantidad, hid.asignadoA, un.unidad_no, us.nombreUser
+						$Consulta = "SELECT hid.noEquipo, hid.nombre, hid.codigoReciente, hid.marca, hid.color, hid.cantidad, hid.asignadoA, us.nombreUser
 									FROM hidraulicopersonal hid
-									INNER JOIN unidad un ON un.idUnidad = hid.asignadoA
 									INNER JOIN Usuario us ON us.idUsuario = hid.idUsuario;";
 
 						$Respuesta = $Conexion->list_orders($Consulta);
@@ -108,7 +104,7 @@
 										<td>".$row['codigoReciente']."</td>
 										<td>".$row['marca']."</td>
 										<td>".$row['color']."</td>
-										<td>".$row['unidad_no']."</td>
+										<td>".$row['asignadoA']."</td>
 										<td>".$row['cantidad']."</td>
 										<td>".$row['nombreUser']."</td>
 										<td>".$Modificar."</td>
@@ -123,7 +119,6 @@
 </html>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#empleado').select2();
         FncTabla('tabla_Hidraulico');
     });
 </script>

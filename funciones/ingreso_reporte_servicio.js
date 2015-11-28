@@ -219,10 +219,11 @@ function FncBuscar()
     Fechab2 = Fechab2.substring(6,10)+Fechab2.substring(3,5)+Fechab2.substring(0,2);
     Categoria = $("#categoriab").val();
     Usuariob = $("#usuariob").val();
+    Unidad = $("#unidadb").val();
 
     if ((Fechab1 != '') && (Fechab2 != ''))
     {
-        Parametros = "BuscarServicios=1"+"&Fechab1="+Fechab1+"&Fechab2="+Fechab2+"&Categoria="+Categoria+"&Usuariob="+Usuariob;
+        Parametros = "BuscarServicios=1"+"&Fechab1="+Fechab1+"&Fechab2="+Fechab2+"&Categoria="+Categoria+"&Usuariob="+Usuariob+"&Unidad="+Unidad;
 
         $.post("tablas.php", Parametros, function( data ){
             $( "#mostrar" ).html( data );

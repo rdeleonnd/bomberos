@@ -610,6 +610,15 @@
 			$Usuario  = "";
 		}
 
+		if($_POST["Unidad"] != 0)
+		{
+			$Unidad = " AND r.unidad_no  = ".$_POST["Unidad"] ."";
+		}
+		else
+		{
+			$Unidad  = "";
+		}
+
 		echo "<div class='form-group'>
 					<table id='tabla_Servicios' cellpadding='0' cellspacing='0' border='0' class='table table-striped'>
 						<thead>
@@ -655,7 +664,7 @@
 											INNER JOIN personal p ON p.idEmpleado = r.piloto 
 											INNER JOIN personal per ON per.idEmpleado = r.bomberoReporte
 											INNER JOIN usuario u ON u.idUsuario= r.idUsuario
-											".$Usuario.$Fechas.$Actividad.";";
+											".$Usuario.$Fechas.$Actividad.$Unidad.";";
 								//echo $Consulta;
 								$Respuesta = $Conexion->list_orders($Consulta);
 								$x=0;
